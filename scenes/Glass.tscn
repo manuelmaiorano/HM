@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqg05qufup05h"]
+
+[ext_resource type="PackedScene" uid="uid://bhcsdpu70b312" path="res://assets/models/breackable/original.glb" id="1_e1s7p"]
+[ext_resource type="Script" uid="uid://b31t7lgyp32k3" path="res://scripts/components/breakable.gd" id="2_megkt"]
+[ext_resource type="PackedScene" uid="uid://c7fk5njqhkd7n" path="res://scenes/BrokenGlass.tscn" id="3_hoobn"]
+[ext_resource type="Script" uid="uid://spcieak5y62x" path="res://scripts/components/health.gd" id="3_mu441"]
+[ext_resource type="Script" uid="uid://dnh2kek2omxo1" path="res://scripts/components/hit_box.gd" id="4_hoobn"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_megkt"]
+points = PackedVector3Array(0.0841013, 2.99142, 1, -0.0132418, 2.99142, 1, 0.0841013, 0, 1, 0.0841013, 2.99142, -1, -0.0132418, 2.99142, -1, -0.0132418, 0, 1, 0.0841013, 0, -1, -0.0132418, 0, -1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_megkt"]
+size = Vector3(0.187256, 2.96979, 2.00928)
+
+[node name="Glass" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_megkt")
+
+[node name="original2" parent="." instance=ExtResource("1_e1s7p")]
+
+[node name="Breakable" type="Node" parent="." node_paths=PackedStringArray("agent", "health")]
+script = ExtResource("2_megkt")
+agent = NodePath("..")
+health = NodePath("../Health")
+broken_scene = ExtResource("3_hoobn")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_mu441")
+max_health = 10.0
+
+[node name="HitBox" type="Node" parent="." node_paths=PackedStringArray("health", "detection_area")]
+script = ExtResource("4_hoobn")
+health = NodePath("../Health")
+detection_area = NodePath("../Area3D")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0560303, 1.4664, 0.00610352)
+shape = SubResource("BoxShape3D_megkt")

@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://xotrswqf71f1"]
+
+[ext_resource type="PackedScene" uid="uid://b4rcs3rd6ty0v" path="res://assets/models/knife.glb" id="1_2xf1r"]
+[ext_resource type="Script" uid="uid://bvtxk76q4i1xo" path="res://scripts/components/pickable_interactable.gd" id="2_7hrnw"]
+[ext_resource type="Script" uid="uid://dtlpbo88xhkur" path="res://scripts/components/pickable.gd" id="3_c20fe"]
+[ext_resource type="Script" uid="uid://c8jlenbmf1545" path="res://scripts/resources/action_resource.gd" id="3_qf5yf"]
+[ext_resource type="Script" uid="uid://b1p3bunddmtvj" path="res://scripts/resources/inventory_resource.gd" id="4_qf5yf"]
+[ext_resource type="Script" uid="uid://qukfbc8qie1b" path="res://scripts/components/hurt_box.gd" id="6_qf5yf"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2xf1r"]
+points = PackedVector3Array(-0.0108875, -0.0527349, -0.0930074, -0.0108875, -0.0299839, -0.138613, 0.0108875, -0.0527349, -0.0930074, -0.0108875, -0.0527349, -0.0474019, 0.0108875, -0.0299839, -0.138613, -0.0108875, 0.0204184, -0.138613, 0.0108875, -0.0527349, -0.0474019, -0.0108875, -0.0293057, 0.0396921, 0.0108875, 0.0204184, -0.138613, -0.0108875, 0.0527292, -0.0930074, 0.0108875, -0.0293057, 0.0396921, -0.0108875, -0.00321859, 0.134573, 0.0108875, 0.0527292, -0.0930074, -0.0108875, 0.0590077, 0.187423, 0.0108875, -0.00321859, 0.134573, 0.0108875, 0.0590077, 0.187423)
+
+[sub_resource type="Resource" id="Resource_qa48d"]
+script = ExtResource("3_qf5yf")
+id = 0
+desc = &"Pick Up"
+metadata/_custom_type_script = "uid://c8jlenbmf1545"
+
+[sub_resource type="Resource" id="Resource_ndam4"]
+script = ExtResource("4_qf5yf")
+name = &"knife"
+scene_path = &"res://scenes/weapons/knife.tscn"
+wield_transform_position = Vector3(-0.0517378, 0.109959, 0.135211)
+wield_transform_rotation = Quaternion(-0.0843865, 0.0580764, 0.994714, -0.00705299)
+metadata/_custom_type_script = "uid://b1p3bunddmtvj"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qf5yf"]
+size = Vector3(0.0274658, 0.0543365, 0.252686)
+
+[node name="Knife" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_2xf1r")
+
+[node name="knife" parent="." instance=ExtResource("1_2xf1r")]
+
+[node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("pickable_component")]
+script = ExtResource("2_7hrnw")
+pickable_component = NodePath("../Pickable")
+pickup_action = SubResource("Resource_qa48d")
+
+[node name="Pickable" type="Node" parent="." node_paths=PackedStringArray("agent")]
+script = ExtResource("3_c20fe")
+agent = NodePath("..")
+inventory_item = SubResource("Resource_ndam4")
+
+[node name="HurtBox" type="Node" parent="." node_paths=PackedStringArray("detection_area")]
+script = ExtResource("6_qf5yf")
+detection_area = NodePath("../HurtBoxArea")
+damage = 20.0
+
+[node name="HurtBoxArea" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBoxArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00152588, -0.0108261, 0.0789795)
+shape = SubResource("BoxShape3D_qf5yf")

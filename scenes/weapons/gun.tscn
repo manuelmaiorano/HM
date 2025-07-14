@@ -1,0 +1,54 @@
+[gd_scene load_steps=11 format=3 uid="uid://cui0xddsgh1e"]
+
+[ext_resource type="PackedScene" uid="uid://das2axdp4wo0d" path="res://assets/models/gun.glb" id="1_76485"]
+[ext_resource type="Script" uid="uid://dtlpbo88xhkur" path="res://scripts/components/pickable.gd" id="1_mgo42"]
+[ext_resource type="Script" uid="uid://bvtxk76q4i1xo" path="res://scripts/components/pickable_interactable.gd" id="2_nurr2"]
+[ext_resource type="Script" uid="uid://c8jlenbmf1545" path="res://scripts/resources/action_resource.gd" id="3_e4hp8"]
+[ext_resource type="Script" uid="uid://b1p3bunddmtvj" path="res://scripts/resources/inventory_resource.gd" id="5_nurr2"]
+[ext_resource type="Script" uid="uid://dyuvvgdbyamre" path="res://scripts/components/shootable.gd" id="6_e4hp8"]
+[ext_resource type="PackedScene" uid="uid://bkhyhejx2q6ph" path="res://scenes/bullet.tscn" id="7_of66t"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mfrst"]
+points = PackedVector3Array(-0.0160973, -0.0573502, -0.16701, 0.0160973, -0.0573502, -0.16701, -0.0160973, -0.0573502, -0.0790931, -0.0160973, 0.0573502, -0.111349, 0.0160973, 0.0573502, -0.111349, 0.0160973, -0.0573502, -0.0790931, -0.0160973, -1.1228e-05, 0.144743, -0.0160973, 0.0573502, 0.144743, 0.0160973, 0.0573502, 0.144743, 0.0160973, -1.1228e-05, 0.144743)
+
+[sub_resource type="Resource" id="Resource_of66t"]
+script = ExtResource("3_e4hp8")
+id = 0
+desc = &"Pick up"
+metadata/_custom_type_script = "uid://c8jlenbmf1545"
+
+[sub_resource type="Resource" id="Resource_voj0y"]
+script = ExtResource("5_nurr2")
+name = &"gun"
+scene_path = &"res://scenes/weapons/gun.tscn"
+wield_transform_position = Vector3(-0.0383664, 0.169683, 0.0323393)
+wield_transform_rotation = Quaternion(-0.0890254, 0.689425, 0.718344, 0.0273778)
+metadata/_custom_type_script = "uid://b1p3bunddmtvj"
+
+[node name="Gun" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_mfrst")
+
+[node name="gun" parent="." instance=ExtResource("1_76485")]
+
+[node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("pickable_component")]
+script = ExtResource("2_nurr2")
+pickable_component = NodePath("../Pickable")
+pickup_action = SubResource("Resource_of66t")
+
+[node name="Pickable" type="Node" parent="." node_paths=PackedStringArray("agent")]
+script = ExtResource("1_mgo42")
+agent = NodePath("..")
+inventory_item = SubResource("Resource_voj0y")
+
+[node name="Shootable" type="Node" parent="." node_paths=PackedStringArray("agent", "shoot_from")]
+script = ExtResource("6_e4hp8")
+agent = NodePath("..")
+shoot_from = NodePath("../ShootFrom")
+bullet_scene = ExtResource("7_of66t")
+
+[node name="ShootFrom" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03296, 0)

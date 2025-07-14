@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5ifia8xxlhtt"]
+
+[ext_resource type="Script" uid="uid://olr2vsv5jlp7" path="res://scenes/inventory_ui.gd" id="1_tahbm"]
+[ext_resource type="Script" uid="uid://covq88y5r4suh" path="res://scenes/scroll_items.gd" id="2_ylkvr"]
+
+[node name="InventoryUi" type="VBoxContainer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Inventory" type="Node" parent="." node_paths=PackedStringArray("current_item_label", "all_items", "scroll_component")]
+script = ExtResource("1_tahbm")
+current_item_label = NodePath("../CurrentItem")
+all_items = NodePath("../AllItems")
+scroll_component = NodePath("../ScrollComponent")
+
+[node name="ScrollComponent" type="Node" parent="." node_paths=PackedStringArray("container_node")]
+script = ExtResource("2_ylkvr")
+container_node = NodePath("../AllItems")
+
+[node name="CurrentItem" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Holster"
+
+[node name="AllItems" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2

@@ -1,0 +1,226 @@
+[gd_scene load_steps=20 format=3 uid="uid://ckldaterjjk1p"]
+
+[ext_resource type="Script" uid="uid://c6rnwllugvfri" path="res://scripts/components/character_movement.gd" id="2_dqkch"]
+[ext_resource type="Script" uid="uid://bqf2omymurd11" path="res://scripts/components/player_input.gd" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://dumfq48ecyo48" path="res://scripts/components/player_interactions.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://cljkkxuh0qmda" path="res://scripts/components/inventory.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://spcieak5y62x" path="res://scripts/components/health.gd" id="6_tuyoq"]
+[ext_resource type="Script" uid="uid://0d6v3bvl24gm" path="res://scripts/components/wield_item.gd" id="7_d2wvv"]
+[ext_resource type="Script" uid="uid://dnh2kek2omxo1" path="res://scripts/components/hit_box.gd" id="7_fjrip"]
+[ext_resource type="PackedScene" uid="uid://bi03gwowknh6n" path="res://assets/models/AnimationLibrary_Godot_Standard.glb" id="7_smehm"]
+[ext_resource type="Script" uid="uid://c4tv8e6ccpuqy" path="res://scripts/components/animations.gd" id="7_ur7pv"]
+[ext_resource type="Script" uid="uid://cc3jidsbst1nx" path="res://scenes/player_shooting.gd" id="9_3v2ag"]
+[ext_resource type="PackedScene" uid="uid://das2axdp4wo0d" path="res://assets/models/gun.glb" id="9_ur7pv"]
+[ext_resource type="PackedScene" uid="uid://b4rcs3rd6ty0v" path="res://assets/models/knife.glb" id="10_y4r1p"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkhd4"]
+radius = 0.171647
+height = 1.73555
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fjrip"]
+size = Vector3(0.343353, 1.52237, 0.265617)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fjrip"]
+radius = 0.0981617
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jej6c"]
+animation = &"Pistol_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3v2ag"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_f1ej7"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_jej6c"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_3v2ag")
+nodes/Animation/position = Vector2(300, 140)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_jej6c")
+"nodes/Animation 2/position" = Vector2(300, 320)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_f1ej7")
+nodes/OneShot/position = Vector2(580, 80)
+nodes/output/position = Vector2(820, 140)
+node_connections = [&"OneShot", 0, &"Animation", &"OneShot", 1, &"Animation 2", &"output", 0, &"OneShot"]
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.870951, 0)
+shape = SubResource("CapsuleShape3D_rkhd4")
+
+[node name="CharacterMovement" type="Node" parent="." node_paths=PackedStringArray("character", "character_model")]
+script = ExtResource("2_dqkch")
+character = NodePath("..")
+character_model = NodePath("../AnimationLibrary_Godot_Standard")
+
+[node name="PlayerInput" type="Node" parent="." node_paths=PackedStringArray("character", "movement_component", "camera", "pitch", "yaw")]
+script = ExtResource("3_qlg0r")
+character = NodePath("..")
+movement_component = NodePath("../CharacterMovement")
+camera = NodePath("../Yaw/Pitch/Camera3D")
+pitch = NodePath("../Yaw/Pitch")
+yaw = NodePath("../Yaw")
+
+[node name="PlayerInteractions" type="Node" parent="." node_paths=PackedStringArray("raycast")]
+script = ExtResource("4_dqkch")
+raycast = NodePath("../Yaw/Pitch/Camera3D/RayCast3D")
+
+[node name="Inventory" type="Node" parent="." node_paths=PackedStringArray("character", "drop_node")]
+script = ExtResource("5_qlg0r")
+character = NodePath("..")
+drop_node = NodePath("../AnimationLibrary_Godot_Standard/DropItemNode")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("6_tuyoq")
+
+[node name="HitBoxBody" type="Node" parent="." node_paths=PackedStringArray("health", "detection_area")]
+script = ExtResource("7_fjrip")
+health = NodePath("../Health")
+detection_area = NodePath("../HitBoxBodyArea")
+
+[node name="HitBoxHead" type="Node" parent="." node_paths=PackedStringArray("health", "detection_area")]
+script = ExtResource("7_fjrip")
+health = NodePath("../Health")
+detection_area = NodePath("../HitBocBodyArea")
+damage_multiplier = 2.0
+
+[node name="WieldItem" type="Node" parent="." node_paths=PackedStringArray("bone_attachment_offset_node", "inventory")]
+script = ExtResource("7_d2wvv")
+bone_attachment_offset_node = NodePath("../AnimationLibrary_Godot_Standard/Rig/Skeleton3D/BoneAttachment3D/OffsetNode")
+inventory = NodePath("../Inventory")
+
+[node name="Animations" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "player_shooting_component")]
+script = ExtResource("7_ur7pv")
+animation_tree = NodePath("../AnimationLibrary_Godot_Standard/AnimationTree")
+player_shooting_component = NodePath("../PlayerShooting")
+
+[node name="PlayerShooting" type="Node" parent="." node_paths=PackedStringArray("wieldable", "target")]
+script = ExtResource("9_3v2ag")
+wieldable = NodePath("../WieldItem")
+target = NodePath("../AnimationLibrary_Godot_Standard/ShootingTarget")
+
+[node name="Yaw" type="Node3D" parent="."]
+
+[node name="Pitch" type="SpringArm3D" parent="Yaw"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.18153, 0)
+spring_length = -2.0
+
+[node name="Camera3D" type="Camera3D" parent="Yaw/Pitch"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="Yaw/Pitch/Camera3D"]
+target_position = Vector3(0, 0, -5.63)
+collision_mask = 4
+
+[node name="HitBoxBodyArea" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxBodyArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000228882, 0.763626, -0.0601616)
+shape = SubResource("BoxShape3D_fjrip")
+
+[node name="HitBocBodyArea" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBocBodyArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000228882, 1.69156, -0.0601616)
+shape = SubResource("SphereShape3D_fjrip")
+
+[node name="AnimationLibrary_Godot_Standard" parent="." instance=ExtResource("7_smehm")]
+
+[node name="Skeleton3D" parent="AnimationLibrary_Godot_Standard/Rig" index="0"]
+bones/1/position = Vector3(0.00501279, 0.0873206, 0.874801)
+bones/1/rotation = Quaternion(0.75993, -0.0887623, -0.0747035, 0.639567)
+bones/3/rotation = Quaternion(-0.0278793, 0.000116058, 0.000123821, 0.999611)
+bones/4/rotation = Quaternion(0.147647, 0.000317301, 0.000395995, 0.98904)
+bones/5/rotation = Quaternion(0.0122435, -0.000239971, -0.000239459, 0.999925)
+bones/6/rotation = Quaternion(-0.00482457, 0.0959846, -0.00354692, 0.995365)
+bones/7/rotation = Quaternion(-0.603577, -0.370709, -0.396792, 0.583802)
+bones/8/rotation = Quaternion(-0.274989, 0.672143, -0.504818, 0.466651)
+bones/9/rotation = Quaternion(0.282653, 0.0300964, -0.00122781, 0.958749)
+bones/10/rotation = Quaternion(0.106009, 0.00637576, -0.0256743, 0.994013)
+bones/11/rotation = Quaternion(0.44519, 0.549369, -0.445194, 0.549365)
+bones/12/rotation = Quaternion(0.623342, 6.13486e-08, 2.15438e-07, 0.781949)
+bones/13/rotation = Quaternion(0.623341, -2.04856e-07, 6.31242e-08, 0.78195)
+bones/14/rotation = Quaternion(0.43209, 0.5387, -0.458046, 0.559727)
+bones/15/rotation = Quaternion(0.623341, 0.000943477, 0.00118364, 0.781949)
+bones/16/rotation = Quaternion(0.623341, -0.000704321, -0.000883352, 0.781949)
+bones/17/rotation = Quaternion(0.504057, 0.511541, -0.435152, 0.543042)
+bones/18/rotation = Quaternion(0.623163, -0.0200615, 0.0149255, 0.781692)
+bones/19/rotation = Quaternion(0.623342, 0.000379825, 0.000476617, 0.78195)
+bones/20/rotation = Quaternion(0.43534, 0.541356, -0.454904, 0.557203)
+bones/21/rotation = Quaternion(0.623342, 7.39393e-06, 9.58044e-06, 0.781949)
+bones/22/rotation = Quaternion(0.623341, -0.000665145, -0.0008345, 0.781949)
+bones/23/rotation = Quaternion(0.290838, 0.949649, 0.114583, 0.021217)
+bones/24/rotation = Quaternion(0.21939, 0.0238026, -0.00530472, 0.975332)
+bones/25/rotation = Quaternion(0.687388, -0.000309068, -0.000444658, 0.72629)
+bones/26/rotation = Quaternion(-0.63975, 0.308296, 0.331645, 0.621035)
+bones/27/rotation = Quaternion(-0.289643, -0.678001, 0.480294, 0.47512)
+bones/28/rotation = Quaternion(0.367819, -0.145179, 0.0582556, 0.916645)
+bones/29/rotation = Quaternion(0.116709, 0.00291669, 0.0447786, 0.992152)
+bones/30/rotation = Quaternion(0.445191, -0.549369, 0.445194, 0.549365)
+bones/31/rotation = Quaternion(0.623341, 2.17518e-07, 6.33371e-08, 0.78195)
+bones/32/rotation = Quaternion(0.623342, 1.52451e-07, -2.12003e-07, 0.78195)
+bones/33/rotation = Quaternion(0.43209, -0.5387, 0.458047, 0.559727)
+bones/34/rotation = Quaternion(0.623341, -0.00094351, -0.0011834, 0.781949)
+bones/35/rotation = Quaternion(0.623341, 0.000704174, 0.000883148, 0.781949)
+bones/36/rotation = Quaternion(0.504057, -0.511541, 0.435152, 0.543042)
+bones/37/rotation = Quaternion(0.623163, 0.0200611, -0.0149253, 0.781692)
+bones/38/rotation = Quaternion(0.623342, -0.000380153, -0.000476532, 0.781949)
+bones/39/rotation = Quaternion(0.43534, -0.541356, 0.454904, 0.557203)
+bones/40/rotation = Quaternion(0.623341, -7.55302e-06, -9.27693e-06, 0.78195)
+bones/41/rotation = Quaternion(0.623342, 0.000664924, 0.000834326, 0.781949)
+bones/42/rotation = Quaternion(-0.290838, 0.949649, 0.114584, -0.021217)
+bones/43/rotation = Quaternion(0.21939, -0.0238026, 0.00530485, 0.975332)
+bones/44/rotation = Quaternion(0.687388, 0.000309234, 0.000444539, 0.72629)
+bones/45/rotation = Quaternion(0.959768, 0.112823, -0.0139108, 0.256754)
+bones/46/rotation = Quaternion(0.20155, -0.1111, 0.0230062, 0.972885)
+bones/47/rotation = Quaternion(-0.501904, 0.0224145, 0.0924024, 0.859681)
+bones/48/rotation = Quaternion(-0.000137176, 0.964307, -0.264787, -0.000499421)
+bones/49/rotation = Quaternion(0.991804, -0.123736, 0.0152562, 0.0279616)
+bones/50/rotation = Quaternion(0.139668, 0.355316, -0.0537941, 0.922686)
+bones/51/rotation = Quaternion(-0.58821, -0.0513862, -0.16314, 0.790413)
+bones/52/rotation = Quaternion(-0.000137047, 0.964307, -0.264787, -0.000499421)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D" index="1"]
+transform = Transform3D(-0.987675, -0.141045, 0.0678545, 0.156247, -0.863001, 0.480434, -0.00920436, 0.485115, 0.874402, -0.283571, 0.916865, -0.194875)
+bone_name = "DEF-hand.R"
+bone_idx = 29
+
+[node name="Node3D" type="Node3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(-0.982651, -0.162086, -0.0901518, -0.0834193, -0.0478882, 0.995364, -0.165652, 0.985615, 0.0335361, -0.0383664, 0.169683, 0.0323393)
+rotation_edit_mode = 1
+
+[node name="gun" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D/BoneAttachment3D/Node3D" instance=ExtResource("9_ur7pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+
+[node name="Node3D2" type="Node3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(-0.98566, 0.00422907, -0.1687, -0.0238332, -0.993156, 0.114348, -0.167062, 0.116729, 0.979013, -0.0517378, 0.109959, 0.135211)
+rotation_edit_mode = 1
+
+[node name="knife" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D/BoneAttachment3D/Node3D2" instance=ExtResource("10_y4r1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+
+[node name="OffsetNode" type="Node3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D/BoneAttachment3D"]
+
+[node name="AnimationTree" type="AnimationTree" parent="AnimationLibrary_Godot_Standard"]
+tree_root = SubResource("AnimationNodeBlendTree_jej6c")
+anim_player = NodePath("../AnimationPlayer")
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+
+[node name="DropItemNode" type="Node3D" parent="AnimationLibrary_Godot_Standard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32585, 0.558785)
+
+[node name="ShootingTarget" type="Node3D" parent="AnimationLibrary_Godot_Standard"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.18153, 11.4146)
+
+[editable path="AnimationLibrary_Godot_Standard"]

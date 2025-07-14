@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=4 uid="uid://dmf4uo7ygswj0"]
+
+[ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://3u6bql5cwtjf" path="res://scenes/door.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cui0xddsgh1e" path="res://scenes/weapons/gun.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://xotrswqf71f1" path="res://scenes/weapons/knife.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cqg05qufup05h" path="res://scenes/Glass.tscn" id="6_7mycd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
+albedo_color = Color(0.42, 0.42, 0.42, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lquwl"]
+_surfaces = [{
+"aabb": AABB(-7.98045, -0.85718, -6.82115, 15.9609, 1.71436, 13.6423),
+"attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("2V//wCZwW7/cRtpA2V//wCZwW7/cRtrA2V//wCZwWz/cRtrA2V//QCZwW7/cRtrA2V//wCZwW7/cRtrA2V//wCZwW7/cRtpA2V//wCZwWz/cRtrA2V//wCZwW7/cRtrA2V//QCZwW7/cRtrA2V//wCZwWz/cRtrA2V//wCZwWz/cRtpA2V//wCZwW7/cRtpA2V//wCZwW7/cRtpA2V//wCZwWz/cRtpA2V//QCZwWz/cRtpA2V//QCZwWz/cRtpA2V//wCZwWz/cRtpA2V//wCZwWz/cRtrA2V//wCZwW7/cRtpA2V//QCZwW7/cRtpA2V//QCZwW7/cRtrA2V//QCZwWz/cRtpA2V//QCZwW7/cRtpA2V//wCZwW7/cRtpA2V//QCZwW7/cRtrA2V//QCZwW7/cRtpA2V//QCZwWz/cRtpA2V//QCZwW7/cRtrA2V//QCZwWz/cRtrA2V//wCZwWz/cRtrA2V//wCZwWz/cRtrA2V//QCZwWz/cRtrA2V//QCZwWz/cRtpA2V//QCZwWz/cRtpA2V//QCZwWz/cRtrA2V//QCZwW7/cRtrAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+size = Vector3(15.9082, 1.69812, 13.6653)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.39911, 2.11426, 0.203491)
+use_collision = true
+size = Vector3(1.44906, 5.22852, 13.6423)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.34009, 0.302587)
+operation = 2
+use_collision = true
+size = Vector3(1.44906, 2.54834, 1.05011)
+
+[node name="Door" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.155, 0, 0)
+
+[node name="UI" parent="." instance=ExtResource("3_h2yge")]
+
+[node name="Gun" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.230643, 0.855573)
+
+[node name="Knife" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.478872, 1.55829)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_mask = 7
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.28324, -0.849365, 0.203491)
+material_override = SubResource("StandardMaterial3D_lquwl")
+mesh = SubResource("ArrayMesh_lquwl")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25575, -0.845276, 0.227661)
+shape = SubResource("BoxShape3D_lquwl")
+
+[node name="Glass" parent="." instance=ExtResource("6_7mycd")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.487048, 0.00378418, 4.38143)
