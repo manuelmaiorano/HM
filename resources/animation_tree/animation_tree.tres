@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=4 format=3 uid="uid://cr5i6g2a5t0xg"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=9 format=3 uid="uid://cr5i6g2a5t0xg"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jej6c"]
 animation = &"Pistol_Shoot"
@@ -6,14 +6,40 @@ animation = &"Pistol_Shoot"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3v2ag"]
 animation = &"Idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_46rtb"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8wnu4"]
+animation = &"Sprint"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ngmp6"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dpgnh"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_dpgnh"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_46rtb")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_8wnu4")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_ngmp6")
+blend_point_2/pos = 0.5
+blend_point_3/node = SubResource("AnimationNodeAnimation_dpgnh")
+blend_point_3/pos = 0.0
+min_space = 0.0
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_f1ej7"]
 
 [resource]
+graph_offset = Vector2(-29, -68)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_3v2ag")
 nodes/Animation/position = Vector2(300, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_jej6c")
 "nodes/Animation 2/position" = Vector2(300, 320)
-nodes/OneShot/node = SubResource("AnimationNodeOneShot_f1ej7")
-nodes/OneShot/position = Vector2(580, 80)
-nodes/output/position = Vector2(820, 140)
-node_connections = [&"OneShot", 0, &"Animation", &"OneShot", 1, &"Animation 2", &"output", 0, &"OneShot"]
+nodes/movement_blend/node = SubResource("AnimationNodeBlendSpace1D_dpgnh")
+nodes/movement_blend/position = Vector2(520, 20)
+nodes/output/position = Vector2(940, 180)
+nodes/shoot/node = SubResource("AnimationNodeOneShot_f1ej7")
+nodes/shoot/position = Vector2(740, 180)
+node_connections = [&"output", 0, &"shoot", &"shoot", 0, &"movement_blend", &"shoot", 1, &"Animation 2"]
