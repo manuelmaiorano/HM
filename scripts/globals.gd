@@ -8,12 +8,17 @@ signal PickedItem(item: InventoryItem)
 signal DroppedItem(item: InventoryItem)
 signal SelectedItemToUse(item: InventoryItem)
 
+
 signal UiElementActiveChanged()
 enum UiElementActive {None, InteractionsMenu, InventoryMenu}
 @export var current_ui_element_active: UiElementActive = UiElementActive.None:
 	set(x):
 		current_ui_element_active = x
 		UiElementActiveChanged.emit()
+
+
+@export var patrol_points: Dictionary[StringName, Array]
+
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

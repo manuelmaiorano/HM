@@ -13,9 +13,11 @@ class_name CharacterMovementComponent
 @export var run_speed: float = 4.0
 @export var rotation_speed: float = 5.0
 
-var current_navigation_target: Vector3 = Vector3.ZERO
+@export_category("Debug")
+@export var current_navigation_target: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
+	character.set_meta("CharacterMovementComponent", self)
 	if navigation_agent:
 		navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 
@@ -35,22 +37,27 @@ func move(delta: float, direction: Vector3, speed: float):
 	character.move_and_slide()
 
 func move_to(delta: float, position: Vector3, speed: float):
+	position.y = character.global_position.y
 	var direction = character.global_position.direction_to(position)
-	rotateModelTowards(delta, direction)
+	DebugDraw3D.draw_line(character.global_position + Vector3.UP, character.global_position + Vector3.UP + direction) 
 	move(delta, direction, speed)
+	rotateModelTowards(delta, direction)
 
-func navigateTo(delta: float, position: Vector3, speed: float):
+func navigate(delta: float, speed: float) -> bool:
 	if NavigationServer3D.map_get_iteration_id(navigation_agent.get_navigation_map()) == 0:
-		return
+		return true
 
 	if navigation_agent.is_navigation_finished():
-		return
+		return true
 
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 	if navigation_agent.avoidance_enabled:
-		navigation_agent.set_velocity(character.global_position.direction_to(position) * speed)
+		return false
+		#navigation_agent.set_velocity(character.global_position.direction_to(position) * speed)
 	else:
 		move_to(delta, next_path_position, speed)
+	
+	return false
 
 func rotateModelTowards(delta: float, direction: Vector3):
 	if direction.is_zero_approx():

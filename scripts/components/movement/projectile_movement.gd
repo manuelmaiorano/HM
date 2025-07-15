@@ -14,14 +14,15 @@ class_name ProjectileMovement
 		var velocity = speed * agent.global_position.direction_to(target)
 		agent.velocity = velocity
 
+var time_passed = 0.0
 
 func _ready() -> void:
 	hurt_box.has_hit.connect(func(): agent.queue_free())
 	agent.set_meta("ProjectileMovement", self)
-	var tween = get_tree().create_tween()
-	tween.tween_interval(2.0) # Wait 2 seconds
-	tween.tween_callback(func (): if agent: agent.queue_free())
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	agent.move_and_slide()
+	time_passed += delta
+	if time_passed > life:
+		agent.queue_free()

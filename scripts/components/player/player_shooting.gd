@@ -4,8 +4,6 @@ class_name PlayerShootingComponent
 @export var wieldable: WieldableComponent
 @export var raycast: RayCast3D
 
-signal is_shooting
-
 func _ready() -> void:
 	return
 
@@ -18,5 +16,4 @@ func _unhandled_input(_event: InputEvent) -> void:
 		else:
 			target = raycast.target_position
 
-		if wieldable.try_shoot(target):
-			is_shooting.emit()
+		wieldable.try_shoot(target)

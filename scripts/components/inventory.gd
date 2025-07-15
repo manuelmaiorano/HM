@@ -15,9 +15,13 @@ signal item_in_use_changed(item: InventoryItem)
 
 var current_items: Array[InventoryItem] = []
 
+func _enter_tree() -> void:
+	character.set_meta("InventoryComponent", self)
 
 func _ready() -> void:
 	current_items = initial_items
+	if item_in_use:
+		item_in_use_changed.emit(item_in_use)
 
 func equip_item(item: InventoryItem):
 	item_in_use = item
