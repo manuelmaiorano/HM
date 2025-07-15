@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://1w5laahpdlic"]
+[gd_scene load_steps=9 format=3 uid="uid://dxdd43ngn21at"]
 
 [ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="2_de4ha"]
 [ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="3_mfvww"]
@@ -40,3 +40,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6025, 3.8147e-06, 20.7463)
 
 [node name="Gun" parent="." instance=ExtResource("5_rjiu4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7741, -0.0180497, 26.2722)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5762, 1.8997, 24.0887)
+use_collision = true
+size = Vector3(4.573, 3.9502, 1)

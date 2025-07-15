@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ckldaterjjk1p"]
+[gd_scene load_steps=19 format=3 uid="uid://ckldaterjjk1p"]
 
 [ext_resource type="Script" uid="uid://c6rnwllugvfri" path="res://scripts/components/movement/character_movement.gd" id="2_dqkch"]
 [ext_resource type="Script" uid="uid://bqf2omymurd11" path="res://scripts/components/player/player_input.gd" id="3_qlg0r"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://das2axdp4wo0d" path="res://assets/models/gun.glb" id="9_ur7pv"]
 [ext_resource type="Script" uid="uid://d1i2x4sobcwmt" path="res://scripts/components/player/player_inventory_interaction.gd" id="10_f1ej7"]
 [ext_resource type="PackedScene" uid="uid://b4rcs3rd6ty0v" path="res://assets/models/knife.glb" id="10_y4r1p"]
+[ext_resource type="Script" uid="uid://c53chp6plkp1" path="res://scripts/components/player/target_when_check_visible.gd" id="11_oprun"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr5i6g2a5t0xg" path="res://resources/animation_tree/animation_tree.tres" id="13_jej6c"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkhd4"]
@@ -88,6 +89,11 @@ raycast = NodePath("../Yaw/Pitch/Camera3D/ShootingRaycast")
 script = ExtResource("10_f1ej7")
 inventory = NodePath("../Inventory")
 
+[node name="TargetWhenCheckVisible" type="Node" parent="." node_paths=PackedStringArray("character", "target_node")]
+script = ExtResource("11_oprun")
+character = NodePath("..")
+target_node = NodePath("../AnimationLibrary_Godot_Standard/VisibilityCheckTarget")
+
 [node name="Yaw" type="Node3D" parent="."]
 
 [node name="Pitch" type="SpringArm3D" parent="Yaw"]
@@ -126,15 +132,15 @@ shape = SubResource("SphereShape3D_fjrip")
 [node name="AnimationLibrary_Godot_Standard" parent="." instance=ExtResource("7_smehm")]
 
 [node name="Skeleton3D" parent="AnimationLibrary_Godot_Standard/Rig" index="0"]
-bones/1/position = Vector3(0.00158588, 0.0881566, 0.868814)
-bones/1/rotation = Quaternion(0.76377, -0.0892108, -0.0741673, 0.634977)
-bones/3/rotation = Quaternion(-0.0301104, 0.000114889, 0.000124769, 0.999547)
-bones/4/rotation = Quaternion(0.141013, 0.000313654, 0.000398735, 0.990008)
-bones/5/rotation = Quaternion(0.016746, -0.000237705, -0.000241523, 0.99986)
-bones/6/rotation = Quaternion(-0.0329339, 0.0960509, 2.27154e-05, 0.994831)
-bones/7/rotation = Quaternion(-0.613221, -0.364046, -0.402914, 0.573664)
-bones/8/rotation = Quaternion(-0.245034, 0.668558, -0.525692, 0.465442)
-bones/9/rotation = Quaternion(0.251622, -0.00146533, 0.00795549, 0.967792)
+bones/1/position = Vector3(-0.00140725, 0.0865135, 0.873607)
+bones/1/rotation = Quaternion(0.755731, -0.0882718, -0.0752825, 0.644525)
+bones/3/rotation = Quaternion(-0.0342147, 0.000112698, 0.000126518, 0.999415)
+bones/4/rotation = Quaternion(0.126574, 0.000305688, 0.000404551, 0.991957)
+bones/5/rotation = Quaternion(0.0261484, -0.000232894, -0.000245743, 0.999658)
+bones/6/rotation = Quaternion(-0.0171459, 0.096052, 0.000513616, 0.995229)
+bones/7/rotation = Quaternion(-0.605327, -0.369517, -0.397903, 0.581988)
+bones/8/rotation = Quaternion(-0.270011, 0.671546, -0.508532, 0.466385)
+bones/9/rotation = Quaternion(0.256858, 0.0246529, 0.00102335, 0.966134)
 bones/10/rotation = Quaternion(0.106009, 0.00637576, -0.0256743, 0.994013)
 bones/11/rotation = Quaternion(0.44519, 0.549369, -0.445194, 0.549365)
 bones/12/rotation = Quaternion(0.623342, 6.13486e-08, 2.15438e-07, 0.781949)
@@ -151,9 +157,9 @@ bones/22/rotation = Quaternion(0.623341, -0.000665145, -0.0008345, 0.781949)
 bones/23/rotation = Quaternion(0.290838, 0.949649, 0.114583, 0.021217)
 bones/24/rotation = Quaternion(0.21939, 0.0238026, -0.00530472, 0.975332)
 bones/25/rotation = Quaternion(0.687388, -0.000309068, -0.000444658, 0.72629)
-bones/26/rotation = Quaternion(-0.649544, 0.302984, 0.336505, 0.610785)
-bones/27/rotation = Quaternion(-0.283344, -0.674458, 0.494328, 0.469534)
-bones/28/rotation = Quaternion(0.3685, -0.134037, 0.0537848, 0.918341)
+bones/26/rotation = Quaternion(-0.641499, 0.30736, 0.332513, 0.619229)
+bones/27/rotation = Quaternion(-0.293391, -0.680171, 0.471352, 0.478662)
+bones/28/rotation = Quaternion(0.367367, -0.152131, 0.0610451, 0.915517)
 bones/29/rotation = Quaternion(0.116709, 0.00291669, 0.0447786, 0.992152)
 bones/30/rotation = Quaternion(0.445191, -0.549369, 0.445194, 0.549365)
 bones/31/rotation = Quaternion(0.623341, 2.17518e-07, 6.33371e-08, 0.78195)
@@ -170,17 +176,17 @@ bones/41/rotation = Quaternion(0.623342, 0.000664924, 0.000834326, 0.781949)
 bones/42/rotation = Quaternion(-0.290838, 0.949649, 0.114584, -0.021217)
 bones/43/rotation = Quaternion(0.21939, -0.0238026, 0.00530485, 0.975332)
 bones/44/rotation = Quaternion(0.687388, 0.000309234, 0.000444539, 0.72629)
-bones/45/rotation = Quaternion(0.952878, 0.11899, -0.0146711, 0.278656)
-bones/46/rotation = Quaternion(0.233281, -0.108748, 0.0262531, 0.965953)
-bones/47/rotation = Quaternion(-0.513676, 0.0222258, 0.0944141, 0.852484)
+bones/45/rotation = Quaternion(0.961519, 0.11632, -0.014342, 0.248485)
+bones/46/rotation = Quaternion(0.199923, -0.110572, 0.0227026, 0.973288)
+bones/47/rotation = Quaternion(-0.501446, 0.0213407, 0.0962235, 0.859556)
 bones/48/rotation = Quaternion(-0.000137176, 0.964307, -0.264787, -0.000499421)
-bones/49/rotation = Quaternion(0.98885, -0.138611, 0.0170903, 0.0516764)
-bones/50/rotation = Quaternion(0.184176, 0.349219, -0.0702206, 0.916075)
-bones/51/rotation = Quaternion(-0.607357, -0.0548903, -0.161174, 0.775968)
+bones/49/rotation = Quaternion(0.992073, -0.122647, 0.015122, 0.0227976)
+bones/50/rotation = Quaternion(0.146173, 0.354256, -0.0561758, 0.921944)
+bones/51/rotation = Quaternion(-0.593632, -0.053171, -0.161242, 0.786622)
 bones/52/rotation = Quaternion(-0.000137047, 0.964307, -0.264787, -0.000499421)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D" index="1"]
-transform = Transform3D(-0.990169, -0.129986, 0.0516681, 0.137458, -0.835812, 0.531528, -0.0259061, 0.533405, 0.845463, -0.277451, 0.898973, -0.16589)
+transform = Transform3D(-0.985688, -0.151991, 0.0729235, 0.167513, -0.834484, 0.524953, -0.0189344, 0.529656, 0.848001, -0.292072, 0.911036, -0.184002)
 bone_name = "DEF-hand.R"
 bone_idx = 29
 
@@ -212,5 +218,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32585, 0.558785)
 
 [node name="ShootingTarget" type="Node3D" parent="AnimationLibrary_Godot_Standard"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.18153, 11.4146)
+
+[node name="VisibilityCheckTarget" type="Node3D" parent="AnimationLibrary_Godot_Standard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.982579, 0)
 
 [editable path="AnimationLibrary_Godot_Standard"]
