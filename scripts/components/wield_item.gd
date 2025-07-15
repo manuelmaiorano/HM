@@ -22,4 +22,13 @@ func on_item_changed(item: InventoryItem):
 	instance.freeze = true
 	current_item = instance
 
+func try_shoot(target) -> bool:
+	if current_item == null:
+		return false
+	if current_item.has_meta("Shootable"):
+		var shootable_component = current_item.get_meta("Shootable") as Shootable
+		shootable_component.shoot(target)
+		return true
+	return false
+
 	

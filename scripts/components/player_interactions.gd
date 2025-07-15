@@ -26,10 +26,10 @@ func _physics_process(_delta: float) -> void:
 			var collider = raycast.get_collider()
 			if collider.has_meta("InteractableComponent"):
 				Globals.CanInteract.emit(true)
-			was_colliding_previous_frame = true
+				was_colliding_previous_frame = true
 	else:
 		if was_colliding_previous_frame:
 			Globals.CanInteract.emit(false)
-			Globals.Interactions.emit([] as Array[InteractionAction])
+			#Globals.Interactions.emit([] as Array[InteractionAction])
 			current_interactable = null
 			was_colliding_previous_frame = false

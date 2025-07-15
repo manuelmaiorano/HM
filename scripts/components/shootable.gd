@@ -11,7 +11,7 @@ class_name Shootable
 func _ready() -> void:
 	agent.set_meta("Shootable", self)
 
-func shoot(target: Node3D):
+func shoot(target: Vector3):
 	var instance = bullet_scene.instantiate()
 	agent.add_child(instance)
 	instance.top_level = true

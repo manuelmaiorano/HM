@@ -14,12 +14,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="InteractionsComponent" type="Node" parent="." node_paths=PackedStringArray("interactions", "no_interaction_tex", "can_interact_tex", "scroll_interactions_component")]
+[node name="InteractionsComponent" type="Node" parent="." node_paths=PackedStringArray("interactions", "no_interaction_tex", "can_interact_tex", "scroll_component")]
 script = ExtResource("1_ch11f")
 interactions = NodePath("../Interactions")
 no_interaction_tex = NodePath("../CenterContainer/no_interaction")
 can_interact_tex = NodePath("../CenterContainer/can_interact")
-scroll_interactions_component = NodePath("../ScrollComponent")
+scroll_component = NodePath("../ScrollComponent")
 
 [node name="ScrollComponent" type="Node" parent="." node_paths=PackedStringArray("container_node")]
 script = ExtResource("1_bf6le")

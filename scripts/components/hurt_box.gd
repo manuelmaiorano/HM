@@ -14,4 +14,3 @@ func on_area_entered(area: Area3D):
 		var hit_box = area.get_meta("HitBoxComponent") as HitBoxComponent
 		hit_box.take_damage(damage)
 		has_hit.emit()
-		print("hit")

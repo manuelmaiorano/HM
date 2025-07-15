@@ -10,6 +10,7 @@ extends Node
 @export_category("Parameters")
 @export var mouse_sensitivity:float = 0.002
 @export var clamp_pitch_rotation: float = 80
+@export var invert_x_axis = false
 
 func _input(event:InputEvent) -> void:
 	if not event is InputEventMouseMotion:
@@ -17,7 +18,7 @@ func _input(event:InputEvent) -> void:
 		
 	var mouse_movement:Vector2 = event.relative * mouse_sensitivity 
 	
-	pitch.rotation.x = clamp(pitch.rotation.x - mouse_movement.y/2, -deg_to_rad(clamp_pitch_rotation), deg_to_rad(clamp_pitch_rotation) )
+	pitch.rotation.x = clamp(pitch.rotation.x + mouse_movement.y/2, -deg_to_rad(clamp_pitch_rotation), deg_to_rad(clamp_pitch_rotation) )
 	yaw.rotate_y(-mouse_movement.x )
 
 

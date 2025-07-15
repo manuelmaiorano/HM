@@ -1,27 +1,26 @@
 extends Node
 class_name InventoryUiComponent
 
+@export_category("Nodes")
 @export var current_item_label: Label
 @export var all_items: VBoxContainer
 @export var scroll_component: ScrollItemsComponent
 
-var active = false:
-	set(value):
-		active = value
-		all_items.visible = active
+@export_category("Parameters")
+@export var item_scene: PackedScene
+
 
 func _ready() -> void:
+	all_items.hide()
 	Globals.PickedItem.connect(on_item_pickup)
 	Globals.DroppedItem.connect(on_item_drop)
-	Globals.Interactions.connect(on_interactions_update)
 	scroll_component.current_index_changed.connect(func(idx): all_items.get_child(idx).grab_focus())
 
-func on_interactions_update(actions: Array[InteractionAction]):
-	active = actions.is_empty()
-
+func update_scroll_active():
+	scroll_component.active = Globals.current_ui_element_active == Globals.UiElementActive.InventoryMenu
 
 func on_item_pickup(item: InventoryItem):
-	var item_button = InventoryItemButton.new()
+	var item_button = item_scene.instantiate()
 	item_button.inventory_item = item
 	all_items.add_child(item_button)
 
@@ -34,16 +33,20 @@ func on_item_drop(item: InventoryItem):
 
 
 func _input(event):
-	if not active:
+	if Globals.current_ui_element_active == Globals.UiElementActive.None:
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP or event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-					active = true
+					Globals.current_ui_element_active = Globals.UiElementActive.InventoryMenu
+					update_scroll_active()
+					all_items.show()
 	
-	if active:
+	if Globals.current_ui_element_active == Globals.UiElementActive.InventoryMenu:
 		if Input.is_action_just_pressed("interact"):
-			active = false
+			Globals.current_ui_element_active = Globals.UiElementActive.None
+			update_scroll_active()
+			all_items.hide()
 
-	if Input.is_action_just_pressed("execute_action") and active:
+	if Input.is_action_just_pressed("execute_action") and Globals.current_ui_element_active == Globals.UiElementActive.InventoryMenu:
 		var items = all_items.get_children()
 		if not items.is_empty():
 			var current_item = all_items.get_child(scroll_component.current_index)

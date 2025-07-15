@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://dxdd43ngn21at"]
+
+[ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="2_de4ha"]
+[ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="3_mfvww"]
+[ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui.tscn" id="4_mfvww"]
+[ext_resource type="PackedScene" uid="uid://cb8i73sknj50o" path="res://scenes/test/testbuilding.tscn" id="4_rjiu4"]
+[ext_resource type="PackedScene" uid="uid://cui0xddsgh1e" path="res://scenes/weapons/gun.tscn" id="5_rjiu4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_charm"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_6g2hc"]
+sky_material = SubResource("ProceduralSkyMaterial_charm")
+
+[sub_resource type="Environment" id="Environment_de4ha"]
+background_mode = 2
+sky = SubResource("Sky_6g2hc")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestNpcPatrolling" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_de4ha")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Npc" parent="." instance=ExtResource("2_de4ha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2493, 0, 19.1836)
+
+[node name="Player" parent="." instance=ExtResource("3_mfvww")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6025, 3.8147e-06, 20.7463)
+
+[node name="UI" parent="." instance=ExtResource("4_mfvww")]
+
+[node name="testbuilding" parent="." instance=ExtResource("4_rjiu4")]
+
+[node name="Gun" parent="." instance=ExtResource("5_rjiu4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7741, -0.0180497, 26.2722)
