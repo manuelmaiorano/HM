@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=4 uid="uid://dmf4uo7ygswj0"]
 
 [ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://3u6bql5cwtjf" path="res://scenes/door.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://3u6bql5cwtjf" path="res://scenes/props/door.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui/ui.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://cui0xddsgh1e" path="res://scenes/weapons/gun.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://xotrswqf71f1" path="res://scenes/weapons/knife.tscn" id="5_lquwl"]
-[ext_resource type="PackedScene" uid="uid://cqg05qufup05h" path="res://scenes/Glass.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://cqg05qufup05h" path="res://scenes/props/Glass.tscn" id="6_7mycd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)

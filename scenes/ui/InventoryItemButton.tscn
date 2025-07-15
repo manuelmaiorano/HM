@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://nr7v3176ypid"]
 
-[ext_resource type="Script" uid="uid://b8yb7oqfh5bxo" path="res://scenes/inventory_item_button.gd" id="1_5oce4"]
+[ext_resource type="Script" uid="uid://b8yb7oqfh5bxo" path="res://scenes/ui/inventory_item_button.gd" id="1_5oce4"]
 
 [node name="InventoryItemButton" type="Button"]
 anchors_preset = 15

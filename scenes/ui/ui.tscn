@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bnljcgov67ptp"]
 
-[ext_resource type="PackedScene" uid="uid://bexi6a1kt2h8m" path="res://scenes/interactions_ui.tscn" id="3_yev5y"]
-[ext_resource type="PackedScene" uid="uid://b5ifia8xxlhtt" path="res://scenes/inventory_ui.tscn" id="4_gdt2y"]
+[ext_resource type="PackedScene" uid="uid://bexi6a1kt2h8m" path="res://scenes/ui/interactions_ui.tscn" id="3_yev5y"]
+[ext_resource type="PackedScene" uid="uid://b5ifia8xxlhtt" path="res://scenes/ui/inventory_ui.tscn" id="4_gdt2y"]
 
 [node name="UI" type="Control"]
 layout_mode = 3

@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=4 uid="uid://c7fk5njqhkd7n"]
 
-[ext_resource type="Script" uid="uid://xw44t361w7bo" path="res://scenes/broken_glass.gd" id="1_6k0kq"]
+[ext_resource type="Script" uid="uid://xw44t361w7bo" path="res://scenes/props/broken_glass.gd" id="1_6k0kq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rluf"]
 

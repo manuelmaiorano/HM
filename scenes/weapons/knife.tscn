@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://xotrswqf71f1"]
 
 [ext_resource type="PackedScene" uid="uid://b4rcs3rd6ty0v" path="res://assets/models/knife.glb" id="1_2xf1r"]
-[ext_resource type="Script" uid="uid://bvtxk76q4i1xo" path="res://scripts/components/pickable_interactable.gd" id="2_7hrnw"]
-[ext_resource type="Script" uid="uid://dtlpbo88xhkur" path="res://scripts/components/pickable.gd" id="3_c20fe"]
+[ext_resource type="Script" uid="uid://bvtxk76q4i1xo" path="res://scripts/components/interactions/pickable_interactable.gd" id="2_7hrnw"]
+[ext_resource type="Script" uid="uid://dtlpbo88xhkur" path="res://scripts/components/interactions/pickable.gd" id="3_c20fe"]
 [ext_resource type="Script" uid="uid://c8jlenbmf1545" path="res://scripts/resources/action_resource.gd" id="3_qf5yf"]
 [ext_resource type="Script" uid="uid://b1p3bunddmtvj" path="res://scripts/resources/inventory_resource.gd" id="4_qf5yf"]
-[ext_resource type="Script" uid="uid://qukfbc8qie1b" path="res://scripts/components/hurt_box.gd" id="6_qf5yf"]
+[ext_resource type="Script" uid="uid://qukfbc8qie1b" path="res://scripts/components/interactions/hurt_box.gd" id="6_qf5yf"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2xf1r"]
 points = PackedVector3Array(-0.0108875, -0.0527349, -0.0930074, -0.0108875, -0.0299839, -0.138613, 0.0108875, -0.0527349, -0.0930074, -0.0108875, -0.0527349, -0.0474019, 0.0108875, -0.0299839, -0.138613, -0.0108875, 0.0204184, -0.138613, 0.0108875, -0.0527349, -0.0474019, -0.0108875, -0.0293057, 0.0396921, 0.0108875, 0.0204184, -0.138613, -0.0108875, 0.0527292, -0.0930074, 0.0108875, -0.0293057, 0.0396921, -0.0108875, -0.00321859, 0.134573, 0.0108875, 0.0527292, -0.0930074, -0.0108875, 0.0590077, 0.187423, 0.0108875, -0.00321859, 0.134573, 0.0108875, 0.0590077, 0.187423)

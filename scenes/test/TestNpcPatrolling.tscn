@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="2_de4ha"]
 [ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="3_mfvww"]
-[ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui.tscn" id="4_mfvww"]
+[ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui/ui.tscn" id="4_mfvww"]
 [ext_resource type="PackedScene" uid="uid://cb8i73sknj50o" path="res://scenes/test/testbuilding.tscn" id="4_rjiu4"]
 [ext_resource type="PackedScene" uid="uid://cui0xddsgh1e" path="res://scenes/weapons/gun.tscn" id="5_rjiu4"]
 

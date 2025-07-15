@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bkhyhejx2q6ph"]
 
-[ext_resource type="Script" uid="uid://qukfbc8qie1b" path="res://scripts/components/hurt_box.gd" id="1_mkf8s"]
-[ext_resource type="Script" uid="uid://doyxs0ecscykb" path="res://scripts/components/projectile_movement.gd" id="1_y25gk"]
+[ext_resource type="Script" uid="uid://qukfbc8qie1b" path="res://scripts/components/interactions/hurt_box.gd" id="1_mkf8s"]
+[ext_resource type="Script" uid="uid://doyxs0ecscykb" path="res://scripts/components/movement/projectile_movement.gd" id="1_y25gk"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_h1aey"]
 radius = 0.01

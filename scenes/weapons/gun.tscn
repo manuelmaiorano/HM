@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://cui0xddsgh1e"]
 
 [ext_resource type="PackedScene" uid="uid://das2axdp4wo0d" path="res://assets/models/gun.glb" id="1_76485"]
-[ext_resource type="Script" uid="uid://dtlpbo88xhkur" path="res://scripts/components/pickable.gd" id="1_mgo42"]
-[ext_resource type="Script" uid="uid://bvtxk76q4i1xo" path="res://scripts/components/pickable_interactable.gd" id="2_nurr2"]
+[ext_resource type="Script" uid="uid://dtlpbo88xhkur" path="res://scripts/components/interactions/pickable.gd" id="1_mgo42"]
+[ext_resource type="Script" uid="uid://bvtxk76q4i1xo" path="res://scripts/components/interactions/pickable_interactable.gd" id="2_nurr2"]
 [ext_resource type="Script" uid="uid://c8jlenbmf1545" path="res://scripts/resources/action_resource.gd" id="3_e4hp8"]
 [ext_resource type="Resource" uid="uid://bnd6kr53derqv" path="res://resources/inventory/gun.tres" id="5_of66t"]
-[ext_resource type="Script" uid="uid://dyuvvgdbyamre" path="res://scripts/components/shootable.gd" id="6_e4hp8"]
-[ext_resource type="PackedScene" uid="uid://bkhyhejx2q6ph" path="res://scenes/bullet.tscn" id="7_of66t"]
+[ext_resource type="Script" uid="uid://dyuvvgdbyamre" path="res://scripts/components/interactions/shootable.gd" id="6_e4hp8"]
+[ext_resource type="PackedScene" uid="uid://bkhyhejx2q6ph" path="res://scenes/weapons/bullet.tscn" id="7_of66t"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mfrst"]
 points = PackedVector3Array(-0.0160973, -0.0573502, -0.16701, 0.0160973, -0.0573502, -0.16701, -0.0160973, -0.0573502, -0.0790931, -0.0160973, 0.0573502, -0.111349, 0.0160973, 0.0573502, -0.111349, 0.0160973, -0.0573502, -0.0790931, -0.0160973, -1.1228e-05, 0.144743, -0.0160973, 0.0573502, 0.144743, 0.0160973, 0.0573502, 0.144743, 0.0160973, -1.1228e-05, 0.144743)
