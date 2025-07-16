@@ -8,11 +8,17 @@ class_name DetectPlayerComponent
 @export var raycast: RayCast3D
 
 @export_category("Debug")
-@export var is_player_visible: bool = false
+@export var is_player_visible: bool = false:
+	set(value):
+		if value != is_player_visible:
+			player_visibility_changed.emit(value)
+		is_player_visible = value
+
 @export var last_seen_position: Vector3 = Vector3.ZERO
+@export var last_seen_time: float = 0.0
 
 signal player_close_changed(value: bool)
-signal player_visibility_cahnged(value: bool)
+signal player_visibility_changed(value: bool)
 
 var player_close = false
 var player = null
@@ -60,3 +66,4 @@ func update_player_last_known_position():
 	var was_visible_prev_frame = is_player_visible
 	if player and was_visible_prev_frame:
 		last_seen_position = player.global_position
+		last_seen_time = Globals.get_timestamp_seconds()

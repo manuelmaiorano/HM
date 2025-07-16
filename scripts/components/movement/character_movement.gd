@@ -15,6 +15,7 @@ class_name CharacterMovementComponent
 
 @export_category("Debug")
 @export var current_navigation_target: Vector3 = Vector3.ZERO
+var tolerance = 0.1
 
 func _ready() -> void:
 	character.set_meta("CharacterMovementComponent", self)
@@ -23,7 +24,9 @@ func _ready() -> void:
 
 func set_navigation_target(movement_target: Vector3):
 	if navigation_agent:
-		navigation_agent.set_target_position(movement_target)
+		if current_navigation_target.distance_squared_to(movement_target) > tolerance:
+			navigation_agent.set_target_position(movement_target)
+			current_navigation_target = movement_target
 
 func _on_velocity_computed(safe_velocity: Vector3):
 	character.velocity = safe_velocity
@@ -42,6 +45,10 @@ func move_to(delta: float, position: Vector3, speed: float):
 	DebugDraw3D.draw_line(character.global_position + Vector3.UP, character.global_position + Vector3.UP + direction) 
 	move(delta, direction, speed)
 	rotateModelTowards(delta, direction)
+
+func stand_idle(delta: float):
+	move(delta, Vector3.ZERO, walk_speed)
+
 
 func navigate(delta: float, speed: float) -> bool:
 	if NavigationServer3D.map_get_iteration_id(navigation_agent.get_navigation_map()) == 0:

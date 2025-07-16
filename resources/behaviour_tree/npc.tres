@@ -1,22 +1,30 @@
-[gd_resource type="BehaviorTree" load_steps=11 format=3 uid="uid://btwsgk4pfkbjj"]
+[gd_resource type="BehaviorTree" load_steps=12 format=3 uid="uid://btwsgk4pfkbjj"]
 
 [ext_resource type="Script" uid="uid://dwbv0whk2lulp" path="res://ai/tasks/Patrol.gd" id="1_npdif"]
-[ext_resource type="Script" uid="uid://ufckanshevvq" path="res://ai/tasks/check_holding_weapon.gd" id="2_b5boe"]
 [ext_resource type="Script" uid="uid://ddkmhso63nymt" path="res://ai/tasks/chase_player.gd" id="3_0pnie"]
+[ext_resource type="Script" uid="uid://ck8kk23h4oecm" path="res://ai/tasks/investigate_audio.gd" id="4_kdpv0"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_gl1un"]
-
-[sub_resource type="BTCondition" id="BTCondition_0pnie"]
-script = ExtResource("2_b5boe")
 
 [sub_resource type="BTAction" id="BTAction_yo0us"]
 script = ExtResource("3_0pnie")
 shoot_cooldown_time = 1.0
 reset_navigation_target_cooldown_time = 2.0
+distance_to_shoot = 15.0
+distance_to_shoot_tolerance = 3.0
+time_to_stop_chasing_after_spotted = 10.0
 
 [sub_resource type="BTSequence" id="BTSequence_npdif"]
 custom_name = "ChaseAndShoot"
-children = [SubResource("BTCondition_0pnie"), SubResource("BTAction_yo0us")]
+children = [SubResource("BTAction_yo0us")]
+
+[sub_resource type="BTAction" id="BTAction_mut8x"]
+script = ExtResource("4_kdpv0")
+time_to_stop_investigating_after_heard_sound = 10.0
+
+[sub_resource type="BTSequence" id="BTSequence_0pnie"]
+custom_name = "InvestigateAudio"
+children = [SubResource("BTAction_mut8x")]
 
 [sub_resource type="BTAction" id="BTAction_b5boe"]
 script = ExtResource("1_npdif")
@@ -28,7 +36,7 @@ custom_name = "Patrolling"
 children = [SubResource("BTAction_b5boe")]
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_b5boe"]
-children = [SubResource("BTSequence_npdif"), SubResource("BTSequence_sxcp6")]
+children = [SubResource("BTSequence_npdif"), SubResource("BTSequence_0pnie"), SubResource("BTSequence_sxcp6")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_gl1un")

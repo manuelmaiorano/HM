@@ -27,8 +27,10 @@ func _exit() -> void:
 
 func _tick(delta: float) -> Status:
 	if patrol_points.is_empty():
+		character_movement.stand_idle(delta)
 		return RUNNING
 	if is_waiting:
+		character_movement.stand_idle(delta)
 		time_passed += delta
 		if time_passed >= time_to_wait_on_patrol_point:
 			is_waiting = false

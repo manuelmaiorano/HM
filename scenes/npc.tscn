@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ddppbvxc1iutf"]
+[gd_scene load_steps=27 format=3 uid="uid://ddppbvxc1iutf"]
 
 [ext_resource type="Script" uid="uid://c6rnwllugvfri" path="res://scripts/components/movement/character_movement.gd" id="1_wuru7"]
 [ext_resource type="Script" uid="uid://b1p3bunddmtvj" path="res://scripts/resources/inventory_resource.gd" id="3_gl1un"]
@@ -18,6 +18,7 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr5i6g2a5t0xg" path="res://resources/animation_tree/animation_tree.tres" id="13_gc4mq"]
 [ext_resource type="Script" uid="uid://d08cashg6a2lp" path="res://scripts/components/npc/health_ui.gd" id="13_u2tho"]
 [ext_resource type="BehaviorTree" uid="uid://btwsgk4pfkbjj" path="res://resources/behaviour_tree/npc.tres" id="13_wuru7"]
+[ext_resource type="Script" uid="uid://sqsf0u3jc3p8" path="res://scripts/components/npc/audio_hearing.gd" id="14_ca6vw"]
 [ext_resource type="PackedScene" uid="uid://deqpan4silm2n" path="res://scenes/ui/waypoint/waypoint.tscn" id="18_n0klm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkhd4"]
@@ -26,6 +27,9 @@ height = 1.73555
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fjrip"]
 size = Vector3(0.343353, 1.52237, 0.265617)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ca6vw"]
+radius = 0.461751
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fjrip"]
 radius = 0.10685
@@ -110,6 +114,11 @@ script = ExtResource("13_u2tho")
 health = NodePath("../Health")
 ui = NodePath("../HealthPivot/Waypoint")
 
+[node name="AudioHearing" type="Node" parent="." node_paths=PackedStringArray("agent", "detect_area")]
+script = ExtResource("14_ca6vw")
+agent = NodePath("..")
+detect_area = NodePath("../HearSoundArea")
+
 [node name="HitBoxBodyArea" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 8
@@ -119,19 +128,28 @@ monitoring = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000228882, 0.763626, -0.0601616)
 shape = SubResource("BoxShape3D_fjrip")
 
+[node name="HearSoundArea" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HearSoundArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58034, 0)
+shape = SubResource("SphereShape3D_ca6vw")
+
 [node name="AnimationLibrary_Godot_Standard" parent="." instance=ExtResource("10_d56e8")]
 
 [node name="Skeleton3D" parent="AnimationLibrary_Godot_Standard/Rig" index="0"]
-bones/1/position = Vector3(0.0101525, 0.0802469, 0.874606)
-bones/1/rotation = Quaternion(0.769015, -0.0758984, -0.0580141, 0.632052)
-bones/3/rotation = Quaternion(-0.0296251, -0.00149426, -0.00104959, 0.999559)
-bones/4/rotation = Quaternion(0.14215, -0.00350015, 0.00502815, 0.989826)
-bones/5/rotation = Quaternion(0.0165736, 0.00248238, -0.0037641, 0.999853)
-bones/6/rotation = Quaternion(-0.019529, 0.0781444, -0.00659051, 0.996729)
-bones/7/rotation = Quaternion(-0.607737, -0.36298, -0.39111, 0.588162)
-bones/8/rotation = Quaternion(-0.224136, 0.679488, -0.538339, 0.445253)
-bones/9/rotation = Quaternion(0.285191, -0.0237462, 0.00380976, 0.958169)
-bones/10/rotation = Quaternion(0.109263, 0.00831991, -0.0228404, 0.993716)
+bones/1/position = Vector3(-0.00523426, 0.0796096, 0.881789)
+bones/1/rotation = Quaternion(0.76565, -0.0727262, -0.0603561, 0.636277)
+bones/3/rotation = Quaternion(-0.0297704, -0.00137347, 0.000264062, 0.999556)
+bones/4/rotation = Quaternion(0.142086, -0.00393479, 0.00255263, 0.989843)
+bones/5/rotation = Quaternion(0.0159818, 0.00268056, -0.00158047, 0.999867)
+bones/6/rotation = Quaternion(-0.00457681, 0.0790495, -0.00459793, 0.99685)
+bones/7/rotation = Quaternion(-0.603378, -0.364862, -0.385535, 0.595124)
+bones/8/rotation = Quaternion(-0.260391, 0.678432, -0.51967, 0.449299)
+bones/9/rotation = Quaternion(0.294802, 0.0093109, -0.0105878, 0.955454)
+bones/10/rotation = Quaternion(0.128236, 0.00781767, -0.0223075, 0.991462)
 bones/11/rotation = Quaternion(0.44519, 0.549369, -0.445194, 0.549365)
 bones/12/rotation = Quaternion(0.623342, -2.3868e-08, 2.62154e-07, 0.78195)
 bones/13/rotation = Quaternion(0.623342, -2.31041e-07, -3.21915e-09, 0.78195)
@@ -147,10 +165,10 @@ bones/22/rotation = Quaternion(0.623341, -0.000665122, -0.000834483, 0.781949)
 bones/23/rotation = Quaternion(0.290838, 0.949649, 0.114583, 0.021217)
 bones/24/rotation = Quaternion(0.21939, 0.0238026, -0.00530476, 0.975332)
 bones/25/rotation = Quaternion(0.687388, -0.000309049, -0.000444572, 0.72629)
-bones/26/rotation = Quaternion(-0.6414, 0.304807, 0.328879, 0.622526)
-bones/27/rotation = Quaternion(-0.285841, -0.674907, 0.500352, 0.460916)
-bones/28/rotation = Quaternion(0.351468, -0.113579, 0.0521281, 0.927821)
-bones/29/rotation = Quaternion(0.118648, -0.00125024, 0.0383417, 0.992195)
+bones/26/rotation = Quaternion(-0.633864, 0.311212, 0.329912, 0.626516)
+bones/27/rotation = Quaternion(-0.282274, -0.681468, 0.493708, 0.460625)
+bones/28/rotation = Quaternion(0.351792, -0.116372, 0.0503638, 0.92745)
+bones/29/rotation = Quaternion(0.0996482, -0.0015395, 0.0385943, 0.994273)
 bones/30/rotation = Quaternion(0.445191, -0.549369, 0.445194, 0.549365)
 bones/31/rotation = Quaternion(0.623342, 1.43368e-07, 1.01203e-07, 0.78195)
 bones/32/rotation = Quaternion(0.623342, 9.98051e-08, -9.81281e-08, 0.78195)
@@ -166,17 +184,17 @@ bones/41/rotation = Quaternion(0.623342, 0.000664927, 0.000834353, 0.781949)
 bones/42/rotation = Quaternion(-0.290838, 0.949649, 0.114584, -0.021217)
 bones/43/rotation = Quaternion(0.21939, -0.0238026, 0.00530483, 0.975332)
 bones/44/rotation = Quaternion(0.687388, 0.00030921, 0.000444553, 0.72629)
-bones/45/rotation = Quaternion(0.967759, 0.0846602, -0.0110627, 0.236964)
-bones/46/rotation = Quaternion(0.237652, -0.0906092, 0.0154685, 0.966991)
-bones/47/rotation = Quaternion(-0.515903, 0.0151071, 0.0755387, 0.853176)
-bones/48/rotation = Quaternion(-0.00299964, 0.947515, -0.319697, -0.000435189)
-bones/49/rotation = Quaternion(0.986712, -0.111361, 0.0205836, 0.116513)
-bones/50/rotation = Quaternion(0.18148, 0.285368, -0.0366502, 0.940365)
-bones/51/rotation = Quaternion(-0.599588, -0.0452694, -0.134018, 0.787708)
-bones/52/rotation = Quaternion(-0.000137057, 0.964307, -0.264787, -0.000499416)
+bones/45/rotation = Quaternion(0.961457, 0.0930297, -0.0149093, 0.258308)
+bones/46/rotation = Quaternion(0.288015, -0.0904794, 0.00434584, 0.953332)
+bones/47/rotation = Quaternion(-0.463203, 0.0129282, 0.0810561, 0.882443)
+bones/48/rotation = Quaternion(-0.000137167, 0.964307, -0.264787, -0.000499413)
+bones/49/rotation = Quaternion(0.994223, -0.0919526, 0.012409, 0.05396)
+bones/50/rotation = Quaternion(0.140836, 0.288911, -0.0329164, 0.946368)
+bones/51/rotation = Quaternion(-0.589479, -0.046137, -0.127072, 0.796391)
+bones/52/rotation = Quaternion(-0.000100135, 0.964055, -0.265702, -0.000489268)
 
 [node name="WeaponAttachment" type="BoneAttachment3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D" index="1"]
-transform = Transform3D(-0.989622, -0.137946, 0.0402455, 0.140098, -0.863943, 0.48371, -0.031956, 0.484328, 0.874302, -0.272589, 0.907527, -0.168725)
+transform = Transform3D(-0.985887, -0.150695, 0.0729221, 0.167412, -0.887465, 0.429392, 8.35396e-06, 0.435541, 0.900169, -0.300271, 0.923621, -0.178456)
 bone_name = "DEF-hand.R"
 bone_idx = 29
 
@@ -197,7 +215,7 @@ visible = false
 [node name="OffsetNode" type="Node3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D/WeaponAttachment"]
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D" index="2"]
-transform = Transform3D(0.998225, -0.052073, -0.0289045, 0.042001, 0.959592, -0.278241, 0.0422254, 0.276534, 0.960076, -0.0169413, 1.51898, 0.0287318)
+transform = Transform3D(0.998285, -0.0521568, -0.026566, 0.0420337, 0.954653, -0.294738, 0.0407339, 0.293116, 0.955209, -0.0266518, 1.5275, 0.0226895)
 bone_name = "DEF-head"
 bone_idx = 6
 
