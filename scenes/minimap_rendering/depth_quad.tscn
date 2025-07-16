@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdulnlvnnvpse"]
+
+[ext_resource type="Shader" uid="uid://c8g8v02a806qx" path="res://resources/shaders/depth/sample_depth.gdshader" id="1_wldfh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xakbr"]
+render_priority = 0
+shader = ExtResource("1_wldfh")
+
+[sub_resource type="QuadMesh" id="QuadMesh_mbu8c"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="DepthQuad" type="MeshInstance3D"]
+material_override = SubResource("ShaderMaterial_xakbr")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_mbu8c")
+skeleton = NodePath("")
