@@ -1,5 +1,5 @@
 extends Node
-class_name InventoryInteractionComponent
+class_name PlayerInventoryInteractionComponent
 
 @export var inventory: InventoryComponent
 
