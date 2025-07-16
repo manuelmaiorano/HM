@@ -27,6 +27,8 @@ func _setup() -> void:
 
 func on_visibility_changed(is_visible: bool):
 	if is_visible:
+		if not player_inventory.item_in_use:
+			return
 		if player_inventory.item_in_use.is_weapon:
 			is_chasing_player = true
 			is_player_spotted_with_weapon = true

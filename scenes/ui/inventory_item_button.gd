@@ -8,3 +8,10 @@ class_name InventoryItemButton
 			text = "Holster"
 			return
 		text = inventory_item.name
+
+@export var item_name: String:
+	get():
+		if inventory_item:
+			return inventory_item.name
+		else:
+			return "Holster"

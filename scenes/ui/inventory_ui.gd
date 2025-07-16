@@ -40,9 +40,10 @@ func on_item_drop(item: InventoryItem):
 	for child in all_items.get_children():
 		if child.inventory_item == item:
 			child.queue_free()
+			scroll_component.current_index = 0
 			var current_item = all_items.get_child(scroll_component.current_index)
 			Globals.SelectedItemToUse.emit(current_item.inventory_item)
-			current_item_label.text = current_item.inventory_item.name
+			current_item_label.text = current_item.item_name
 
 
 func _input(event):
@@ -64,8 +65,7 @@ func _input(event):
 		if not items.is_empty():
 			var current_item = all_items.get_child(scroll_component.current_index)
 			Globals.SelectedItemToUse.emit(current_item.inventory_item)
-			if current_item.inventory_item:
-				current_item_label.text = current_item.inventory_item.name
+			current_item_label.text = current_item.item_name
 			Globals.current_ui_element_active = Globals.UiElementActive.None
 			Globals.UiElementActiveChanged.emit()
 			get_viewport().set_input_as_handled()
