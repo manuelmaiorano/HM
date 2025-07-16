@@ -1,5 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://ckldaterjjk1p"]
+[gd_scene load_steps=24 format=3 uid="uid://ckldaterjjk1p"]
 
+[ext_resource type="Script" uid="uid://cdedmtcvw313h" path="res://scripts/components/player/player_state.gd" id="1_4r5pv"]
+[ext_resource type="Script" uid="uid://dxfxej3khngxq" path="res://scripts/components/player/camera_control.gd" id="1_fulsm"]
 [ext_resource type="Script" uid="uid://c6rnwllugvfri" path="res://scripts/components/movement/character_movement.gd" id="2_dqkch"]
 [ext_resource type="Script" uid="uid://bqf2omymurd11" path="res://scripts/components/player/player_input.gd" id="3_qlg0r"]
 [ext_resource type="Script" uid="uid://dumfq48ecyo48" path="res://scripts/components/player/player_interactions.gd" id="4_dqkch"]
@@ -17,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://b4rcs3rd6ty0v" path="res://assets/models/knife.glb" id="10_y4r1p"]
 [ext_resource type="Script" uid="uid://c53chp6plkp1" path="res://scripts/components/player/target_when_check_visible.gd" id="11_oprun"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr5i6g2a5t0xg" path="res://resources/animation_tree/animation_tree.tres" id="13_jej6c"]
+[ext_resource type="Script" uid="uid://4khaop3bkv0r" path="res://scripts/components/player/player_health_ui.gd" id="16_60mlk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkhd4"]
 radius = 0.257767
@@ -36,22 +39,38 @@ collision_mask = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.870951, 0)
 shape = SubResource("CapsuleShape3D_rkhd4")
 
+[node name="PlayerState" type="Node" parent="." node_paths=PackedStringArray("health", "player_input", "player_shooting", "player_inventory", "player_interactions")]
+script = ExtResource("1_4r5pv")
+health = NodePath("../Health")
+player_input = NodePath("../PlayerInput")
+player_shooting = NodePath("../PlayerShooting")
+player_inventory = NodePath("../PlayerInventoryInteraction")
+player_interactions = NodePath("../PlayerInteractions")
+
+[node name="CameraControl" type="Node" parent="." node_paths=PackedStringArray("pitch", "yaw")]
+script = ExtResource("1_fulsm")
+pitch = NodePath("../Yaw/Pitch")
+yaw = NodePath("../Yaw")
+
 [node name="CharacterMovement" type="Node" parent="." node_paths=PackedStringArray("character", "character_model")]
 script = ExtResource("2_dqkch")
 character = NodePath("..")
 character_model = NodePath("../AnimationLibrary_Godot_Standard")
 
-[node name="PlayerInput" type="Node" parent="." node_paths=PackedStringArray("character", "movement_component", "camera", "pitch", "yaw")]
+[node name="PlayerInput" type="Node" parent="." node_paths=PackedStringArray("character", "movement_component", "camera", "yaw")]
 script = ExtResource("3_qlg0r")
 character = NodePath("..")
 movement_component = NodePath("../CharacterMovement")
 camera = NodePath("../Yaw/Pitch/Camera3D")
-pitch = NodePath("../Yaw/Pitch")
 yaw = NodePath("../Yaw")
 
 [node name="PlayerInteractions" type="Node" parent="." node_paths=PackedStringArray("raycast")]
 script = ExtResource("4_dqkch")
 raycast = NodePath("../Yaw/Pitch/Camera3D/InteractionsRaycast")
+
+[node name="PlayerInventoryInteraction" type="Node" parent="." node_paths=PackedStringArray("inventory")]
+script = ExtResource("10_f1ej7")
+inventory = NodePath("../Inventory")
 
 [node name="Inventory" type="Node" parent="." node_paths=PackedStringArray("character", "drop_node")]
 script = ExtResource("5_qlg0r")
@@ -74,31 +93,33 @@ health = NodePath("../Health")
 detection_area = NodePath("../HitBocBodyArea")
 damage_multiplier = 2.0
 
-[node name="WieldItem" type="Node" parent="." node_paths=PackedStringArray("character", "bone_attachment_offset_node", "inventory")]
+[node name="WieldItem" type="Node" parent="." node_paths=PackedStringArray("character", "bone_attachment_offset_node", "inventory", "shoot_from")]
 script = ExtResource("7_d2wvv")
 character = NodePath("..")
 bone_attachment_offset_node = NodePath("../AnimationLibrary_Godot_Standard/Rig/Skeleton3D/BoneAttachment3D/OffsetNode")
 inventory = NodePath("../Inventory")
+shoot_from = NodePath("../AnimationLibrary_Godot_Standard/ShootFrom")
 
-[node name="Animations" type="Node" parent="." node_paths=PackedStringArray("character_movement", "animation_tree", "wieldable_component")]
+[node name="Animations" type="Node" parent="." node_paths=PackedStringArray("character_movement", "animation_tree", "wieldable_component", "health")]
 script = ExtResource("7_ur7pv")
 character_movement = NodePath("../CharacterMovement")
 animation_tree = NodePath("../AnimationLibrary_Godot_Standard/AnimationTree")
 wieldable_component = NodePath("../WieldItem")
+health = NodePath("../Health")
 
 [node name="PlayerShooting" type="Node" parent="." node_paths=PackedStringArray("wieldable", "raycast")]
 script = ExtResource("9_3v2ag")
 wieldable = NodePath("../WieldItem")
 raycast = NodePath("../Yaw/Pitch/Camera3D/ShootingRaycast")
 
-[node name="PlayerInventoryInteraction" type="Node" parent="." node_paths=PackedStringArray("inventory")]
-script = ExtResource("10_f1ej7")
-inventory = NodePath("../Inventory")
-
 [node name="TargetWhenCheckVisible" type="Node" parent="." node_paths=PackedStringArray("character", "target_node")]
 script = ExtResource("11_oprun")
 character = NodePath("..")
 target_node = NodePath("../AnimationLibrary_Godot_Standard/VisibilityCheckTarget")
+
+[node name="PlayerHealthUi" type="Node" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("16_60mlk")
+health = NodePath("../Health")
 
 [node name="Yaw" type="Node3D" parent="."]
 
@@ -138,15 +159,15 @@ shape = SubResource("SphereShape3D_fjrip")
 [node name="AnimationLibrary_Godot_Standard" parent="." instance=ExtResource("7_smehm")]
 
 [node name="Skeleton3D" parent="AnimationLibrary_Godot_Standard/Rig" index="0"]
-bones/1/position = Vector3(0.0028736, 0.0881939, 0.869296)
-bones/1/rotation = Quaternion(0.763519, -0.0891814, -0.0742026, 0.635279)
-bones/3/rotation = Quaternion(-0.0281972, 0.000115909, 0.000123975, 0.999602)
-bones/4/rotation = Quaternion(0.146757, 0.000316833, 0.000396412, 0.989172)
-bones/5/rotation = Quaternion(0.0128427, -0.000239645, -0.000239764, 0.999918)
-bones/6/rotation = Quaternion(-0.0310409, 0.0960458, -0.0009025, 0.994892)
-bones/7/rotation = Quaternion(-0.612791, -0.364348, -0.402641, 0.574124)
-bones/8/rotation = Quaternion(-0.247381, 0.668839, -0.524179, 0.465505)
-bones/9/rotation = Quaternion(0.257117, 0.00102569, 0.00731251, 0.966352)
+bones/1/position = Vector3(0.00353995, 0.0881089, 0.87026)
+bones/1/rotation = Quaternion(0.763241, -0.0891489, -0.0742417, 0.635613)
+bones/3/rotation = Quaternion(-0.0272928, 0.00011637, 0.000123564, 0.999628)
+bones/4/rotation = Quaternion(0.149848, 0.000318498, 0.00039515, 0.988709)
+bones/5/rotation = Quaternion(0.0108236, -0.000240677, -0.000238798, 0.999941)
+bones/6/rotation = Quaternion(-0.0258354, 0.0960326, -0.00180833, 0.995041)
+bones/7/rotation = Quaternion(-0.611143, -0.3655, -0.401595, 0.575877)
+bones/8/rotation = Quaternion(-0.252569, 0.669459, -0.520762, 0.465661)
+bones/9/rotation = Quaternion(0.264098, 0.00635851, 0.00585834, 0.964457)
 bones/10/rotation = Quaternion(0.106009, 0.00637576, -0.0256743, 0.994013)
 bones/11/rotation = Quaternion(0.44519, 0.549369, -0.445194, 0.549365)
 bones/12/rotation = Quaternion(0.623342, 6.13486e-08, 2.15438e-07, 0.781949)
@@ -163,9 +184,9 @@ bones/22/rotation = Quaternion(0.623341, -0.000665145, -0.0008345, 0.781949)
 bones/23/rotation = Quaternion(0.290838, 0.949649, 0.114583, 0.021217)
 bones/24/rotation = Quaternion(0.21939, 0.0238026, -0.00530472, 0.975332)
 bones/25/rotation = Quaternion(0.687388, -0.000309068, -0.000444658, 0.72629)
-bones/26/rotation = Quaternion(-0.649107, 0.303225, 0.336288, 0.611249)
-bones/27/rotation = Quaternion(-0.282244, -0.673853, 0.49666, 0.468604)
-bones/28/rotation = Quaternion(0.36859, -0.132493, 0.0531652, 0.918565)
+bones/26/rotation = Quaternion(-0.647433, 0.304143, 0.335458, 0.613021)
+bones/27/rotation = Quaternion(-0.282812, -0.674165, 0.49546, 0.469083)
+bones/28/rotation = Quaternion(0.368553, -0.133126, 0.0534189, 0.918473)
 bones/29/rotation = Quaternion(0.116709, 0.00291669, 0.0447786, 0.992152)
 bones/30/rotation = Quaternion(0.445191, -0.549369, 0.445194, 0.549365)
 bones/31/rotation = Quaternion(0.623341, 2.17518e-07, 6.33371e-08, 0.78195)
@@ -182,17 +203,17 @@ bones/41/rotation = Quaternion(0.623342, 0.000664924, 0.000834326, 0.781949)
 bones/42/rotation = Quaternion(-0.290838, 0.949649, 0.114584, -0.021217)
 bones/43/rotation = Quaternion(0.21939, -0.0238026, 0.00530485, 0.975332)
 bones/44/rotation = Quaternion(0.687388, 0.000309234, 0.000444539, 0.72629)
-bones/45/rotation = Quaternion(0.952917, 0.118138, -0.0145661, 0.278893)
-bones/46/rotation = Quaternion(0.231988, -0.10896, 0.0261506, 0.966243)
-bones/47/rotation = Quaternion(-0.513902, 0.0224812, 0.0936398, 0.852426)
+bones/45/rotation = Quaternion(0.953962, 0.117108, -0.0144392, 0.275741)
+bones/46/rotation = Quaternion(0.227072, -0.10935, 0.0256575, 0.967379)
+bones/47/rotation = Quaternion(-0.512009, 0.0225201, 0.0932441, 0.853607)
 bones/48/rotation = Quaternion(-0.000137176, 0.964307, -0.264787, -0.000499421)
-bones/49/rotation = Quaternion(0.988939, -0.138235, 0.017044, 0.0509984)
-bones/50/rotation = Quaternion(0.181125, 0.349659, -0.0691045, 0.916601)
-bones/51/rotation = Quaternion(-0.606188, -0.0545402, -0.161601, 0.776818)
+bones/49/rotation = Quaternion(0.989404, -0.136092, 0.0167798, 0.0477189)
+bones/50/rotation = Quaternion(0.17441, 0.35062, -0.0666444, 0.917718)
+bones/51/rotation = Quaternion(-0.603156, -0.0539746, -0.161928, 0.779146)
 bones/52/rotation = Quaternion(-0.000137047, 0.964307, -0.264787, -0.000499421)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D" index="1"]
-transform = Transform3D(-0.99056, -0.127248, 0.0509689, 0.13503, -0.841807, 0.522616, -0.0235959, 0.524565, 0.851043, -0.275372, 0.900393, -0.169065)
+transform = Transform3D(-0.99031, -0.128489, 0.0526898, 0.137283, -0.848525, 0.511036, -0.0209537, 0.513318, 0.857943, -0.276106, 0.90353, -0.174522)
 bone_name = "DEF-hand.R"
 bone_idx = 29
 
@@ -215,6 +236,9 @@ visible = false
 [node name="AnimationTree" type="AnimationTree" parent="AnimationLibrary_Godot_Standard"]
 tree_root = ExtResource("13_jej6c")
 anim_player = NodePath("../AnimationPlayer")
+parameters/Transition/current_state = false
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0.0
 parameters/movement_blend/blend_position = 0
 parameters/shoot/active = false
 parameters/shoot/internal_active = false
@@ -228,5 +252,8 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.1
 
 [node name="VisibilityCheckTarget" type="Node3D" parent="AnimationLibrary_Godot_Standard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.982579, 0)
+
+[node name="ShootFrom" type="Node3D" parent="AnimationLibrary_Godot_Standard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32995, 0.674628)
 
 [editable path="AnimationLibrary_Godot_Standard"]

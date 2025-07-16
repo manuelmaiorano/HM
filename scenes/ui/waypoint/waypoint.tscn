@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://deqpan4silm2n"]
+
+[ext_resource type="Script" uid="uid://bn2oaogkfhgeq" path="res://scenes/ui/waypoint/waypoint.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cgywc0chjpw4s" path="res://scenes/ui/waypoint/waypoint.svg" id="2"]
+
+[node name="Waypoint" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -200.0
+offset_top = -44.0
+offset_right = 200.0
+offset_bottom = -15.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 18
+text = "Waypoint"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -89.0
+offset_top = -37.0
+offset_right = 89.0
+offset_bottom = -24.0
+grow_horizontal = 2
+value = 100.0
+show_percentage = false
+
+[node name="Marker" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+texture = ExtResource("2")
+expand_mode = 1

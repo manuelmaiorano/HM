@@ -9,12 +9,23 @@ class_name InventoryUiComponent
 @export_category("Parameters")
 @export var item_scene: PackedScene
 
+var no_item_button = null
 
-func _ready() -> void:
+func _enter_tree() -> void:
+	no_item_button = on_item_pickup(null)
 	all_items.hide()
 	Globals.PickedItem.connect(on_item_pickup)
 	Globals.DroppedItem.connect(on_item_drop)
+	Globals.InventoryChanged.connect(on_inventory_changed)
 	scroll_component.current_index_changed.connect(func(idx): all_items.get_child(idx).grab_focus())
+
+func on_inventory_changed(items: Array[InventoryItem]):
+	for child in all_items.get_children():
+		if child == no_item_button:
+			continue
+		child.queue_free()
+	for item in items:
+		on_item_pickup(item)
 
 func update_scroll_active():
 	scroll_component.active = Globals.current_ui_element_active == Globals.UiElementActive.InventoryMenu
@@ -23,13 +34,15 @@ func on_item_pickup(item: InventoryItem):
 	var item_button = item_scene.instantiate()
 	item_button.inventory_item = item
 	all_items.add_child(item_button)
+	return item_button
 
 func on_item_drop(item: InventoryItem):
 	for child in all_items.get_children():
 		if child.inventory_item == item:
 			child.queue_free()
-			scroll_component.current_index = 0
-			current_item_label.text = "No item"
+			var current_item = all_items.get_child(scroll_component.current_index)
+			Globals.SelectedItemToUse.emit(current_item.inventory_item)
+			current_item_label.text = current_item.inventory_item.name
 
 
 func _input(event):
@@ -51,4 +64,10 @@ func _input(event):
 		if not items.is_empty():
 			var current_item = all_items.get_child(scroll_component.current_index)
 			Globals.SelectedItemToUse.emit(current_item.inventory_item)
-			current_item_label.text = current_item.inventory_item.name
+			if current_item.inventory_item:
+				current_item_label.text = current_item.inventory_item.name
+			Globals.current_ui_element_active = Globals.UiElementActive.None
+			Globals.UiElementActiveChanged.emit()
+			get_viewport().set_input_as_handled()
+			update_scroll_active()
+			all_items.hide()

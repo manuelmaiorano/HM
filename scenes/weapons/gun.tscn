@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cui0xddsgh1e"]
+[gd_scene load_steps=13 format=3 uid="uid://cui0xddsgh1e"]
 
 [ext_resource type="PackedScene" uid="uid://das2axdp4wo0d" path="res://assets/models/gun.glb" id="1_76485"]
 [ext_resource type="Script" uid="uid://dtlpbo88xhkur" path="res://scripts/components/interactions/pickable.gd" id="1_mgo42"]
@@ -7,6 +7,8 @@
 [ext_resource type="Resource" uid="uid://bnd6kr53derqv" path="res://resources/inventory/gun.tres" id="5_of66t"]
 [ext_resource type="Script" uid="uid://dyuvvgdbyamre" path="res://scripts/components/interactions/shootable.gd" id="6_e4hp8"]
 [ext_resource type="PackedScene" uid="uid://bkhyhejx2q6ph" path="res://scenes/weapons/bullet.tscn" id="7_of66t"]
+[ext_resource type="Script" uid="uid://cn0g4shunkmwa" path="res://scripts/components/interactions/shooting_audio.gd" id="8_7dh3r"]
+[ext_resource type="AudioStream" uid="uid://cbp4e44bc2r1i" path="res://assets/sfx/556 Single WAV.wav" id="8_voj0y"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mfrst"]
 points = PackedVector3Array(-0.0160973, -0.0573502, -0.16701, 0.0160973, -0.0573502, -0.16701, -0.0160973, -0.0573502, -0.0790931, -0.0160973, 0.0573502, -0.111349, 0.0160973, 0.0573502, -0.111349, 0.0160973, -0.0573502, -0.0790931, -0.0160973, -1.1228e-05, 0.144743, -0.0160973, 0.0573502, 0.144743, 0.0160973, 0.0573502, 0.144743, 0.0160973, -1.1228e-05, 0.144743)
@@ -16,6 +18,11 @@ script = ExtResource("3_e4hp8")
 id = 0
 desc = &"Pick up"
 metadata/_custom_type_script = "uid://c8jlenbmf1545"
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7dh3r"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("8_voj0y")
 
 [node name="Gun" type="RigidBody3D"]
 collision_layer = 4
@@ -42,5 +49,14 @@ agent = NodePath("..")
 shoot_from = NodePath("../ShootFrom")
 bullet_scene = ExtResource("7_of66t")
 
+[node name="ShootingAudio" type="Node" parent="." node_paths=PackedStringArray("shootable_component", "audio_player")]
+script = ExtResource("8_7dh3r")
+shootable_component = NodePath("../Shootable")
+audio_player = NodePath("../AudioStreamPlayer3D")
+
 [node name="ShootFrom" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03296, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_7dh3r")
+bus = &"Sfx"

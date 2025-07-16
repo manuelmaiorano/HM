@@ -1,6 +1,17 @@
 extends Node
+class_name WorldInteractionComponent
 
 @export var raycast: RayCast3D 
+
+
+@export_category("Debug")
+@export var enabled: bool:
+	set(value):
+		enabled = value
+		if value:
+			set_physics_process(true)
+		else:
+			set_physics_process(false)
 
 var was_colliding_previous_frame = false
 var current_interactable: InteractableComponent = null

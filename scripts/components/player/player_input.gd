@@ -1,26 +1,20 @@
 extends Node
+class_name PlayerInputComponent
 
 @export_category("Nodes")
 @export var character: CharacterBody3D
 @export var movement_component: CharacterMovementComponent
 @export var camera: Camera3D
-@export var pitch: Node3D
 @export var yaw: Node3D
 
-@export_category("Parameters")
-@export var mouse_sensitivity:float = 0.002
-@export var clamp_pitch_rotation: float = 80
-@export var invert_x_axis = false
-
-func _input(event:InputEvent) -> void:
-	if not event is InputEventMouseMotion:
-		return
-		
-	var mouse_movement:Vector2 = event.relative * mouse_sensitivity 
-	
-	pitch.rotation.x = clamp(pitch.rotation.x + mouse_movement.y/2, -deg_to_rad(clamp_pitch_rotation), deg_to_rad(clamp_pitch_rotation) )
-	yaw.rotate_y(-mouse_movement.x )
-
+@export_category("Debug")
+@export var enabled: bool:
+	set(value):
+		enabled = value
+		if value:
+			set_physics_process(true)
+		else:
+			set_physics_process(false)
 
 func _physics_process(delta: float) -> void:
 	var movement_direction = Input.get_vector("forward", "back", "right", "left")

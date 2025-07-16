@@ -11,6 +11,7 @@ class_name  InventoryComponent
 @export_category("Debug")
 @export var item_in_use: InventoryItem = null
 
+signal inventory_changed(items: Array[InventoryItem])
 signal item_in_use_changed(item: InventoryItem)
 
 var current_items: Array[InventoryItem] = []
@@ -20,6 +21,8 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	current_items = initial_items
+	if not current_items.is_empty():
+		inventory_changed.emit(current_items)
 	if item_in_use:
 		item_in_use_changed.emit(item_in_use)
 

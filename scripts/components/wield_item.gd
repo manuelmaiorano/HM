@@ -4,6 +4,7 @@ class_name WieldableComponent
 @export var character: CharacterBody3D
 @export var bone_attachment_offset_node: Node3D
 @export var inventory: InventoryComponent
+@export var shoot_from: Node3D
 @export var current_item: Node3D
 
 signal is_shooting()
@@ -34,7 +35,7 @@ func try_shoot(target: Vector3) -> bool:
 		return false
 	if current_item.has_meta("Shootable"):
 		var shootable_component = current_item.get_meta("Shootable") as Shootable
-		shootable_component.shoot(target)
+		shootable_component.shoot(target, shoot_from)
 		is_shooting.emit()
 		return true
 	return false

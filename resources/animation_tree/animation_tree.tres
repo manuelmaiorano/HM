@@ -1,10 +1,23 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=9 format=3 uid="uid://cr5i6g2a5t0xg"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=11 format=3 uid="uid://cr5i6g2a5t0xg"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jej6c"]
 animation = &"Pistol_Shoot"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ngwyk"]
+animation = &"Death01"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3v2ag"]
 animation = &"Idle"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_yycqb"]
+input_0/name = "alive"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "dead"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_46rtb"]
 animation = &"Idle"
@@ -32,14 +45,18 @@ min_space = 0.0
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_f1ej7"]
 
 [resource]
-graph_offset = Vector2(-29, -68)
+graph_offset = Vector2(389.665, 153.77)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_3v2ag")
 nodes/Animation/position = Vector2(300, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_jej6c")
 "nodes/Animation 2/position" = Vector2(300, 320)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_ngwyk")
+"nodes/Animation 3/position" = Vector2(640, 420)
+nodes/Transition/node = SubResource("AnimationNodeTransition_yycqb")
+nodes/Transition/position = Vector2(960, 180)
 nodes/movement_blend/node = SubResource("AnimationNodeBlendSpace1D_dpgnh")
 nodes/movement_blend/position = Vector2(520, 20)
-nodes/output/position = Vector2(940, 180)
+nodes/output/position = Vector2(1120, 200)
 nodes/shoot/node = SubResource("AnimationNodeOneShot_f1ej7")
-nodes/shoot/position = Vector2(740, 180)
-node_connections = [&"output", 0, &"shoot", &"shoot", 0, &"movement_blend", &"shoot", 1, &"Animation 2"]
+nodes/shoot/position = Vector2(780, 100)
+node_connections = [&"Transition", 0, &"shoot", &"Transition", 1, &"Animation 3", &"output", 0, &"Transition", &"shoot", 0, &"movement_blend", &"shoot", 1, &"Animation 2"]

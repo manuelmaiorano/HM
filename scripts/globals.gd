@@ -1,4 +1,5 @@
 extends Node
+signal PlayerHealthChanged(value)
 
 signal CanInteract(is_interactable_colliding: bool)
 signal Interactions(actions: Array[InteractionAction])
@@ -8,6 +9,7 @@ signal PickedItem(item: InventoryItem)
 signal DroppedItem(item: InventoryItem)
 signal SelectedItemToUse(item: InventoryItem)
 
+signal InventoryChanged(itmes: Array[InventoryItem])
 
 signal UiElementActiveChanged()
 enum UiElementActive {None, InteractionsMenu, InventoryMenu}
@@ -18,6 +20,7 @@ enum UiElementActive {None, InteractionsMenu, InventoryMenu}
 
 
 @export var patrol_points: Dictionary[StringName, Array]
+
 
 
 func _ready() -> void:
