@@ -7,5 +7,5 @@ func _ready() -> void:
 func get_actions() -> Array[InteractionAction]:
     return []
 
-func execute_action(_action: InteractionAction):
+func execute_action(_action: InteractionAction, _agent: Node3D):
     pass

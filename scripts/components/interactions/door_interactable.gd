@@ -26,7 +26,7 @@ func get_actions() -> Array[InteractionAction]:
 	else:
 		return []
 
-func execute_action(action: InteractionAction):
+func execute_action(action: InteractionAction, _agent: Node3D):
 	if state == State.Running:
 		return
 	if action.id == open_action.id:

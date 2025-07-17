@@ -44,6 +44,7 @@ func on_item_drop(item: InventoryItem):
 			var current_item = all_items.get_child(scroll_component.current_index)
 			Globals.SelectedItemToUse.emit(current_item.inventory_item)
 			current_item_label.text = current_item.item_name
+			return
 
 
 func _input(event):

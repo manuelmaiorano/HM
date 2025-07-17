@@ -2,7 +2,7 @@ extends Node
 class_name  InventoryComponent
 
 @export_category("Nodes")
-@export var character: CharacterBody3D
+@export var character: Node3D
 @export var drop_node: Node3D
 
 @export_category("Parameters")
@@ -44,3 +44,23 @@ func drop_item():
 
 func add_item(item: InventoryItem):
 	current_items.append(item)
+
+func transfer_all_inventory(other_inventory: InventoryComponent):
+	other_inventory.current_items = current_items
+	current_items = []
+	item_in_use = null
+	inventory_changed.emit(current_items)
+	item_in_use_changed.emit(item_in_use)
+	other_inventory.inventory_changed.emit(other_inventory.current_items)
+
+
+func transfer_item(item: InventoryItem, other_inventory: InventoryComponent):
+	assert(current_items.has(item))
+	other_inventory.current_items.append(item)
+	current_items.erase(item)
+	if item_in_use == item:
+		item_in_use = null
+		item_in_use_changed.emit(item_in_use)
+
+	inventory_changed.emit(current_items)
+	other_inventory.inventory_changed.emit(other_inventory.current_items)

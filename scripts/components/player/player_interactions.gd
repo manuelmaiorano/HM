@@ -1,6 +1,8 @@
 extends Node
 class_name PlayerInteractionsComponent
 
+@export_category("Nodes")
+@export var character: CharacterBody3D
 @export var raycast: RayCast3D 
 
 
@@ -21,7 +23,7 @@ func _ready() -> void:
 
 func on_execute_action(action: InteractionAction):
 	if current_interactable:
-		current_interactable.execute_action(action)
+		current_interactable.execute_action(action, character)
 
 func _physics_process(_delta: float) -> void:
 	if raycast.is_colliding():

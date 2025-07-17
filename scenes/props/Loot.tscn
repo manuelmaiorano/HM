@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://djbe5nw1oau28"]
+
+[ext_resource type="Script" uid="uid://dbi8arp4pfla2" path="res://scripts/components/interactions/loot_interactable.gd" id="1_5vx2d"]
+[ext_resource type="Script" uid="uid://cljkkxuh0qmda" path="res://scripts/components/inventory.gd" id="2_66xqq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jpyv3"]
+radius = 0.684068
+
+[node name="Loot" type="Area3D"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_jpyv3")
+
+[node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("inventory")]
+script = ExtResource("1_5vx2d")
+inventory = NodePath("../Inventory")
+
+[node name="Inventory" type="Node" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("2_66xqq")
+character = NodePath("..")

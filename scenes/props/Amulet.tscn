@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://8kk7cnovc1mj"]
+
+[ext_resource type="PackedScene" uid="uid://b65uhxcpy6ri3" path="res://assets/models/amulet.glb" id="1_1xjwa"]
+[ext_resource type="Script" uid="uid://dtlpbo88xhkur" path="res://scripts/components/interactions/pickable.gd" id="2_12wt8"]
+[ext_resource type="Resource" uid="uid://cr016lejn45dv" path="res://resources/inventory/Amulet.tres" id="3_12wt8"]
+[ext_resource type="Script" uid="uid://bvtxk76q4i1xo" path="res://scripts/components/interactions/pickable_interactable.gd" id="4_ciwwb"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1xjwa"]
+points = PackedVector3Array(-0.0037077, -0.0018, -0.00765073, 0.00405621, 0.0102355, 0.00815238, -0.00372753, 0.01, 0.00778827, 0.00405621, 0.0202351, -0.00374959, 0.00405621, -0.0102351, 0.00386545, 0.00944103, -0.0018, -0.00765073, 0.00977143, 0.00357404, 0.00815238, -0.00403809, -0.0102351, 0.00386545, -0.00403809, 0.0202351, 0.00386545, -0.00372753, 0.01, -0.00767398, 0.00405621, -0.0102351, -0.00374959, 0.00405621, 0.0202351, 0.00386545, 0.00977143, 0.00357404, -0.0080381, -0.0037077, -0.0018, 0.00776502, 0.00944103, -0.0018, 0.00776502, -0.00340401, 0.018836, -0.0034, -0.00340401, -0.00883602, -0.0034, 0.00405621, 0.0102355, -0.0080381)
+
+[node name="Amulet" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 7
+continuous_cd = true
+
+[node name="amulet" parent="." instance=ExtResource("1_1xjwa")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_1xjwa")
+
+[node name="Pickable" type="Node" parent="." node_paths=PackedStringArray("agent")]
+script = ExtResource("2_12wt8")
+agent = NodePath("..")
+inventory_item = ExtResource("3_12wt8")
+
+[node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("pickable_component")]
+script = ExtResource("4_ciwwb")
+pickable_component = NodePath("../Pickable")
