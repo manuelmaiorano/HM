@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ckldaterjjk1p"]
+[gd_scene load_steps=30 format=3 uid="uid://ckldaterjjk1p"]
 
 [ext_resource type="Script" uid="uid://cdedmtcvw313h" path="res://scripts/components/player/player_state.gd" id="1_4r5pv"]
 [ext_resource type="Script" uid="uid://dxfxej3khngxq" path="res://scripts/components/player/camera_control.gd" id="1_fulsm"]
@@ -18,12 +18,14 @@
 [ext_resource type="Script" uid="uid://d1i2x4sobcwmt" path="res://scripts/components/player/player_inventory_interaction.gd" id="10_f1ej7"]
 [ext_resource type="Resource" uid="uid://btiyru1urx6xn" path="res://resources/inventory/knife.tres" id="10_l71n6"]
 [ext_resource type="PackedScene" uid="uid://b4rcs3rd6ty0v" path="res://assets/models/knife.glb" id="10_y4r1p"]
+[ext_resource type="Resource" uid="uid://c4g777laes2j7" path="res://resources/inventory/sniper_rifle.tres" id="11_ke2ow"]
 [ext_resource type="Script" uid="uid://c53chp6plkp1" path="res://scripts/components/player/target_when_check_visible.gd" id="11_oprun"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr5i6g2a5t0xg" path="res://resources/animation_tree/animation_tree.tres" id="13_jej6c"]
 [ext_resource type="Script" uid="uid://4khaop3bkv0r" path="res://scripts/components/player/player_health_ui.gd" id="16_60mlk"]
 [ext_resource type="Script" uid="uid://c1m0kj0fise8s" path="res://scripts/components/player/player_disguise.gd" id="17_i4ail"]
 [ext_resource type="Script" uid="uid://p71q6aatforl" path="res://scripts/components/clothes_component.gd" id="18_a38lo"]
 [ext_resource type="Resource" uid="uid://c83k81fbm1wp2" path="res://resources/clothes/player.tres" id="19_4ni07"]
+[ext_resource type="PackedScene" uid="uid://bhry6ebir7a5l" path="res://assets/models/sniper_rifle.glb" id="25_ujl30"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkhd4"]
 radius = 0.257767
@@ -81,7 +83,7 @@ inventory = NodePath("../Inventory")
 script = ExtResource("5_qlg0r")
 character = NodePath("..")
 drop_node = NodePath("../AnimationLibrary_Godot_Standard/DropItemNode")
-initial_items = Array[ExtResource("5_qfm1y")]([ExtResource("6_fulsm"), ExtResource("10_l71n6")])
+initial_items = Array[ExtResource("5_qfm1y")]([ExtResource("6_fulsm"), ExtResource("10_l71n6"), ExtResource("11_ke2ow")])
 item_in_use = ExtResource("6_fulsm")
 
 [node name="Health" type="Node" parent="."]
@@ -250,6 +252,13 @@ rotation_edit_mode = 1
 visible = false
 
 [node name="OffsetNode" type="Node3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D/BoneAttachment3D"]
+
+[node name="Node3D3" type="Node3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(-0.847887, 0.380853, -0.368836, -0.513836, -0.41891, 0.748657, 0.13062, 0.824297, 0.550884, -0.0521829, 0.129528, 0.104097)
+rotation_edit_mode = 1
+
+[node name="sniper_rifle" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D/BoneAttachment3D/Node3D3" instance=ExtResource("25_ujl30")]
+visible = false
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationLibrary_Godot_Standard"]
 tree_root = ExtResource("13_jej6c")

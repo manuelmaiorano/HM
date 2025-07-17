@@ -1,0 +1,73 @@
+[gd_scene load_steps=13 format=3 uid="uid://bug78mgxdlo6o"]
+
+[ext_resource type="PackedScene" uid="uid://bhry6ebir7a5l" path="res://assets/models/sniper_rifle.glb" id="1_f7frn"]
+[ext_resource type="Script" uid="uid://bvtxk76q4i1xo" path="res://scripts/components/interactions/pickable_interactable.gd" id="2_o4qhe"]
+[ext_resource type="Script" uid="uid://dtlpbo88xhkur" path="res://scripts/components/interactions/pickable.gd" id="3_k3q0y"]
+[ext_resource type="Resource" uid="uid://c4g777laes2j7" path="res://resources/inventory/sniper_rifle.tres" id="4_f7frn"]
+[ext_resource type="Script" uid="uid://dyuvvgdbyamre" path="res://scripts/components/interactions/shootable.gd" id="5_ogqrf"]
+[ext_resource type="Resource" uid="uid://b47jd0gr1rdx" path="res://resources/bullet_info/gun.tres" id="6_asga2"]
+[ext_resource type="Script" uid="uid://cn0g4shunkmwa" path="res://scripts/components/interactions/shooting_audio.gd" id="7_823xc"]
+[ext_resource type="Script" uid="uid://bewcd4dxvtj2x" path="res://scripts/components/interactions/audio_area.gd" id="8_gmtfa"]
+[ext_resource type="AudioStream" uid="uid://cbp4e44bc2r1i" path="res://assets/sfx/556 Single WAV.wav" id="9_peefs"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o4qhe"]
+points = PackedVector3Array(0.034154, 0.142834, 0.826406, -0.0298811, -0.113306, -0.198106, 0.034154, -0.113306, -0.198106, 0.0501698, 0.238973, 0.0739941, -0.0379, 0.209616, 0.46079, -0.0298811, 0.0468332, 0.826406, -0.0459064, 0.158869, 0.0739941, 0.034154, 0.0468332, 0.826406, 0.0501698, 0.238973, 0.490117, -0.0298811, 0.142834, -0.0540824, -0.0298811, 0.142834, 0.826406, -0.0298811, -0.113306, -0.0700293, -0.0459064, 0.158869, 0.490117, -0.0379, 0.209616, 0.11402, 0.0501698, 0.158869, 0.490117, 0.034154, -0.113306, -0.0700293, 0.034154, 0.142834, -0.0540824, -0.0298811, -0.0812715, -0.198106, 0.0501698, 0.158869, 0.0739941, 0.034154, -0.0812715, -0.198106)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7dh3r"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("9_peefs")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f7frn"]
+radius = 50.0
+
+[node name="SniperRifle" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 7
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_o4qhe")
+
+[node name="sniper_rifle" parent="." instance=ExtResource("1_f7frn")]
+
+[node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("pickable_component")]
+script = ExtResource("2_o4qhe")
+pickable_component = NodePath("../Pickable")
+
+[node name="Pickable" type="Node" parent="." node_paths=PackedStringArray("agent")]
+script = ExtResource("3_k3q0y")
+agent = NodePath("..")
+inventory_item = ExtResource("4_f7frn")
+
+[node name="Shootable" type="Node" parent="." node_paths=PackedStringArray("agent", "shoot_from")]
+script = ExtResource("5_ogqrf")
+agent = NodePath("..")
+shoot_from = NodePath("../ShootFrom")
+bullet_info = ExtResource("6_asga2")
+
+[node name="ShootingAudio" type="Node" parent="." node_paths=PackedStringArray("shootable_component", "audio_player", "audio_area")]
+script = ExtResource("7_823xc")
+shootable_component = NodePath("../Shootable")
+audio_player = NodePath("../AudioStreamPlayer3D")
+audio_area = NodePath("../AudioArea")
+
+[node name="AudioArea" type="Node" parent="." node_paths=PackedStringArray("sound_emission_node", "detect_area")]
+script = ExtResource("8_gmtfa")
+sound_emission_node = NodePath("..")
+detect_area = NodePath("../Area3D")
+
+[node name="ShootFrom" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.105573, 0.220997)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_7dh3r")
+bus = &"Sfx"
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_f7frn")
