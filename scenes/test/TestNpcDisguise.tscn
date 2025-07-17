@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://1vo7c58j6st2"]
+[gd_scene load_steps=11 format=3 uid="uid://1vo7c58j6st2"]
 
 [ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="1_yiqdd"]
 [ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="2_lh1ap"]
@@ -20,6 +20,9 @@ sky = SubResource("Sky_6g2hc")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_yiqdd"]
+size = Vector3(4.14752, 2.96301, 5.18433)
+
 [node name="TestNpcPatrolling" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -36,7 +39,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2493, 0, 13.1641)
 transform = Transform3D(-0.0367832, 0, 0.999323, 0, 1, 0, -0.999323, 0, -0.0367832, 12.8633, 0, 20.8668)
 
 [node name="Player" parent="." instance=ExtResource("2_lh1ap")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7236, -0.0753975, 12.1624)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7236, -0.0753975, 7.34656)
 
 [node name="UI" parent="." instance=ExtResource("3_vn7bp")]
 
@@ -58,3 +61,10 @@ size = Vector3(1.44906, 2.54834, 1.05011)
 
 [node name="Door2" parent="." instance=ExtResource("6_yiqdd")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.1319, 0, 21.7318)
+
+[node name="RestrictedArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2081, -0.0754004, 22.2223)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RestrictedArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46347, 0.981506, -0.0777588)
+shape = SubResource("BoxShape3D_yiqdd")

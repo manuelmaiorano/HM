@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ClothesInfo" load_steps=3 format=3 uid="uid://et58twiwkwpb"]
+
+[ext_resource type="PackedScene" uid="uid://d0uauty2ym85p" path="res://scenes/test/clothes/TestClothes1.tscn" id="1_tcysj"]
+[ext_resource type="Script" uid="uid://coicgtnqg1jt5" path="res://scripts/resources/clothes_resource.gd" id="2_h2llj"]
+
+[resource]
+script = ExtResource("2_h2llj")
+name = &"npc"
+scene = ExtResource("1_tcysj")
+metadata/_custom_type_script = "uid://coicgtnqg1jt5"
