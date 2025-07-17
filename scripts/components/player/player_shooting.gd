@@ -5,7 +5,7 @@ class_name PlayerShootingComponent
 @export var raycast: RayCast3D
 
 @export_category("Debug")
-@export var enabled: bool:
+@export var enabled: bool = true:
 	set(value):
 		enabled = value
 		if value:
@@ -20,10 +20,10 @@ func _ready() -> void:
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("execute_action") and \
 		Globals.current_ui_element_active == Globals.UiElementActive.None:
-		var target
-		if raycast.is_colliding():
-			target = raycast.get_collision_point()
-		else:
-			target = raycast.to_global(raycast.target_position)
+		# var target
+		# if raycast.is_colliding():
+		# 	target = raycast.get_collision_point()
+		# else:
+		# 	target = raycast.to_global(raycast.target_position)
 
-		wieldable.try_shoot(target)
+		wieldable.try_shoot_raycast(raycast)

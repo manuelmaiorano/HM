@@ -50,7 +50,7 @@ func _physics_process(_delta: float) -> void:
 	if player_close and vis_check_component:
 		raycast.target_position = raycast.to_local(vis_check_component.target_node.global_position)
 		if raycast.is_colliding():
-			if raycast.get_collider().is_in_group("player"):
+			if raycast.get_collider() and raycast.get_collider().is_in_group("player"):
 				is_player_visible = true
 			else:
 				update_player_last_known_position()

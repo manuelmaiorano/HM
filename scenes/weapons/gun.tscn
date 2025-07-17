@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://c8jlenbmf1545" path="res://scripts/resources/action_resource.gd" id="3_e4hp8"]
 [ext_resource type="Resource" uid="uid://bnd6kr53derqv" path="res://resources/inventory/gun.tres" id="5_of66t"]
 [ext_resource type="Script" uid="uid://dyuvvgdbyamre" path="res://scripts/components/interactions/shootable.gd" id="6_e4hp8"]
-[ext_resource type="PackedScene" uid="uid://bkhyhejx2q6ph" path="res://scenes/weapons/bullet.tscn" id="7_of66t"]
+[ext_resource type="Resource" uid="uid://b47jd0gr1rdx" path="res://resources/bullet_info/gun.tres" id="7_5h4ka"]
 [ext_resource type="Script" uid="uid://cn0g4shunkmwa" path="res://scripts/components/interactions/shooting_audio.gd" id="8_7dh3r"]
 [ext_resource type="AudioStream" uid="uid://cbp4e44bc2r1i" path="res://assets/sfx/556 Single WAV.wav" id="8_voj0y"]
 [ext_resource type="Script" uid="uid://bewcd4dxvtj2x" path="res://scripts/components/interactions/audio_area.gd" id="9_5h4ka"]
@@ -52,7 +52,7 @@ inventory_item = ExtResource("5_of66t")
 script = ExtResource("6_e4hp8")
 agent = NodePath("..")
 shoot_from = NodePath("../ShootFrom")
-bullet_scene = ExtResource("7_of66t")
+bullet_info = ExtResource("7_5h4ka")
 
 [node name="ShootingAudio" type="Node" parent="." node_paths=PackedStringArray("shootable_component", "audio_player", "audio_area")]
 script = ExtResource("8_7dh3r")

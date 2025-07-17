@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BulletInfo" load_steps=3 format=3 uid="uid://b47jd0gr1rdx"]
+
+[ext_resource type="PackedScene" uid="uid://bkhyhejx2q6ph" path="res://scenes/weapons/bullet.tscn" id="1_fkkv3"]
+[ext_resource type="Script" uid="uid://cawt6j7ql6n8c" path="res://scripts/resources/bullet_resource.gd" id="2_spkv5"]
+
+[resource]
+script = ExtResource("2_spkv5")
+damage = 20.0
+scene = ExtResource("1_fkkv3")
+metadata/_custom_type_script = "uid://cawt6j7ql6n8c"

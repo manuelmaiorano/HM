@@ -15,9 +15,11 @@ radius = 0.0140564
 
 [node name="Bullet" type="RigidBody3D"]
 collision_layer = 0
-collision_mask = 8
+collision_mask = 9
 gravity_scale = 0.0
 continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_h1aey")
@@ -31,8 +33,9 @@ agent = NodePath("..")
 hurt_box = NodePath("../HurtBox")
 speed = 20.0
 
-[node name="HurtBox" type="Node" parent="." node_paths=PackedStringArray("detection_area")]
+[node name="HurtBox" type="Node" parent="." node_paths=PackedStringArray("agent", "detection_area")]
 script = ExtResource("1_mkf8s")
+agent = NodePath("..")
 detection_area = NodePath("../Area3D")
 damage = 20.0
 

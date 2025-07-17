@@ -20,6 +20,7 @@ metadata/_custom_type_script = "uid://c8jlenbmf1545"
 script = ExtResource("4_qf5yf")
 name = &"knife"
 scene_path = &"res://scenes/weapons/knife.tscn"
+is_weapon = true
 wield_transform_position = Vector3(-0.0517378, 0.109959, 0.135211)
 wield_transform_rotation = Quaternion(-0.0843865, 0.0580764, 0.994714, -0.00705299)
 metadata/_custom_type_script = "uid://b1p3bunddmtvj"
@@ -46,8 +47,9 @@ script = ExtResource("3_c20fe")
 agent = NodePath("..")
 inventory_item = SubResource("Resource_ndam4")
 
-[node name="HurtBox" type="Node" parent="." node_paths=PackedStringArray("detection_area")]
+[node name="HurtBox" type="Node" parent="." node_paths=PackedStringArray("agent", "detection_area")]
 script = ExtResource("6_qf5yf")
+agent = NodePath("..")
 detection_area = NodePath("../HurtBoxArea")
 damage = 20.0
 

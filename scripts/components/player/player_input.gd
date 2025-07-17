@@ -8,7 +8,7 @@ class_name PlayerInputComponent
 @export var yaw: Node3D
 
 @export_category("Debug")
-@export var enabled: bool:
+@export var enabled: bool = true:
 	set(value):
 		enabled = value
 		if value:

@@ -19,6 +19,7 @@ var time_passed = 0.0
 func _ready() -> void:
 	hurt_box.has_hit.connect(func(): agent.queue_free())
 	agent.set_meta("ProjectileMovement", self)
+	agent.body_entered.connect(func(_body): agent.queue_free())
 
 
 func _physics_process(delta: float) -> void:

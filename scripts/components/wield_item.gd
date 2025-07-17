@@ -1,10 +1,14 @@
 extends Node
 class_name WieldableComponent
 
+@export_category("Nodes")
 @export var character: CharacterBody3D
 @export var bone_attachment_offset_node: Node3D
 @export var inventory: InventoryComponent
 @export var shoot_from: Node3D
+@export var hit_box_exceptions_when_wielding_hurtbox: Array[Area3D]
+
+@export_category("Debug")
 @export var current_item: Node3D
 
 signal is_shooting()
@@ -27,8 +31,14 @@ func on_item_changed(item: InventoryItem):
 	var attachment_transform = Transform3D(item.wield_transform_rotation, item.wield_transform_position)
 	bone_attachment_offset_node.transform = attachment_transform
 	bone_attachment_offset_node.add_child(instance)
+	add_wieldable_exceptions(instance)
 	instance.freeze = true
 	current_item = instance
+
+func add_wieldable_exceptions(instance):
+	if instance.has_meta("HurtBoxComponent"):
+		var hb = instance.get_meta("HurtBoxComponent") as HurtBoxComponent
+		hb.exceptions = hit_box_exceptions_when_wielding_hurtbox
 
 func try_shoot(target: Vector3) -> bool:
 	if current_item == null:
@@ -36,6 +46,17 @@ func try_shoot(target: Vector3) -> bool:
 	if current_item.has_meta("Shootable"):
 		var shootable_component = current_item.get_meta("Shootable") as Shootable
 		shootable_component.shoot(target, shoot_from)
+		is_shooting.emit()
+		return true
+	return false
+
+
+func try_shoot_raycast(raycast: RayCast3D) -> bool:
+	if current_item == null:
+		return false
+	if current_item.has_meta("Shootable"):
+		var shootable_component = current_item.get_meta("Shootable") as Shootable
+		shootable_component.raycast_shoot(raycast)
 		is_shooting.emit()
 		return true
 	return false
