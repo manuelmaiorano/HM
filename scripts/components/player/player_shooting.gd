@@ -27,3 +27,4 @@ func _unhandled_input(_event: InputEvent) -> void:
 		# 	target = raycast.to_global(raycast.target_position)
 
 		wieldable.try_shoot_raycast(raycast)
+		wieldable.try_silent_kill(raycast)

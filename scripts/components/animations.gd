@@ -9,11 +9,15 @@ class_name AnimationsManagerComponent
 
 func _ready() -> void:
 	wieldable_component.is_shooting.connect(on_shooting)
+	wieldable_component.is_silent_kill.connect(on_silent_kill)
 	health.dead.connect(on_dead)
 	animation_tree["parameters/Transition/transition_request"] = "alive"
 
 func on_shooting():
 	animation_tree["parameters/shoot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+
+func on_silent_kill():
+	animation_tree["parameters/stab_kill/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 func on_dead():
 	animation_tree["parameters/Transition/transition_request"] = "dead"

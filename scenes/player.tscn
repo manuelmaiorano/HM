@@ -177,15 +177,15 @@ shape = SubResource("SphereShape3D_fjrip")
 [node name="AnimationLibrary_Godot_Standard" parent="." instance=ExtResource("7_smehm")]
 
 [node name="Skeleton3D" parent="AnimationLibrary_Godot_Standard/Rig" index="0"]
-bones/1/position = Vector3(-0.00113959, 0.0875589, 0.873545)
-bones/1/rotation = Quaternion(0.761162, -0.0889061, -0.0745322, 0.638101)
-bones/3/rotation = Quaternion(-0.0275204, 0.000116237, 0.000123663, 0.999621)
-bones/4/rotation = Quaternion(0.150718, 0.000318972, 0.000394771, 0.988577)
-bones/5/rotation = Quaternion(0.0111536, -0.000240512, -0.000238975, 0.999938)
-bones/6/rotation = Quaternion(-0.0109988, 0.0959899, -0.00338388, 0.995316)
-bones/7/rotation = Quaternion(-0.605683, -0.369273, -0.398129, 0.581617)
-bones/8/rotation = Quaternion(-0.268887, 0.671418, -0.509336, 0.466341)
-bones/9/rotation = Quaternion(0.278939, 0.0235256, 0.000798445, 0.96002)
+bones/1/position = Vector3(0.00141427, 0.0879407, 0.868893)
+bones/1/rotation = Quaternion(0.762979, -0.0891184, -0.0742783, 0.635927)
+bones/3/rotation = Quaternion(-0.0310804, 0.000114364, 0.000125186, 0.999517)
+bones/4/rotation = Quaternion(0.138109, 0.000312095, 0.00039996, 0.990417)
+bones/5/rotation = Quaternion(0.0186774, -0.000236708, -0.000242349, 0.999825)
+bones/6/rotation = Quaternion(-0.0352292, 0.0960486, 0.000619265, 0.994753)
+bones/7/rotation = Quaternion(-0.613326, -0.363973, -0.40298, 0.573552)
+bones/8/rotation = Quaternion(-0.245668, 0.668634, -0.525285, 0.465459)
+bones/9/rotation = Quaternion(0.247092, -0.000783915, 0.0077659, 0.968961)
 bones/10/rotation = Quaternion(0.106009, 0.00637576, -0.0256743, 0.994013)
 bones/11/rotation = Quaternion(0.44519, 0.549369, -0.445194, 0.549365)
 bones/12/rotation = Quaternion(0.623342, 6.13486e-08, 2.15438e-07, 0.781949)
@@ -202,9 +202,9 @@ bones/22/rotation = Quaternion(0.623341, -0.000665145, -0.0008345, 0.781949)
 bones/23/rotation = Quaternion(0.290838, 0.949649, 0.114583, 0.021217)
 bones/24/rotation = Quaternion(0.21939, 0.0238026, -0.00530472, 0.975332)
 bones/25/rotation = Quaternion(0.687388, -0.000309068, -0.000444658, 0.72629)
-bones/26/rotation = Quaternion(-0.641884, 0.307153, 0.332704, 0.61883)
-bones/27/rotation = Quaternion(-0.286351, -0.676131, 0.487781, 0.472143)
-bones/28/rotation = Quaternion(0.368187, -0.139271, 0.0558848, 0.917561)
+bones/26/rotation = Quaternion(-0.64965, 0.302925, 0.336558, 0.610671)
+bones/27/rotation = Quaternion(-0.284401, -0.675043, 0.492055, 0.470441)
+bones/28/rotation = Quaternion(0.368392, -0.135862, 0.0545169, 0.918072)
 bones/29/rotation = Quaternion(0.116709, 0.00291669, 0.0447786, 0.992152)
 bones/30/rotation = Quaternion(0.445191, -0.549369, 0.445194, 0.549365)
 bones/31/rotation = Quaternion(0.623341, 2.17518e-07, 6.33371e-08, 0.78195)
@@ -221,17 +221,17 @@ bones/41/rotation = Quaternion(0.623342, 0.000664924, 0.000834326, 0.781949)
 bones/42/rotation = Quaternion(-0.290838, 0.949649, 0.114584, -0.021217)
 bones/43/rotation = Quaternion(0.21939, -0.0238026, 0.00530485, 0.975332)
 bones/44/rotation = Quaternion(0.687388, 0.000309234, 0.000444539, 0.72629)
-bones/45/rotation = Quaternion(0.9586, 0.116837, -0.0144057, 0.259284)
-bones/46/rotation = Quaternion(0.204228, -0.110484, 0.0231929, 0.972392)
-bones/47/rotation = Quaternion(-0.502841, 0.0208306, 0.0959045, 0.858789)
+bones/45/rotation = Quaternion(0.953385, 0.118991, -0.0146713, 0.276915)
+bones/46/rotation = Quaternion(0.23208, -0.108778, 0.0261171, 0.966242)
+bones/47/rotation = Quaternion(-0.51398, 0.022304, 0.0945267, 0.852286)
 bones/48/rotation = Quaternion(-0.000137176, 0.964307, -0.264787, -0.000499421)
-bones/49/rotation = Quaternion(0.9914, -0.125285, 0.0154472, 0.034528)
-bones/50/rotation = Quaternion(0.153374, 0.353696, -0.0589207, 0.920817)
-bones/51/rotation = Quaternion(-0.596406, -0.0533424, -0.160651, 0.784631)
+bones/49/rotation = Quaternion(0.98904, -0.138065, 0.017023, 0.0494725)
+bones/50/rotation = Quaternion(0.182634, 0.34935, -0.0696355, 0.916379)
+bones/51/rotation = Quaternion(-0.607328, -0.0549459, -0.161212, 0.77598)
 bones/52/rotation = Quaternion(-0.000137047, 0.964307, -0.264787, -0.000499421)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D" index="1"]
-transform = Transform3D(-0.988667, -0.136274, 0.0629755, 0.149592, -0.859084, 0.489486, -0.0126031, 0.493359, 0.869734, -0.286833, 0.91312, -0.187807)
+transform = Transform3D(-0.989882, -0.131696, 0.0528166, 0.139369, -0.832528, 0.536166, -0.0266395, 0.538102, 0.842459, -0.278053, 0.898712, -0.165378)
 bone_name = "DEF-hand.R"
 bone_idx = 29
 
@@ -261,6 +261,9 @@ parameters/movement_blend/blend_position = 0
 parameters/shoot/active = false
 parameters/shoot/internal_active = false
 parameters/shoot/request = 0
+parameters/stab_kill/active = false
+parameters/stab_kill/internal_active = false
+parameters/stab_kill/request = 0
 
 [node name="DropItemNode" type="Node3D" parent="AnimationLibrary_Godot_Standard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32585, 0.558785)

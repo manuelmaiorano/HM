@@ -12,6 +12,7 @@ class_name WieldableComponent
 @export var current_item: Node3D
 
 signal is_shooting()
+signal is_silent_kill()
 
 func _enter_tree() -> void:
 	character.set_meta("WieldableComponent", self)
@@ -59,6 +60,16 @@ func try_shoot_raycast(raycast: RayCast3D) -> bool:
 		shootable_component.raycast_shoot(raycast)
 		is_shooting.emit()
 		return true
+	return false
+
+
+func try_silent_kill(raycast: RayCast3D) -> bool:
+	if current_item == null:
+		return false
+	if current_item.has_meta("Stabbable"):
+		var stabbable_component = current_item.get_meta("Stabbable") as Stabbable
+		stabbable_component.raycast_kill(raycast)
+		is_silent_kill.emit()
 	return false
 
 	

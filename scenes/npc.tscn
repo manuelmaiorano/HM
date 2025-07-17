@@ -276,6 +276,9 @@ parameters/movement_blend/blend_position = 0.1
 parameters/shoot/active = false
 parameters/shoot/internal_active = false
 parameters/shoot/request = 0
+parameters/stab_kill/active = false
+parameters/stab_kill/internal_active = false
+parameters/stab_kill/request = 0
 
 [node name="DropItemNode" type="Node3D" parent="AnimationLibrary_Godot_Standard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32585, 0.558785)
