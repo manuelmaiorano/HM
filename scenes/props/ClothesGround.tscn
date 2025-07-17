@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://byf0rtel4k5rq"]
+
+[ext_resource type="PackedScene" uid="uid://bciwpamjjbqbb" path="res://assets/models/clothes_on_ground.glb" id="1_2s2kn"]
+[ext_resource type="Script" uid="uid://y5o7t0y7bmrm" path="res://scripts/components/interactions/clothes_interactable.gd" id="2_b6hfe"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2s2kn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b6hfe"]
+albedo_color = Color(0.21, 0.21, 0.21, 1)
+
+[node name="ClothesGround" type="Area3D"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_2s2kn")
+
+[node name="clothes_on_ground" parent="." instance=ExtResource("1_2s2kn")]
+
+[node name="Cube" parent="clothes_on_ground" index="0"]
+material_override = SubResource("StandardMaterial3D_b6hfe")
+
+[node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("agent")]
+script = ExtResource("2_b6hfe")
+agent = NodePath("..")
+
+[editable path="clothes_on_ground"]
