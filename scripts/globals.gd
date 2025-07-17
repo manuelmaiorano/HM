@@ -21,8 +21,6 @@ enum UiElementActive {None, InteractionsMenu, InventoryMenu}
 		UiElementActiveChanged.emit()
 
 
-@export var patrol_points: Dictionary[StringName, Array]
-
 @export_category("Debug")
 @export var debug_ai: bool = true
 

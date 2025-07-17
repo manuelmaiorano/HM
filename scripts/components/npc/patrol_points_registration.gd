@@ -10,7 +10,6 @@ class_name PatrolPointRegistrationComponent
 @export_category("Debug")
 @export var patrol_points: Array = []
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	character.set_meta("PatrolPointRegistrationComponent", self)
-	if Globals.patrol_points.has(patrol_point_id):
-		patrol_points = Globals.patrol_points[patrol_point_id]
+
