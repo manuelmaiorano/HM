@@ -20,7 +20,7 @@ func _enter_tree() -> void:
 	character.set_meta("InventoryComponent", self)
 
 func _ready() -> void:
-	current_items = initial_items
+	current_items = initial_items.duplicate()
 	if not current_items.is_empty():
 		inventory_changed.emit(current_items)
 	if item_in_use:

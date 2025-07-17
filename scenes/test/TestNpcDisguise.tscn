@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://1vo7c58j6st2"]
+
+[ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="1_yiqdd"]
+[ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="2_lh1ap"]
+[ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui/ui.tscn" id="3_vn7bp"]
+[ext_resource type="NavigationMesh" uid="uid://bobuyawffhctm" path="res://resources/navigation_meshes/test_patrolling.tres" id="5_pargm"]
+[ext_resource type="PackedScene" uid="uid://cb8i73sknj50o" path="res://scenes/test/testbuilding.tscn" id="6_stcnc"]
+[ext_resource type="PackedScene" uid="uid://3u6bql5cwtjf" path="res://scenes/props/door.tscn" id="6_yiqdd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_charm"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_6g2hc"]
+sky_material = SubResource("ProceduralSkyMaterial_charm")
+
+[sub_resource type="Environment" id="Environment_de4ha"]
+background_mode = 2
+sky = SubResource("Sky_6g2hc")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestNpcPatrolling" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_de4ha")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Npc" parent="." instance=ExtResource("1_yiqdd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2493, 0, 13.1641)
+
+[node name="Npc2" parent="." instance=ExtResource("1_yiqdd")]
+transform = Transform3D(-0.0367832, 0, 0.999323, 0, 1, 0, -0.999323, 0, -0.0367832, 12.8633, 0, 20.8668)
+
+[node name="Player" parent="." instance=ExtResource("2_lh1ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7236, -0.0753975, 12.1624)
+
+[node name="UI" parent="." instance=ExtResource("3_vn7bp")]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = ExtResource("5_pargm")
+
+[node name="testbuilding" parent="NavigationRegion3D" instance=ExtResource("6_stcnc")]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8878, 2.11426, 21.9353)
+use_collision = true
+size = Vector3(1.44906, 5.22852, 13.6423)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.34009, 0.302587)
+operation = 2
+use_collision = true
+size = Vector3(1.44906, 2.54834, 1.05011)
+
+[node name="Door2" parent="." instance=ExtResource("6_yiqdd")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.1319, 0, 21.7318)
