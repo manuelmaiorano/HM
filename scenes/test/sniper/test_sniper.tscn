@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://htxogrpp2ygf"]
+
+[ext_resource type="Script" uid="uid://dxfxej3khngxq" path="res://scripts/components/player/camera_control.gd" id="1_h14fq"]
+[ext_resource type="Script" uid="uid://btb5gfumwjp48" path="res://scenes/test/sniper/sniper_zoom.gd" id="2_bss0j"]
+[ext_resource type="Texture2D" uid="uid://cn4v7ihgl6iah" path="res://assets/texture/full_screen_overlay/sniper_overlay.png" id="3_htngp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h14fq"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_bss0j"]
+sky_material = SubResource("ProceduralSkyMaterial_h14fq")
+
+[sub_resource type="Environment" id="Environment_htngp"]
+background_mode = 2
+sky = SubResource("Sky_bss0j")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h14fq"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="TestSniper" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_htngp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CameraMovement" type="Node" parent="." node_paths=PackedStringArray("pitch", "yaw")]
+script = ExtResource("1_h14fq")
+pitch = NodePath("../Yaw/Pitch")
+yaw = NodePath("../Yaw")
+invert_x_axis = true
+
+[node name="SniperZoom" type="Node" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("2_bss0j")
+camera = NodePath("../Yaw/Pitch/Camera3D")
+
+[node name="Yaw" type="Node3D" parent="."]
+
+[node name="Pitch" type="Node3D" parent="Yaw"]
+
+[node name="Camera3D" type="Camera3D" parent="Yaw/Pitch"]
+fov = 35.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34488, -1.05767, -9.67529)
+size = Vector3(9.66071, 1, 25.3174)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02622, -0.0537047, -6.43488)
+size = Vector3(1.21913, 3.00793, 1.03442)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.92497, -0.0537047, -10.2928)
+size = Vector3(1.21913, 3.00793, 1.03442)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10433, -0.0537047, -15.2847)
+size = Vector3(1.21913, 3.00793, 1.03442)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.02066, -0.0537047, -21.5651)
+size = Vector3(1.21913, 3.00793, 1.03442)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(0.250834, 0, 0, 0, 0.250834, 0, 0, 0, 0.250834, -3.43125, -0.418697, -20.7136)
+size = Vector3(1.21913, 3.00793, 1.03442)
+material = SubResource("StandardMaterial3D_h14fq")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_htngp")
