@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InteractionAction" load_steps=2 format=3 uid="uid://c11cm6wcnl4cc"]
+
+[ext_resource type="Script" uid="uid://c8jlenbmf1545" path="res://scripts/resources/action_resource.gd" id="1_ua8cr"]
+
+[resource]
+script = ExtResource("1_ua8cr")
+id = 0
+desc = &"Open Door"
+is_suspicious_in_restricted_area = true
+metadata/_custom_type_script = "uid://c8jlenbmf1545"

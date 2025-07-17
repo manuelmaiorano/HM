@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://duktm5ovkj0wp"]
+
+[ext_resource type="Script" uid="uid://dvf7qfv2ymqsv" path="res://scripts/components/interactions/restricted_area_access.gd" id="1_7xuij"]
+[ext_resource type="Script" uid="uid://coicgtnqg1jt5" path="res://scripts/resources/clothes_resource.gd" id="2_vwd2a"]
+[ext_resource type="Resource" uid="uid://et58twiwkwpb" path="res://resources/clothes/npc.tres" id="3_fiih2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yiqdd"]
+size = Vector3(4.14752, 2.96301, 5.18433)
+
+[node name="RestrictedArea" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46347, 0.981506, -0.0777588)
+shape = SubResource("BoxShape3D_yiqdd")
+
+[node name="RestrictedAreaAccess" type="Node" parent="." node_paths=PackedStringArray("detect_area")]
+script = ExtResource("1_7xuij")
+detect_area = NodePath("..")
+disguises_required = Array[ExtResource("2_vwd2a")]([ExtResource("3_fiih2")])

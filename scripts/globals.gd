@@ -11,6 +11,8 @@ signal SelectedItemToUse(item: InventoryItem)
 
 signal InventoryChanged(itmes: Array[InventoryItem])
 
+signal ExecutedAction(action: InteractionAction)
+
 signal UiElementActiveChanged()
 enum UiElementActive {None, InteractionsMenu, InventoryMenu}
 @export var current_ui_element_active: UiElementActive = UiElementActive.None:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://1vo7c58j6st2"]
+[gd_scene load_steps=12 format=3 uid="uid://1vo7c58j6st2"]
 
 [ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="1_yiqdd"]
 [ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="2_lh1ap"]
@@ -6,6 +6,8 @@
 [ext_resource type="NavigationMesh" uid="uid://bobuyawffhctm" path="res://resources/navigation_meshes/test_patrolling.tres" id="5_pargm"]
 [ext_resource type="PackedScene" uid="uid://cb8i73sknj50o" path="res://scenes/test/testbuilding.tscn" id="6_stcnc"]
 [ext_resource type="PackedScene" uid="uid://3u6bql5cwtjf" path="res://scenes/props/door.tscn" id="6_yiqdd"]
+[ext_resource type="PackedScene" uid="uid://duktm5ovkj0wp" path="res://scenes/restricted_area.tscn" id="7_vn7bp"]
+[ext_resource type="Script" uid="uid://g3u2mxcjnqdq" path="res://scenes/register_restricted_areas.gd" id="8_4lxio"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_charm"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -20,10 +22,13 @@ sky = SubResource("Sky_6g2hc")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yiqdd"]
-size = Vector3(4.14752, 2.96301, 5.18433)
-
 [node name="TestNpcPatrolling" type="Node3D"]
+
+[node name="RegisterRestrictedAreas" type="Node" parent="." node_paths=PackedStringArray("npc_to_restricted_areas")]
+script = ExtResource("8_4lxio")
+npc_to_restricted_areas = {
+NodePath("../Npc2"): NodePath("../RestrictedArea")
+}
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_de4ha")
@@ -62,9 +67,5 @@ size = Vector3(1.44906, 2.54834, 1.05011)
 [node name="Door2" parent="." instance=ExtResource("6_yiqdd")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.1319, 0, 21.7318)
 
-[node name="RestrictedArea" type="Area3D" parent="."]
+[node name="RestrictedArea" parent="." instance=ExtResource("7_vn7bp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2081, -0.0754004, 22.2223)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RestrictedArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46347, 0.981506, -0.0777588)
-shape = SubResource("BoxShape3D_yiqdd")

@@ -24,6 +24,7 @@ func _ready() -> void:
 func on_execute_action(action: InteractionAction):
 	if current_interactable:
 		current_interactable.execute_action(action, character)
+		Globals.ExecutedAction.emit(action)
 
 func _physics_process(_delta: float) -> void:
 	if raycast.is_colliding():
