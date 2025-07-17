@@ -4,7 +4,7 @@ extends Node
 @export var player_input: PlayerInputComponent
 @export var player_shooting: PlayerShootingComponent
 @export var player_inventory: PlayerInventoryInteractionComponent
-@export var player_interactions: WorldInteractionComponent
+@export var player_interactions: PlayerInteractionsComponent
 
 @export var state: State
 

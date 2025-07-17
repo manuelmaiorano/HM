@@ -1,5 +1,5 @@
 extends Node
-class_name WorldInteractionComponent
+class_name PlayerInteractionsComponent
 
 @export var raycast: RayCast3D 
 
