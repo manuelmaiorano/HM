@@ -4,6 +4,7 @@ class_name DropLootComponent
 
 @export_category("Nodes")
 @export var character: Node3D
+@export var character_attachment: BoneAttachment3D
 @export var inventory: InventoryComponent
 @export var health: HealthComponent
 @export var clothes_component: ClothesComponent
@@ -18,8 +19,7 @@ func _ready() -> void:
 
 func on_dead():
 	var instance = loot_scene.instantiate()
-	character.get_parent().add_child(instance)
-	instance.global_position = character.global_position
+	character_attachment.add_child(instance)
 	var loot_interactable = instance.get_meta("LootInteractableComponent") as LootInteractableComponent
 	inventory.transfer_all_inventory(loot_interactable.inventory)
 	loot_interactable.clothes_component = clothes_component

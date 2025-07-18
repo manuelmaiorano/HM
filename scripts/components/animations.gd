@@ -5,13 +5,23 @@ class_name AnimationsManagerComponent
 @export var animation_tree: AnimationTree
 @export var wieldable_component: WieldableComponent
 @export var health: HealthComponent
-
+@export var dragging_component: PlayerDraggingComponent
 
 func _ready() -> void:
 	wieldable_component.is_shooting.connect(on_shooting)
 	wieldable_component.is_silent_kill.connect(on_silent_kill)
 	health.dead.connect(on_dead)
+	if dragging_component:
+		dragging_component.is_dragging_state_changed.connect(on_drag_state_changed)
 	animation_tree["parameters/Transition/transition_request"] = "alive"
+	animation_tree["parameters/crouch_blend/blend_position"] = 0.0
+	animation_tree["parameters/movement_blend/blend_position"] = 0.0
+
+func on_drag_state_changed(is_dragging: bool):
+	if is_dragging:
+		animation_tree["parameters/Transition/transition_request"] = "drag"
+	else:
+		animation_tree["parameters/Transition/transition_request"] = "alive"
 
 func on_shooting():
 	animation_tree["parameters/shoot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
@@ -24,3 +34,7 @@ func on_dead():
 
 func _physics_process(_delta: float) -> void:
 	animation_tree["parameters/movement_blend/blend_position"] = character_movement.character.velocity.length() /character_movement.run_speed
+	if dragging_component:
+		if dragging_component.enabled:
+			animation_tree["parameters/crouch_blend/blend_position"] = character_movement.character.velocity.length() /character_movement.walk_speed
+

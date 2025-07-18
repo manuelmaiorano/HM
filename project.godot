@@ -85,6 +85,7 @@ screenshot={
 3d_physics/layer_3="interactable"
 3d_physics/layer_4="hurt_box"
 3d_physics/layer_5="audio"
+3d_physics/layer_6="ragdoll"
 
 [physics]
 

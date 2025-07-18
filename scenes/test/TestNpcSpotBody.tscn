@@ -39,7 +39,8 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2493, 0, 13.1641)
 
 [node name="Npc2" parent="." instance=ExtResource("2_61gk2")]
-transform = Transform3D(-0.0367832, 0, 0.999323, 0, 1, 0, -0.999323, 0, -0.0367832, 11.1681, 0, 19.1633)
+process_mode = 4
+transform = Transform3D(-0.0367832, 0, 0.999323, 0, 1, 0, -0.999323, 0, -0.0367832, 4.56215, 0, 19.1633)
 
 [node name="Player" parent="." instance=ExtResource("3_725su")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7236, -0.0753975, 7.34656)
@@ -52,7 +53,7 @@ navigation_mesh = ExtResource("5_1rpql")
 [node name="testbuilding" parent="NavigationRegion3D" instance=ExtResource("6_8dsjm")]
 
 [node name="PatrolPoint" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3884, 9.53674e-07, 19.2104)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.49542, 9.53674e-07, 19.2104)
 
 [node name="PatrolPoint2" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2766, 9.53674e-07, 19.2104)

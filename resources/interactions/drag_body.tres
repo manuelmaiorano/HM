@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InteractionAction" load_steps=2 format=3 uid="uid://clfuf8ctblybu"]
+
+[ext_resource type="Script" uid="uid://c8jlenbmf1545" path="res://scripts/resources/action_resource.gd" id="1_fqold"]
+
+[resource]
+script = ExtResource("1_fqold")
+id = 0
+desc = &"drag body"
+is_suspicious_in_restricted_area = true
+metadata/_custom_type_script = "uid://c8jlenbmf1545"
