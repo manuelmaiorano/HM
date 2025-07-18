@@ -15,7 +15,6 @@ func raycast_kill(raycast: RayCast3D):
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
 		if agent.global_position.distance_to(collider.global_position) > distance_to_kill:
-			print(agent.global_position.distance_to(collider.global_position))
 			return false
 		if collider.has_meta("HitBoxComponent"):
 			var hitbox = collider.get_meta("HitBoxComponent", null) as HitBoxComponent

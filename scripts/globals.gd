@@ -14,7 +14,7 @@ signal InventoryChanged(itmes: Array[InventoryItem])
 signal ExecutedAction(action: InteractionAction)
 
 signal UiElementActiveChanged()
-enum UiElementActive {None, InteractionsMenu, InventoryMenu}
+enum UiElementActive {None, InteractionsMenu, InventoryMenu, Sniper}
 @export var current_ui_element_active: UiElementActive = UiElementActive.None:
 	set(x):
 		current_ui_element_active = x

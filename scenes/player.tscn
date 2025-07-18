@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ckldaterjjk1p"]
+[gd_scene load_steps=33 format=3 uid="uid://ckldaterjjk1p"]
 
 [ext_resource type="Script" uid="uid://cdedmtcvw313h" path="res://scripts/components/player/player_state.gd" id="1_4r5pv"]
 [ext_resource type="Script" uid="uid://dxfxej3khngxq" path="res://scripts/components/player/camera_control.gd" id="1_fulsm"]
@@ -25,7 +25,10 @@
 [ext_resource type="Script" uid="uid://c1m0kj0fise8s" path="res://scripts/components/player/player_disguise.gd" id="17_i4ail"]
 [ext_resource type="Script" uid="uid://p71q6aatforl" path="res://scripts/components/clothes_component.gd" id="18_a38lo"]
 [ext_resource type="Resource" uid="uid://c83k81fbm1wp2" path="res://resources/clothes/player.tres" id="19_4ni07"]
+[ext_resource type="Script" uid="uid://btb5gfumwjp48" path="res://scripts/components/player/sniper_zoom.gd" id="22_31cv2"]
+[ext_resource type="Script" uid="uid://b5wdcevseqkkh" path="res://scripts/components/player/sniper_shooting.gd" id="23_pf23h"]
 [ext_resource type="PackedScene" uid="uid://bhry6ebir7a5l" path="res://assets/models/sniper_rifle.glb" id="25_ujl30"]
+[ext_resource type="Texture2D" uid="uid://cn4v7ihgl6iah" path="res://assets/texture/full_screen_overlay/sniper_overlay.png" id="29_dt7fs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkhd4"]
 radius = 0.257767
@@ -45,13 +48,20 @@ collision_mask = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.870951, 0)
 shape = SubResource("CapsuleShape3D_rkhd4")
 
-[node name="PlayerState" type="Node" parent="." node_paths=PackedStringArray("health", "player_input", "player_shooting", "player_inventory", "player_interactions")]
+[node name="PlayerState" type="Node" parent="." node_paths=PackedStringArray("health", "player_input", "player_shooting", "player_inventory", "player_interactions", "camera_control_normal", "camera_control_sniper", "camera_zoom_sniper", "sniper_shooting", "camera_normal", "camera_sniper")]
 script = ExtResource("1_4r5pv")
 health = NodePath("../Health")
 player_input = NodePath("../PlayerInput")
 player_shooting = NodePath("../PlayerShooting")
 player_inventory = NodePath("../PlayerInventoryInteraction")
 player_interactions = NodePath("../PlayerInteractions")
+camera_control_normal = NodePath("../CameraControl")
+camera_control_sniper = NodePath("../SniperCameraMovement")
+camera_zoom_sniper = NodePath("../SniperCameraZoom")
+sniper_shooting = NodePath("../SniperShooting")
+camera_normal = NodePath("../Yaw/Pitch/Camera3D")
+camera_sniper = NodePath("../YawSniper/PitchSniper/CameraSniper")
+state = 1
 
 [node name="CameraControl" type="Node" parent="." node_paths=PackedStringArray("pitch", "yaw")]
 script = ExtResource("1_fulsm")
@@ -139,6 +149,36 @@ character = NodePath("..")
 skeleton = NodePath("../AnimationLibrary_Godot_Standard/Rig/Skeleton3D")
 initial_clothes = ExtResource("19_4ni07")
 
+[node name="SniperCameraMovement" type="Node" parent="." node_paths=PackedStringArray("pitch", "yaw")]
+script = ExtResource("1_fulsm")
+pitch = NodePath("../YawSniper/PitchSniper")
+yaw = NodePath("../YawSniper")
+
+[node name="SniperCameraZoom" type="Node" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("22_31cv2")
+camera = NodePath("../YawSniper/PitchSniper/CameraSniper")
+
+[node name="SniperShooting" type="Node" parent="." node_paths=PackedStringArray("wieldable", "raycast", "overlay", "character")]
+script = ExtResource("23_pf23h")
+wieldable = NodePath("../WieldItem")
+raycast = NodePath("../YawSniper/PitchSniper/CameraSniper/SniperShootingRaycast")
+overlay = NodePath("../SniperOverlay")
+character = NodePath("..")
+
+[node name="YawSniper" type="Node3D" parent="."]
+
+[node name="PitchSniper" type="Node3D" parent="YawSniper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69184, 0)
+
+[node name="CameraSniper" type="Camera3D" parent="YawSniper/PitchSniper"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0.199504)
+
+[node name="SniperShootingRaycast" type="RayCast3D" parent="YawSniper/PitchSniper/CameraSniper"]
+target_position = Vector3(0, 0, -500)
+collision_mask = 9
+collide_with_areas = true
+debug_shape_custom_color = Color(0, 1, 0, 1)
+
 [node name="Yaw" type="Node3D" parent="."]
 
 [node name="Pitch" type="SpringArm3D" parent="Yaw"]
@@ -179,15 +219,15 @@ shape = SubResource("SphereShape3D_fjrip")
 [node name="AnimationLibrary_Godot_Standard" parent="." instance=ExtResource("7_smehm")]
 
 [node name="Skeleton3D" parent="AnimationLibrary_Godot_Standard/Rig" index="0"]
-bones/1/position = Vector3(0.00534341, 0.0866226, 0.877076)
-bones/1/rotation = Quaternion(0.756558, -0.0883683, -0.075169, 0.643553)
-bones/3/rotation = Quaternion(-0.0315499, 0.000114133, 0.000125379, 0.999502)
-bones/4/rotation = Quaternion(0.136716, 0.000311326, 0.000400507, 0.99061)
-bones/5/rotation = Quaternion(0.0196044, -0.000236243, -0.000242776, 0.999808)
-bones/6/rotation = Quaternion(0.00230517, 0.09601, -0.00282352, 0.995374)
-bones/7/rotation = Quaternion(-0.599717, -0.373316, -0.39434, 0.587767)
-bones/8/rotation = Quaternion(-0.285962, 0.673461, -0.496254, 0.467341)
-bones/9/rotation = Quaternion(0.282489, 0.0422705, -0.00481043, 0.958327)
+bones/1/position = Vector3(-0.000340347, 0.0870882, 0.871168)
+bones/1/rotation = Quaternion(0.758656, -0.0886134, -0.0748801, 0.641079)
+bones/3/rotation = Quaternion(-0.0336141, 0.000113007, 0.00012625, 0.999435)
+bones/4/rotation = Quaternion(0.128391, 0.000306683, 0.000403872, 0.991724)
+bones/5/rotation = Quaternion(0.0252021, -0.000233397, -0.000245359, 0.999682)
+bones/6/rotation = Quaternion(-0.0283971, 0.0960452, 0.00121383, 0.994971)
+bones/7/rotation = Quaternion(-0.609452, -0.366676, -0.400522, 0.577667)
+bones/8/rotation = Quaternion(-0.2577, 0.670072, -0.517288, 0.465841)
+bones/9/rotation = Quaternion(0.247972, 0.0115807, 0.00460283, 0.968687)
 bones/10/rotation = Quaternion(0.106009, 0.00637576, -0.0256743, 0.994013)
 bones/11/rotation = Quaternion(0.44519, 0.549369, -0.445194, 0.549365)
 bones/12/rotation = Quaternion(0.623342, 6.13486e-08, 2.15438e-07, 0.781949)
@@ -204,9 +244,9 @@ bones/22/rotation = Quaternion(0.623341, -0.000665145, -0.0008345, 0.781949)
 bones/23/rotation = Quaternion(0.290838, 0.949649, 0.114583, 0.021217)
 bones/24/rotation = Quaternion(0.21939, 0.0238026, -0.00530472, 0.975332)
 bones/25/rotation = Quaternion(0.687388, -0.000309068, -0.000444658, 0.72629)
-bones/26/rotation = Quaternion(-0.635832, 0.310376, 0.329699, 0.625047)
-bones/27/rotation = Quaternion(-0.294718, -0.680954, 0.468056, 0.479964)
-bones/28/rotation = Quaternion(0.367196, -0.154665, 0.0620619, 0.915092)
+bones/26/rotation = Quaternion(-0.645715, 0.30508, 0.334606, 0.614831)
+bones/27/rotation = Quaternion(-0.289732, -0.678052, 0.480088, 0.475202)
+bones/28/rotation = Quaternion(0.367808, -0.145351, 0.0583246, 0.916618)
 bones/29/rotation = Quaternion(0.116709, 0.00291669, 0.0447786, 0.992152)
 bones/30/rotation = Quaternion(0.445191, -0.549369, 0.445194, 0.549365)
 bones/31/rotation = Quaternion(0.623341, 2.17518e-07, 6.33371e-08, 0.78195)
@@ -223,17 +263,17 @@ bones/41/rotation = Quaternion(0.623342, 0.000664924, 0.000834326, 0.781949)
 bones/42/rotation = Quaternion(-0.290838, 0.949649, 0.114584, -0.021217)
 bones/43/rotation = Quaternion(0.21939, -0.0238026, 0.00530485, 0.975332)
 bones/44/rotation = Quaternion(0.687388, 0.000309234, 0.000444539, 0.72629)
-bones/45/rotation = Quaternion(0.963498, 0.110529, -0.0136279, 0.243452)
-bones/46/rotation = Quaternion(0.185944, -0.112051, 0.0213395, 0.975917)
-bones/47/rotation = Quaternion(-0.495744, 0.0223417, 0.0922849, 0.863263)
+bones/45/rotation = Quaternion(0.957811, 0.117888, -0.0145353, 0.261706)
+bones/46/rotation = Quaternion(0.216364, -0.109595, 0.0244402, 0.969834)
+bones/47/rotation = Quaternion(-0.507955, 0.0218721, 0.0956108, 0.855782)
 bones/48/rotation = Quaternion(-0.000137176, 0.964307, -0.264787, -0.000499421)
-bones/49/rotation = Quaternion(0.993157, -0.115154, 0.0141982, 0.0133088)
-bones/50/rotation = Quaternion(0.116505, 0.358207, -0.0451147, 0.925245)
-bones/51/rotation = Quaternion(-0.578468, -0.0497709, -0.163878, 0.797522)
+bones/49/rotation = Quaternion(0.990687, -0.130525, 0.0160933, 0.0352696)
+bones/50/rotation = Quaternion(0.165285, 0.351651, -0.0632383, 0.919252)
+bones/51/rotation = Quaternion(-0.60106, -0.0542436, -0.161156, 0.780906)
 bones/52/rotation = Quaternion(-0.000137047, 0.964307, -0.264787, -0.000499421)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D" index="1"]
-transform = Transform3D(-0.9849, -0.154283, 0.0785357, 0.172973, -0.858175, 0.483337, -0.00717348, 0.489623, 0.871904, -0.289695, 0.922309, -0.201242)
+transform = Transform3D(-0.987527, -0.143676, 0.0644075, 0.155625, -0.828542, 0.537864, -0.0239135, 0.541179, 0.840567, -0.285997, 0.904269, -0.172798)
 bone_name = "DEF-hand.R"
 bone_idx = 29
 
@@ -285,5 +325,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.982579, 0)
 
 [node name="ShootFrom" type="Node3D" parent="AnimationLibrary_Godot_Standard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32995, 0.674628)
+
+[node name="SniperOverlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="SniperOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("29_dt7fs")
 
 [editable path="AnimationLibrary_Godot_Standard"]

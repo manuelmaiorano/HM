@@ -17,6 +17,15 @@ class_name CameraControl
 		else:
 			x_rotation_mult = 1
 
+@export_category("Debug")
+@export var enabled: bool = true:
+	set(value):
+		enabled = value
+		if value:
+			set_process_input(true)
+		else:
+			set_process_input(false)
+
 var x_rotation_mult = 1
 
 func _input(event:InputEvent) -> void:

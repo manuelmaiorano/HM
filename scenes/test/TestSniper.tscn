@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://lsberrbbnplv"]
+
+[ext_resource type="Script" uid="uid://doy4l5fg1sy52" path="res://scenes/test/register_patrol_points.gd" id="1_b5uyj"]
+[ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="2_2bbht"]
+[ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="3_c0vpj"]
+[ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui/ui.tscn" id="4_eghvk"]
+[ext_resource type="PackedScene" uid="uid://cui0xddsgh1e" path="res://scenes/weapons/gun.tscn" id="5_kis6s"]
+[ext_resource type="NavigationMesh" uid="uid://bobuyawffhctm" path="res://resources/navigation_meshes/test_patrolling.tres" id="6_6wpp7"]
+[ext_resource type="PackedScene" uid="uid://cb8i73sknj50o" path="res://scenes/test/testbuilding.tscn" id="7_mod2l"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_charm"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_6g2hc"]
+sky_material = SubResource("ProceduralSkyMaterial_charm")
+
+[sub_resource type="Environment" id="Environment_de4ha"]
+background_mode = 2
+sky = SubResource("Sky_6g2hc")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestNpcPatrolling" type="Node3D"]
+
+[node name="PatrolPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8703, 1.90735e-06, 18.1483)
+gizmo_extents = 1.65
+
+[node name="PatrolPoint2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8703, 1.90735e-06, -21.4186)
+gizmo_extents = 1.65
+
+[node name="PatrolPoint3" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3199, 1.90735e-06, -21.4186)
+gizmo_extents = 1.65
+
+[node name="PatrolPoint4" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3199, 1.90735e-06, 21.2898)
+gizmo_extents = 1.65
+
+[node name="RegisterPatrolPoints" type="Node" parent="." node_paths=PackedStringArray("npc_to_patrol_points")]
+script = ExtResource("1_b5uyj")
+npc_to_patrol_points = {
+NodePath("../Npc"): [NodePath("../PatrolPoint"), NodePath("../PatrolPoint2"), NodePath("../PatrolPoint3"), NodePath("../PatrolPoint4")]
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_de4ha")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Npc" parent="." instance=ExtResource("2_2bbht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2493, 0, 19.1836)
+
+[node name="Player" parent="." instance=ExtResource("3_c0vpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 118.255, 38.5696, -0.321346)
+
+[node name="UI" parent="." instance=ExtResource("4_eghvk")]
+
+[node name="Gun" parent="." instance=ExtResource("5_kis6s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7741, -0.0180497, 26.2722)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = ExtResource("6_6wpp7")
+
+[node name="testbuilding" parent="NavigationRegion3D" instance=ExtResource("7_mod2l")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 117.93, 19.0348, 0)
+use_collision = true
+size = Vector3(1, 39.0696, 1)

@@ -10,6 +10,16 @@ class_name SniperZoomControl
 @export var max_fov: float = 70.0  # Widest FOV (normal view)
 @export var zoom_speed: float = 2.0
 
+
+@export_category("Debug")
+@export var enabled: bool = true:
+	set(value):
+		enabled = value
+		if value:
+			set_process_unhandled_input(true)
+		else:
+			set_process_unhandled_input(false)
+
 var rotation_x := 0.0
 var rotation_y := 0.0
 
