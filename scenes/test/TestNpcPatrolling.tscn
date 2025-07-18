@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://1w5laahpdlic"]
 
-[ext_resource type="Script" uid="uid://doy4l5fg1sy52" path="res://scenes/test/register_patrol_points.gd" id="1_tacd5"]
+[ext_resource type="Script" uid="uid://doy4l5fg1sy52" path="res://scenes/register_patrol_points.gd" id="1_tacd5"]
 [ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="2_de4ha"]
 [ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="3_mfvww"]
 [ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui/ui.tscn" id="4_mfvww"]
-[ext_resource type="PackedScene" uid="uid://cb8i73sknj50o" path="res://scenes/test/testbuilding.tscn" id="4_rjiu4"]
+[ext_resource type="PackedScene" uid="uid://cb8i73sknj50o" path="res://scenes/test/buildings/testbuilding.tscn" id="4_rjiu4"]
 [ext_resource type="NavigationMesh" uid="uid://bobuyawffhctm" path="res://resources/navigation_meshes/test_patrolling.tres" id="5_lhdno"]
 [ext_resource type="PackedScene" uid="uid://cui0xddsgh1e" path="res://scenes/weapons/gun.tscn" id="5_rjiu4"]
 
