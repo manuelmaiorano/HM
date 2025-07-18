@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://qvmfvm8dwhtt"]
+
+[ext_resource type="Script" uid="uid://3thort8wmxxm" path="res://scripts/components/interactions/draggable_interactable.gd" id="1_8trm2"]
+[ext_resource type="Resource" uid="uid://clfuf8ctblybu" path="res://resources/interactions/drag_body.tres" id="2_r1ahh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x1uxm"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jl3l1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jl3l1"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8trm2"]
+
+[node name="Draggable" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_x1uxm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_jl3l1")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32366, 0, 0)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_jl3l1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_8trm2")
+
+[node name="ConeTwistJoint3D" type="ConeTwistJoint3D" parent="."]
+node_a = NodePath("..")
+node_b = NodePath("../RigidBody3D")
+bias = 1.95
+
+[node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("1_8trm2")
+body = NodePath("..")
+drag_action = ExtResource("2_r1ahh")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://byiiacfnlduqh"]
+[gd_scene load_steps=11 format=3 uid="uid://byiiacfnlduqh"]
 
 [ext_resource type="Script" uid="uid://doy4l5fg1sy52" path="res://scenes/register_patrol_points.gd" id="1_jb2kq"]
 [ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="2_61gk2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui/ui.tscn" id="4_13kk4"]
 [ext_resource type="NavigationMesh" uid="uid://vknqiraama2x" path="res://resources/navigation_meshes/test_spot_body.tres" id="5_jb2kq"]
 [ext_resource type="PackedScene" uid="uid://cb8i73sknj50o" path="res://scenes/test/buildings/testbuilding.tscn" id="6_8dsjm"]
+[ext_resource type="PackedScene" uid="uid://qvmfvm8dwhtt" path="res://scenes/test/ragdoll/Draggable.tscn" id="7_oilf3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_charm"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -65,3 +66,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2766, 9.53674e-07, 19.2104
 
 [node name="PatrolPoint3" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2766, 9.53674e-07, -6.95813)
+
+[node name="Draggable" parent="." instance=ExtResource("7_oilf3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9344, 0.424601, 5.26208)

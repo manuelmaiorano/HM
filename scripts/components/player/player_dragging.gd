@@ -32,7 +32,7 @@ class_name PlayerDraggingComponent
 			process_mode = Node.PROCESS_MODE_DISABLED
 		is_dragging_state_changed.emit(value)
 
-@export var bone_to_drag: PhysicalBone3D = null
+@export var bone_to_drag: PhysicsBody3D = null
 
 var current_joint: Joint3D = null
 
@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 	movement_component.move(delta, direction, movement_component.walk_speed)
 	drag_bone(delta)
 
-func request_drag(_bone_to_drag: PhysicalBone3D):
+func request_drag(_bone_to_drag:  PhysicsBody3D):
 	drag_requested.emit()
 	bone_to_drag = _bone_to_drag
 	bone_to_drag.can_sleep = false
@@ -89,9 +89,11 @@ func drag_bone(_delta: float):
 	damping_force = clamp(damping_force, -spring_force, +spring_force)
 	var total_force_length = clamp(spring_force + damping_force, -max_force, max_force )
 
-	var total_force = displacement
-
-	bone_to_drag.force_to_apply = total_force
+	var total_force = displacement * 0.1
+	if bone_to_drag is PhysicalBone3D:
+		bone_to_drag.force_to_apply = total_force
+	else:
+		bone_to_drag.add_constant_central_force(total_force)
 	DebugDraw3D.draw_line(bone_pos, bone_pos + total_force, Color.ORANGE_RED)
 	DebugDraw3D.draw_box(target_pos, Quaternion.IDENTITY, Vector3.ONE * 0.1)
 	DebugDraw3D.draw_box(bone_pos, Quaternion.IDENTITY, Vector3.ONE * 0.1)
