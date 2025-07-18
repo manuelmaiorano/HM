@@ -7,9 +7,9 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_jl3l1"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_jl3l1"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_8trm2"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_8trm2"]
+[sub_resource type="SphereMesh" id="SphereMesh_r1ahh"]
 
 [node name="Draggable" type="RigidBody3D"]
 collision_layer = 4
@@ -21,23 +21,22 @@ shape = SubResource("SphereShape3D_x1uxm")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_jl3l1")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32366, 0, 0)
-collision_layer = 4
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("SphereShape3D_jl3l1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("SphereMesh_8trm2")
-
-[node name="ConeTwistJoint3D" type="ConeTwistJoint3D" parent="."]
-node_a = NodePath("..")
-node_b = NodePath("../RigidBody3D")
-bias = 1.95
-
 [node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("body")]
 script = ExtResource("1_8trm2")
 body = NodePath("..")
 drag_action = ExtResource("2_r1ahh")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29286, 0, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_8trm2")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_r1ahh")
+skeleton = NodePath("../..")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.652567, 0, 0)
+node_a = NodePath("..")
+node_b = NodePath("../RigidBody3D")

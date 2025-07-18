@@ -89,12 +89,12 @@ func drag_bone(_delta: float):
 	damping_force = clamp(damping_force, -spring_force, +spring_force)
 	var total_force_length = clamp(spring_force + damping_force, -max_force, max_force )
 
-	var total_force = displacement * 0.1
+	var total_force = displacement * 200
 	if bone_to_drag is PhysicalBone3D:
 		bone_to_drag.force_to_apply = total_force
 	else:
-		bone_to_drag.add_constant_central_force(total_force)
-	DebugDraw3D.draw_line(bone_pos, bone_pos + total_force, Color.ORANGE_RED)
+		bone_to_drag.apply_central_force(total_force)
+	DebugDraw3D.draw_line(bone_pos, bone_pos + displacement, Color.ORANGE_RED)
 	DebugDraw3D.draw_box(target_pos, Quaternion.IDENTITY, Vector3.ONE * 0.1)
 	DebugDraw3D.draw_box(bone_pos, Quaternion.IDENTITY, Vector3.ONE * 0.1)
 	# bone_to_drag.apply_central_force(total_force)

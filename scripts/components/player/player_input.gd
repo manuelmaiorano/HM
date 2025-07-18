@@ -13,8 +13,10 @@ class_name PlayerInputComponent
 		enabled = value
 		if value:
 			set_physics_process(true)
+			process_mode = Node.PROCESS_MODE_INHERIT
 		else:
 			set_physics_process(false)
+			process_mode = Node.PROCESS_MODE_DISABLED
 
 func _physics_process(delta: float) -> void:
 	var movement_direction = Input.get_vector("forward", "back", "right", "left")
