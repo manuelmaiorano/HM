@@ -27,7 +27,8 @@ func _unhandled_input(_event: InputEvent) -> void:
 		# 	target = raycast.get_collision_point()
 		# else:
 		# 	target = raycast.to_global(raycast.target_position)
-
+		if wieldable.current_item == null:
+			return
 		if wieldable.current_item.has_meta("SniperComponent"):
 			is_sniper_enabled.emit()
 			Globals.current_ui_element_active = Globals.UiElementActive.Sniper

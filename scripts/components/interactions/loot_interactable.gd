@@ -6,6 +6,7 @@ class_name LootInteractableComponent
 
 @export_category("Parameters")
 @export var clothes_component: ClothesComponent
+@export var bone_to_drag: PhysicalBone3D
 @export var interpolation_string = "Take %s"
 @export var interpolation_string_clothes = "Take %s's clothes"
 @export var drag_action: InteractionAction
@@ -38,7 +39,7 @@ func execute_action(action: InteractionAction, agent: Node3D):
 	if action.id == 0:
 		if agent.has_meta("PlayerDraggingComponent"):
 			var drag_component = agent.get_meta("PlayerDraggingComponent") as PlayerDraggingComponent
-			drag_component.request_drag()
+			drag_component.request_drag(bone_to_drag)
 		return
 	if agent.has_meta("InventoryComponent"):
 		var agent_inventory = agent.get_meta("InventoryComponent") as InventoryComponent

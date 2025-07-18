@@ -8,6 +8,7 @@ class_name DropLootComponent
 @export var inventory: InventoryComponent
 @export var health: HealthComponent
 @export var clothes_component: ClothesComponent
+@export var bone_to_drag: PhysicalBone3D
 
 @export_category("Parameters")
 @export var loot_scene: PackedScene
@@ -23,4 +24,5 @@ func on_dead():
 	var loot_interactable = instance.get_meta("LootInteractableComponent") as LootInteractableComponent
 	inventory.transfer_all_inventory(loot_interactable.inventory)
 	loot_interactable.clothes_component = clothes_component
+	loot_interactable.bone_to_drag = bone_to_drag
 

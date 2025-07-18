@@ -26,14 +26,12 @@ func _physics_process(delta: float) -> void:
 
 
 func check_dead_bodies():
-	for body in detect_area.get_overlapping_bodies():
-		if not body.is_in_group("npc"):
-			continue
-		var vis_check_component = body.get_meta("VisibilityCheckTargetComponent") as VisibilityCheckTargetComponent
-		var health_component = body.get_meta("HealthComponent") as HealthComponent
-		raycast.target_position = raycast.to_local(vis_check_component.target_node.global_position)
-		raycast.force_raycast_update()
-		if raycast.is_colliding() and health_component.current_health <= 0:
-			dead_body_found.emit(body.global_position)
-			last_dead_body_position = body.global_position
-			return
+	for area in detect_area.get_overlapping_areas():
+		if area.has_meta("LootInteractableComponent"):
+			raycast.target_position = raycast.to_local(area.global_position)
+			raycast.force_raycast_update()
+			if raycast.is_colliding():
+				if raycast.get_collider() == area:
+					dead_body_found.emit(area.global_position)
+					last_dead_body_position = area.global_position
+					return

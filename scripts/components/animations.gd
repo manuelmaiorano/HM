@@ -16,6 +16,8 @@ func _ready() -> void:
 	animation_tree["parameters/Transition/transition_request"] = "alive"
 	animation_tree["parameters/crouch_blend/blend_position"] = 0.0
 	animation_tree["parameters/movement_blend/blend_position"] = 0.0
+	animation_tree["parameters/shoot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
+	animation_tree["parameters/stab_kill/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
 
 func on_drag_state_changed(is_dragging: bool):
 	if is_dragging:
