@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://btcfsykryyqv7"]
+[gd_scene load_steps=10 format=3 uid="uid://btcfsykryyqv7"]
 
 [ext_resource type="Script" uid="uid://doy4l5fg1sy52" path="res://scenes/register_patrol_points.gd" id="1_hgxyh"]
-[ext_resource type="Script" uid="uid://gpthe6bttgxp" path="res://scenes/register_schedule.gd" id="1_qir2n"]
 [ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="2_cbr2x"]
 [ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="3_3m8iu"]
 [ext_resource type="NavigationMesh" uid="uid://difkv33qsjxpw" path="res://resources/navigation_meshes/test_follow_schedule.tres" id="4_fcr17"]
@@ -23,13 +22,11 @@ glow_enabled = true
 
 [node name="TestNpcPatrolling" type="Node3D"]
 
-[node name="ScheduleConfiguration" type="Node" parent="."]
-script = ExtResource("1_qir2n")
-
 [node name="PatrolPointConfiguration" type="Node" parent="." node_paths=PackedStringArray("npc_to_patrol_points")]
 script = ExtResource("1_hgxyh")
 npc_to_patrol_points = {
-NodePath("../Npc2"): [NodePath("../Marker3D")]
+NodePath("../Npc2"): [NodePath("../Marker3D")],
+NodePath("../Npc3"): [NodePath("../Marker3D2")]
 }
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -40,7 +37,11 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Npc2" parent="." instance=ExtResource("2_cbr2x")]
+process_mode = 4
 transform = Transform3D(-0.0367832, 0, 0.999323, 0, 1, 0, -0.999323, 0, -0.0367832, -14.5446, 0, 19.1633)
+
+[node name="Npc3" parent="." instance=ExtResource("2_cbr2x")]
+transform = Transform3D(-0.997505, 0, -0.0705922, 0, 1, 0, 0.0705922, 0, -0.997505, 26.5571, 0, -27.9242)
 
 [node name="Player" parent="." instance=ExtResource("3_3m8iu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7236, -0.0753975, 7.34656)
@@ -71,3 +72,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.1431
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4928, 0, -10.2633)
+
+[node name="Marker3D2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.4034, 0, 9.99832)

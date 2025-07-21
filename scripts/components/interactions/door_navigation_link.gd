@@ -5,13 +5,13 @@ extends NavigationLinkCrossingComponent
 
 var ending_position: Vector3
 
-func on_link_enter(charater: Node3D):
-	if charater.global_position.distance_squared_to(navigation_link.get_global_end_position()) > \
-		charater.global_position.distance_squared_to(navigation_link.get_global_start_position()):
+func on_link_enter(character: Node3D):
+	if character.global_position.distance_squared_to(navigation_link.get_global_end_position()) > \
+		character.global_position.distance_squared_to(navigation_link.get_global_start_position()):
 			ending_position = navigation_link.get_global_end_position()
 	else:
 		ending_position = navigation_link.get_global_start_position()
-	interactable.open()
+	interactable.open(character)
 	return
 
 

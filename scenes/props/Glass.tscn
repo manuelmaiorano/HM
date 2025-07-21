@@ -25,8 +25,9 @@ agent = NodePath("..")
 health = NodePath("../Health")
 broken_scene = ExtResource("3_hoobn")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("agent")]
 script = ExtResource("3_mu441")
+agent = NodePath("..")
 max_health = 10.0
 
 [node name="HitBox" type="Node" parent="." node_paths=PackedStringArray("health", "detection_area")]

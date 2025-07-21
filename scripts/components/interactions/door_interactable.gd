@@ -38,17 +38,20 @@ func execute_action(action: InteractionAction, _agent: Node3D):
 	if state == State.Running:
 		return
 	if action.id == open_action.id:
-		open()
+		open(_agent)
 	elif action.id == close_action.id:
 		close()
 
 
-func open():
+func open(_agent):
 	if state == State.Open or state == State.Running:
 		return
 	state = State.Running
+
+	var direction = _agent.global_position.direction_to(agent.global_position).dot(agent.global_basis.z)
+	var angle = -open_angle if direction < 0 else open_angle
 	var tween = get_tree().create_tween()
-	tween.tween_property(agent, "rotation_degrees:y", open_angle, animation_duration).as_relative()
+	tween.tween_property(agent, "rotation_degrees:y", angle, animation_duration).as_relative()
 	tween.tween_callback(func (): state = State.Open)
 
 func close():
@@ -56,5 +59,5 @@ func close():
 		return
 	state = State.Running
 	var tween = get_tree().create_tween()
-	tween.tween_property(agent, "rotation_degrees:y", -open_angle, animation_duration).as_relative()
+	tween.tween_property(agent, "rotation_degrees:y", 0, animation_duration)
 	tween.tween_callback(func (): state = State.Closed)
