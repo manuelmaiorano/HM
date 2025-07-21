@@ -5,6 +5,7 @@ class_name LootInteractableComponent
 @export var inventory: InventoryComponent
 
 @export_category("Parameters")
+@export var character: CharacterBody3D
 @export var clothes_component: ClothesComponent
 @export var bone_to_drag: PhysicalBone3D
 @export var interpolation_string = "Take %s"

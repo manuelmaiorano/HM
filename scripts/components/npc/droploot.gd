@@ -22,6 +22,7 @@ func on_dead():
 	var instance = loot_scene.instantiate()
 	character_attachment.add_child(instance)
 	var loot_interactable = instance.get_meta("LootInteractableComponent") as LootInteractableComponent
+	loot_interactable.character = character
 	inventory.transfer_all_inventory(loot_interactable.inventory)
 	loot_interactable.clothes_component = clothes_component
 	loot_interactable.bone_to_drag = bone_to_drag

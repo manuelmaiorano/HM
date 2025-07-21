@@ -3,14 +3,16 @@ extends Node
 class_name DetectDeadBodyComponent
 
 @export_category("Nodes")
-@export var character: CharacterBody3D
+@export var character: Node3D
 @export var detect_area: Area3D
 @export var raycast: RayCast3D
 
 @export_category("Parameters")
 @export var update_frequency: float = 1.0
+@export var ignore_raycast: bool = false
 
 @export_category("Debug")
+var last_body: CharacterBody3D
 var last_dead_body_position: Vector3 = Vector3.ZERO
 
 signal dead_body_found(where: Vector3)
@@ -28,10 +30,17 @@ func _physics_process(delta: float) -> void:
 func check_dead_bodies():
 	for area in detect_area.get_overlapping_areas():
 		if area.has_meta("LootInteractableComponent"):
-			raycast.target_position = raycast.to_local(area.global_position)
-			raycast.force_raycast_update()
-			if raycast.is_colliding():
-				if raycast.get_collider() == area:
-					dead_body_found.emit(area.global_position)
-					last_dead_body_position = area.global_position
-					return
+			var loot_component = area.get_meta("LootInteractableComponent") as LootInteractableComponent
+			if ignore_raycast:
+				dead_body_found.emit(area.global_position)
+				last_dead_body_position = area.global_position
+				last_body = loot_component.character
+			else:
+				raycast.target_position = raycast.to_local(area.global_position)
+				raycast.force_raycast_update()
+				if raycast.is_colliding():
+					if raycast.get_collider() == area:
+						dead_body_found.emit(area.global_position)
+						last_dead_body_position = area.global_position
+						last_body = loot_component.character
+						return
