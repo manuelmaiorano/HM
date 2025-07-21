@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnljcgov67ptp"]
+[gd_scene load_steps=5 format=3 uid="uid://bnljcgov67ptp"]
 
 [ext_resource type="Script" uid="uid://cswybg6g7uyln" path="res://scenes/ui/playerhealth_ui.gd" id="3_aac20"]
 [ext_resource type="PackedScene" uid="uid://bexi6a1kt2h8m" path="res://scenes/ui/interactions_ui.tscn" id="3_yev5y"]
+[ext_resource type="Script" uid="uid://bc0byi2cu3l3q" path="res://scenes/ui/SecondsPassed.gd" id="4_g5kmx"]
 [ext_resource type="PackedScene" uid="uid://b5ifia8xxlhtt" path="res://scenes/ui/inventory_ui.tscn" id="4_gdt2y"]
 
 [node name="UI" type="Control"]
@@ -28,3 +29,11 @@ offset_bottom = 27.0
 value = 100.0
 show_percentage = false
 script = ExtResource("3_aac20")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 941.0
+offset_top = 42.0
+offset_right = 981.0
+offset_bottom = 65.0
+script = ExtResource("4_g5kmx")

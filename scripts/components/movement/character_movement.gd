@@ -20,6 +20,7 @@ var tolerance = 0.1
 func _ready() -> void:
 	character.set_meta("CharacterMovementComponent", self)
 	if navigation_agent:
+		navigation_agent.link_reached.connect(func(x): print(x))
 		navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 
 func set_navigation_target(movement_target: Vector3):

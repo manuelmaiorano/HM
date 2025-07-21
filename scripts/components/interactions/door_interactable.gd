@@ -3,6 +3,9 @@ extends InteractableComponent
 enum State {Open, Closed, Running}
 enum Action {Open, Close}
 
+@export_category("Nodes")
+@export var agent: Node3D
+
 @export_category("Debug")
 @export var state = State.Closed
 
@@ -14,6 +17,10 @@ enum Action {Open, Close}
 @export var open_action: InteractionAction
 @export var close_action: InteractionAction
 @export var lock_action: InteractionAction
+
+
+func _enter_tree() -> void:
+	agent.set_meta("InteractableComponent", self)
 
 func _ready() -> void:
 	super._ready()
@@ -32,10 +39,10 @@ func execute_action(action: InteractionAction, _agent: Node3D):
 	if action.id == open_action.id:
 		state = State.Running
 		var tween = get_tree().create_tween()
-		tween.tween_property(get_parent(), "rotation_degrees:y", open_angle, animation_duration).as_relative()
+		tween.tween_property(agent, "rotation_degrees:y", open_angle, animation_duration).as_relative()
 		tween.tween_callback(func (): state = State.Open)
 	elif action.id == close_action.id:
 		state = State.Running
 		var tween = get_tree().create_tween()
-		tween.tween_property(get_parent(), "rotation_degrees:y", -open_angle, animation_duration).as_relative()
+		tween.tween_property(agent, "rotation_degrees:y", -open_angle, animation_duration).as_relative()
 		tween.tween_callback(func (): state = State.Closed)

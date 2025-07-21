@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://3u6bql5cwtjf"]
+[gd_scene load_steps=8 format=3 uid="uid://3u6bql5cwtjf"]
 
 [ext_resource type="Script" uid="uid://cjyavjjufjda6" path="res://scripts/components/interactions/door_interactable.gd" id="1_hpvv5"]
 [ext_resource type="Resource" uid="uid://c11cm6wcnl4cc" path="res://resources/interactions/open_door.tres" id="2_lbmyp"]
 [ext_resource type="Resource" uid="uid://u7uengk7cxby" path="res://resources/interactions/close_door.tres" id="3_vinnd"]
 [ext_resource type="Resource" uid="uid://dbat63k7legix" path="res://resources/interactions/lock_door.tres" id="4_lbmyp"]
+[ext_resource type="Script" uid="uid://dp7rxr7ci7h44" path="res://scripts/components/interactions/navigation_link_crossing.gd" id="5_vinnd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5f452"]
 size = Vector3(1, 2, 0.1)
@@ -11,20 +12,33 @@ size = Vector3(1, 2, 0.1)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5f452"]
 data = PackedVector3Array(-0.5, 1, 0.05, 0.5, 1, 0.05, -0.5, -1, 0.05, 0.5, 1, 0.05, 0.5, -1, 0.05, -0.5, -1, 0.05, 0.5, 1, -0.05, -0.5, 1, -0.05, 0.5, -1, -0.05, -0.5, 1, -0.05, -0.5, -1, -0.05, 0.5, -1, -0.05, 0.5, 1, 0.05, 0.5, 1, -0.05, 0.5, -1, 0.05, 0.5, 1, -0.05, 0.5, -1, -0.05, 0.5, -1, 0.05, -0.5, 1, -0.05, -0.5, 1, 0.05, -0.5, -1, -0.05, -0.5, 1, 0.05, -0.5, -1, 0.05, -0.5, -1, -0.05, 0.5, 1, 0.05, -0.5, 1, 0.05, 0.5, 1, -0.05, -0.5, 1, 0.05, -0.5, 1, -0.05, 0.5, 1, -0.05, -0.5, -1, 0.05, 0.5, -1, 0.05, -0.5, -1, -0.05, 0.5, -1, 0.05, 0.5, -1, -0.05, -0.5, -1, -0.05)
 
-[node name="Door" type="AnimatableBody3D"]
-collision_layer = 5
-collision_mask = 3
+[node name="Door" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.508717, 1.00262, 0)
-mesh = SubResource("BoxMesh_5f452")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.508717, 1.00262, 0)
-shape = SubResource("ConcavePolygonShape3D_5f452")
-
-[node name="Interaction" type="Node" parent="."]
+[node name="Interaction" type="Node" parent="." node_paths=PackedStringArray("agent")]
 script = ExtResource("1_hpvv5")
+agent = NodePath("../Door")
 open_action = ExtResource("2_lbmyp")
 close_action = ExtResource("3_vinnd")
 lock_action = ExtResource("4_lbmyp")
+
+[node name="NavigationLinkCrossing" type="Node" parent="." node_paths=PackedStringArray("agent", "navigation_link")]
+script = ExtResource("5_vinnd")
+agent = NodePath("..")
+navigation_link = NodePath("../NavigationLink3D")
+
+[node name="NavigationLink3D" type="NavigationLink3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.369083, 0, 0)
+start_position = Vector3(0, 0, 2.085)
+end_position = Vector3(0, 0, -2.085)
+
+[node name="Door" type="AnimatableBody3D" parent="."]
+collision_layer = 5
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.508717, 1.00262, 0)
+mesh = SubResource("BoxMesh_5f452")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.508717, 1.00262, 0)
+shape = SubResource("ConcavePolygonShape3D_5f452")
