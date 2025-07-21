@@ -1,7 +1,8 @@
-[gd_resource type="BehaviorTree" load_steps=12 format=3 uid="uid://btwsgk4pfkbjj"]
+[gd_resource type="BehaviorTree" load_steps=15 format=3 uid="uid://btwsgk4pfkbjj"]
 
 [ext_resource type="Script" uid="uid://dwbv0whk2lulp" path="res://ai/tasks/Patrol.gd" id="1_npdif"]
 [ext_resource type="Script" uid="uid://ddkmhso63nymt" path="res://ai/tasks/chase_player.gd" id="3_0pnie"]
+[ext_resource type="Script" uid="uid://dbhqg7d6xtpux" path="res://ai/tasks/Follow_schedule.gd" id="3_yo0us"]
 [ext_resource type="Script" uid="uid://ck8kk23h4oecm" path="res://ai/tasks/investigate_audio.gd" id="4_kdpv0"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_gl1un"]
@@ -26,6 +27,13 @@ time_to_stop_investigating_after_heard_sound = 10.0
 custom_name = "InvestigateAudio"
 children = [SubResource("BTAction_mut8x")]
 
+[sub_resource type="BTAction" id="BTAction_kdpv0"]
+script = ExtResource("3_yo0us")
+
+[sub_resource type="BTSequence" id="BTSequence_yo0us"]
+custom_name = "FollowSchedule"
+children = [SubResource("BTAction_kdpv0")]
+
 [sub_resource type="BTAction" id="BTAction_b5boe"]
 script = ExtResource("1_npdif")
 time_to_wait_on_patrol_point = 5.0
@@ -36,7 +44,7 @@ custom_name = "Patrolling"
 children = [SubResource("BTAction_b5boe")]
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_b5boe"]
-children = [SubResource("BTSequence_npdif"), SubResource("BTSequence_0pnie"), SubResource("BTSequence_sxcp6")]
+children = [SubResource("BTSequence_npdif"), SubResource("BTSequence_0pnie"), SubResource("BTSequence_yo0us"), SubResource("BTSequence_sxcp6")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_gl1un")
