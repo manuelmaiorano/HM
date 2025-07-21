@@ -20,7 +20,7 @@ sky = SubResource("Sky_6g2hc")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="TestNpcPatrolling" type="Node3D"]
+[node name="TestNpcThroughDoor" type="Node3D"]
 
 [node name="PatrolPointConfiguration" type="Node" parent="." node_paths=PackedStringArray("npc_to_patrol_points")]
 script = ExtResource("1_hgxyh")
@@ -37,7 +37,6 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Npc2" parent="." instance=ExtResource("2_cbr2x")]
-process_mode = 4
 transform = Transform3D(-0.0367832, 0, 0.999323, 0, 1, 0, -0.999323, 0, -0.0367832, -14.5446, 0, 19.1633)
 
 [node name="Npc3" parent="." instance=ExtResource("2_cbr2x")]
