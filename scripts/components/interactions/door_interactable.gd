@@ -1,4 +1,5 @@
 extends InteractableComponent
+class_name DoorInteractableComponent
 
 enum State {Open, Closed, Running}
 enum Action {Open, Close}
@@ -37,12 +38,23 @@ func execute_action(action: InteractionAction, _agent: Node3D):
 	if state == State.Running:
 		return
 	if action.id == open_action.id:
-		state = State.Running
-		var tween = get_tree().create_tween()
-		tween.tween_property(agent, "rotation_degrees:y", open_angle, animation_duration).as_relative()
-		tween.tween_callback(func (): state = State.Open)
+		open()
 	elif action.id == close_action.id:
-		state = State.Running
-		var tween = get_tree().create_tween()
-		tween.tween_property(agent, "rotation_degrees:y", -open_angle, animation_duration).as_relative()
-		tween.tween_callback(func (): state = State.Closed)
+		close()
+
+
+func open():
+	if state == State.Open or state == State.Running:
+		return
+	state = State.Running
+	var tween = get_tree().create_tween()
+	tween.tween_property(agent, "rotation_degrees:y", open_angle, animation_duration).as_relative()
+	tween.tween_callback(func (): state = State.Open)
+
+func close():
+	if state == State.Closed or state == State.Running:
+		return
+	state = State.Running
+	var tween = get_tree().create_tween()
+	tween.tween_property(agent, "rotation_degrees:y", -open_angle, animation_duration).as_relative()
+	tween.tween_callback(func (): state = State.Closed)

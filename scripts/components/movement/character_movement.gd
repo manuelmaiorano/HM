@@ -15,13 +15,21 @@ class_name CharacterMovementComponent
 
 @export_category("Debug")
 @export var current_navigation_target: Vector3 = Vector3.ZERO
+@export var moving_through_link: bool = false
+@export var current_link_component: NavigationLinkCrossingComponent
 var tolerance = 0.1
 
 func _ready() -> void:
 	character.set_meta("CharacterMovementComponent", self)
 	if navigation_agent:
-		navigation_agent.link_reached.connect(func(x): print(x))
+		navigation_agent.link_reached.connect(on_link_reached)
 		navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
+
+func on_link_reached(link_info: Dictionary):
+	current_link_component = link_info["owner"].get_meta("NavigationLinkCrossingComponent")
+	assert(current_link_component != null)
+	moving_through_link = true
+	current_link_component.on_link_enter(character)
 
 func set_navigation_target(movement_target: Vector3):
 	if navigation_agent:
@@ -59,6 +67,13 @@ func navigate(delta: float, speed: float) -> bool:
 		return true
 
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+	if moving_through_link:
+		if current_link_component.move_through_link(delta, self, next_path_position, speed):
+			moving_through_link = false
+			current_link_component.on_link_exit(character)
+			return false
+		return false
+
 	if navigation_agent.avoidance_enabled:
 		return false
 		#navigation_agent.set_velocity(character.global_position.direction_to(position) * speed)

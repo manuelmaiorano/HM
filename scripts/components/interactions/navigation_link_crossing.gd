@@ -7,5 +7,15 @@ class_name NavigationLinkCrossingComponent
 @export var navigation_link: NavigationLink3D
 
 func _enter_tree() -> void:
-	agent.set_meta("NavigationLinkCrossingComponent", self)
+	navigation_link.set_meta("NavigationLinkCrossingComponent", self)
+
+func on_link_enter(agent: Node3D):
+	pass
+
+func move_through_link(_delta: float, movement_comp: CharacterMovementComponent, next_path_position: Vector3, speed: float) -> bool:
+	return false
+
+
+func on_link_exit(agent: Node3D):
+	pass
 

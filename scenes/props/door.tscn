@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://c11cm6wcnl4cc" path="res://resources/interactions/open_door.tres" id="2_lbmyp"]
 [ext_resource type="Resource" uid="uid://u7uengk7cxby" path="res://resources/interactions/close_door.tres" id="3_vinnd"]
 [ext_resource type="Resource" uid="uid://dbat63k7legix" path="res://resources/interactions/lock_door.tres" id="4_lbmyp"]
-[ext_resource type="Script" uid="uid://dp7rxr7ci7h44" path="res://scripts/components/interactions/navigation_link_crossing.gd" id="5_vinnd"]
+[ext_resource type="Script" uid="uid://bccn03cu8jn78" path="res://scripts/components/interactions/door_navigation_link.gd" id="5_vinnd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5f452"]
 size = Vector3(1, 2, 0.1)
@@ -21,8 +21,9 @@ open_action = ExtResource("2_lbmyp")
 close_action = ExtResource("3_vinnd")
 lock_action = ExtResource("4_lbmyp")
 
-[node name="NavigationLinkCrossing" type="Node" parent="." node_paths=PackedStringArray("agent", "navigation_link")]
+[node name="NavigationLinkCrossing" type="Node" parent="." node_paths=PackedStringArray("interactable", "agent", "navigation_link")]
 script = ExtResource("5_vinnd")
+interactable = NodePath("../Interaction")
 agent = NodePath("..")
 navigation_link = NodePath("../NavigationLink3D")
 
