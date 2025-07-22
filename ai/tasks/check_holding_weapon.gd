@@ -2,10 +2,12 @@ extends BTCondition
 
 var detect_player_component: DetectPlayerComponent
 var player_inventory: InventoryComponent
+var npc_events: NpcEventsComponent
 
 var is_player_holding_weapon = false
 
 func _setup() -> void:
+	npc_events = agent.get_meta("NpcEventsComponent") as NpcEventsComponent
 	detect_player_component = agent.get_meta("DetectPlayerComponent")
 	player_inventory = agent.get_tree().get_first_node_in_group("player").get_meta("InventoryComponent") as InventoryComponent
 	detect_player_component.player_visibility_changed.connect(on_visibility_changed)
@@ -17,6 +19,7 @@ func on_visibility_changed(is_visible: bool):
 			return
 		if player_inventory.item_in_use.is_weapon:
 			is_player_holding_weapon = true
+			npc_events.player_is_holding_weapon.emit()
 
 
 func _tick(_delta: float) -> Status:

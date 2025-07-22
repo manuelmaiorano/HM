@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=27 format=3 uid="uid://btwsgk4pfkbjj"]
+[gd_resource type="BehaviorTree" load_steps=29 format=3 uid="uid://btwsgk4pfkbjj"]
 
 [ext_resource type="Script" uid="uid://ufckanshevvq" path="res://ai/tasks/check_holding_weapon.gd" id="1_cwhup"]
 [ext_resource type="Script" uid="uid://dwbv0whk2lulp" path="res://ai/tasks/Patrol.gd" id="1_npdif"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dbhqg7d6xtpux" path="res://ai/tasks/Follow_schedule.gd" id="3_yo0us"]
 [ext_resource type="Script" uid="uid://c2m8yovqnewi0" path="res://ai/tasks/check_alarmed_npc.gd" id="5_sojdj"]
 [ext_resource type="Script" uid="uid://ci4xvxhwvh665" path="res://ai/tasks/check_audio_alarm.gd" id="6_ratg2"]
+[ext_resource type="Script" uid="uid://1i0hbjuicov2" path="res://ai/tasks/check_dead_body.gd" id="7_qqk1o"]
 [ext_resource type="Script" uid="uid://ck8kk23h4oecm" path="res://ai/tasks/investigate_position.gd" id="7_ratg2"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_gl1un"]
@@ -42,8 +43,11 @@ script = ExtResource("5_sojdj")
 [sub_resource type="BTCondition" id="BTCondition_cs05x"]
 script = ExtResource("6_ratg2")
 
+[sub_resource type="BTCondition" id="BTCondition_l3unm"]
+script = ExtResource("7_qqk1o")
+
 [sub_resource type="BTSelector" id="BTSelector_l3unm"]
-children = [SubResource("BTCondition_4q83n"), SubResource("BTCondition_cs05x")]
+children = [SubResource("BTCondition_4q83n"), SubResource("BTCondition_cs05x"), SubResource("BTCondition_l3unm")]
 
 [sub_resource type="BTAction" id="BTAction_qqk1o"]
 script = ExtResource("7_ratg2")

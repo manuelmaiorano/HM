@@ -1,20 +1,18 @@
-[gd_scene load_steps=22 format=3 uid="uid://cwcvehowvpg6h"]
+[gd_scene load_steps=20 format=3 uid="uid://cwcvehowvpg6h"]
 
 [ext_resource type="Script" uid="uid://gpthe6bttgxp" path="res://scenes/register_schedule.gd" id="1_skytw"]
 [ext_resource type="Script" uid="uid://bhvrlytnxuq85" path="res://scripts/resources/schedule_action_resource.gd" id="2_sry7c"]
 [ext_resource type="Script" uid="uid://csgdd4lo2587f" path="res://scripts/resources/actions/goto_action.gd" id="3_xcv0y"]
 [ext_resource type="Script" uid="uid://b18cjiwbx5wuj" path="res://scripts/resources/schedule_resource.gd" id="4_loyv8"]
 [ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="5_ogmjx"]
-[ext_resource type="Script" uid="uid://bcopr3g7gkmg6" path="res://scenes/register_bt.gd" id="5_sry7c"]
 [ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="6_254sm"]
-[ext_resource type="BehaviorTree" uid="uid://b0iesgp3y8xs3" path="res://resources/behaviour_tree/civilian.tres" id="6_loyv8"]
-[ext_resource type="Script" uid="uid://yum4h0q1opln" path="res://scenes/register_inventory.gd" id="6_xcv0y"]
 [ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui/ui.tscn" id="7_7v0iq"]
 [ext_resource type="NavigationMesh" uid="uid://difkv33qsjxpw" path="res://resources/navigation_meshes/test_follow_schedule.tres" id="8_8v7at"]
-[ext_resource type="Resource" uid="uid://cr016lejn45dv" path="res://resources/inventory/Amulet.tres" id="8_ogmjx"]
+[ext_resource type="Resource" uid="uid://imclwo0owc31" path="res://resources/roles/civilian.tres" id="8_ogmjx"]
 [ext_resource type="Script" uid="uid://os6dsqegrf26" path="res://scenes/register_places.gd" id="9_7v0iq"]
 [ext_resource type="PackedScene" uid="uid://3u6bql5cwtjf" path="res://scenes/props/door.tscn" id="9_cbk0w"]
 [ext_resource type="Script" uid="uid://dbus1jwxr8cwg" path="res://scripts/resources/place_resource.gd" id="10_8v7at"]
+[ext_resource type="Script" uid="uid://bq5ctdow4y7ti" path="res://scenes/register_roles.gd" id="11_8v7at"]
 
 [sub_resource type="Resource" id="Resource_mudbd"]
 script = ExtResource("3_xcv0y")
@@ -57,26 +55,17 @@ schedules = {
 NodePath("../Npc2"): SubResource("Resource_skytw")
 }
 
-[node name="BtConfiguration" type="Node" parent="." node_paths=PackedStringArray("npc_behaviour_trees")]
-script = ExtResource("5_sry7c")
-npc_behaviour_trees = {
-NodePath("../Npc3"): ExtResource("6_loyv8")
-}
-
-[node name="InventoryConfiguration" type="Node" parent="." node_paths=PackedStringArray("npcs_initial_inventories", "npcs_initial_item_in_use")]
-script = ExtResource("6_xcv0y")
-npcs_initial_inventories = {
-NodePath("../Npc3"): [ExtResource("8_ogmjx")]
-}
-npcs_initial_item_in_use = {
-NodePath("../Npc3"): ExtResource("8_ogmjx")
-}
-
 [node name="RegisterPlaces" type="Node" parent="."]
 script = ExtResource("9_7v0iq")
 places = Dictionary[StringName, ExtResource("10_8v7at")]({
 &"exit_1": SubResource("Resource_cbk0w")
 })
+
+[node name="RoleRegistration" type="Node" parent="." node_paths=PackedStringArray("npc_roles")]
+script = ExtResource("11_8v7at")
+npc_roles = {
+NodePath("../Npc3"): ExtResource("8_ogmjx")
+}
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_de4ha")

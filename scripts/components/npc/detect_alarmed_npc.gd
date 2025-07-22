@@ -32,5 +32,4 @@ func check_alarmed():
 		var alarm_component = area.get_meta("CommunicateAlarmComponent") as CommunicateAlarmComponent
 		if alarm_component.is_alarmed:
 			detected_alarmed_npc.emit(alarm_component.last_alarm_position)
-			print("alarmed")
 			return

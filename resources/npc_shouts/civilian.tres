@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="NpcShouts" load_steps=3 format=3 uid="uid://d4r4fytduhsb"]
+
+[ext_resource type="Script" uid="uid://c52qla7yjuqhr" path="res://scripts/resources/npc_shouts_resource.gd" id="1_pvlax"]
+[ext_resource type="AudioStream" uid="uid://con2sjnrpldsv" path="res://assets/sfx/voice/holy_crap_male.wav" id="2_ejeta"]
+
+[resource]
+script = ExtResource("1_pvlax")
+name = &"civilian_shouts"
+shouts_on_dead_body_found_near_player = Array[AudioStream]([ExtResource("2_ejeta")])
+shouts_on_player_holding_weapon = Array[AudioStream]([ExtResource("2_ejeta")])
+shouts_on_player_suspiciuos_action = Array[AudioStream]([])
+metadata/_custom_type_script = "uid://c52qla7yjuqhr"

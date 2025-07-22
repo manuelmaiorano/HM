@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NpcShouts" load_steps=4 format=3 uid="uid://bxkhl4tiqrs67"]
+
+[ext_resource type="Script" uid="uid://c52qla7yjuqhr" path="res://scripts/resources/npc_shouts_resource.gd" id="1_3vxb1"]
+[ext_resource type="AudioStream" uid="uid://bjpjpu6a36ioq" path="res://assets/sfx/voice/Hostiles Detected Male.wav" id="2_xgvh6"]
+[ext_resource type="AudioStream" uid="uid://dvqvybc54gjkm" path="res://assets/sfx/voice/Intruder Alert Male.wav" id="3_cqfxd"]
+
+[resource]
+script = ExtResource("1_3vxb1")
+name = &""
+shouts_on_dead_body_found_near_player = Array[AudioStream]([ExtResource("2_xgvh6")])
+shouts_on_player_holding_weapon = Array[AudioStream]([ExtResource("2_xgvh6")])
+shouts_on_player_suspiciuos_action = Array[AudioStream]([ExtResource("3_cqfxd")])
+metadata/_custom_type_script = "uid://c52qla7yjuqhr"
