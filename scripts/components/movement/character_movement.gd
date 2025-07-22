@@ -19,8 +19,10 @@ class_name CharacterMovementComponent
 @export var current_link_component: NavigationLinkCrossingComponent
 var tolerance = 0.1
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	character.set_meta("CharacterMovementComponent", self)
+	
+func _ready() -> void:
 	if navigation_agent:
 		navigation_agent.link_reached.connect(on_link_reached)
 		navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))

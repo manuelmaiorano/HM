@@ -64,3 +64,11 @@ func transfer_item(item: InventoryItem, other_inventory: InventoryComponent):
 
 	inventory_changed.emit(current_items)
 	other_inventory.inventory_changed.emit(other_inventory.current_items)
+
+
+func assign_initial_items(items: Array):
+	initial_items = []
+	item_in_use = null
+
+	for item in items:
+		initial_items.append(item as InventoryItem)

@@ -1,0 +1,32 @@
+[gd_resource type="BehaviorTree" load_steps=10 format=3 uid="uid://b0iesgp3y8xs3"]
+
+[ext_resource type="Script" uid="uid://dbhqg7d6xtpux" path="res://ai/tasks/Follow_schedule.gd" id="1_fj5rg"]
+[ext_resource type="Script" uid="uid://dwbv0whk2lulp" path="res://ai/tasks/Patrol.gd" id="2_74cia"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_juyrq"]
+
+[sub_resource type="BTSequence" id="BTSequence_fj5rg"]
+custom_name = "RunAway"
+
+[sub_resource type="BTAction" id="BTAction_4siwh"]
+script = ExtResource("1_fj5rg")
+
+[sub_resource type="BTSequence" id="BTSequence_juyrq"]
+custom_name = "FollowSchedule"
+children = [SubResource("BTAction_4siwh")]
+
+[sub_resource type="BTAction" id="BTAction_2im0v"]
+script = ExtResource("2_74cia")
+time_to_wait_on_patrol_point = 0.0
+waiting_on_start = false
+
+[sub_resource type="BTSequence" id="BTSequence_d732r"]
+custom_name = "Patrol"
+children = [SubResource("BTAction_2im0v")]
+
+[sub_resource type="BTSelector" id="BTSelector_d732r"]
+children = [SubResource("BTSequence_fj5rg"), SubResource("BTSequence_juyrq"), SubResource("BTSequence_d732r")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_juyrq")
+root_task = SubResource("BTSelector_d732r")
