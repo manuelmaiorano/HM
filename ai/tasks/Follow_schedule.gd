@@ -16,6 +16,7 @@ func _tick(delta: float) -> Status:
 	if not current_action:
 		return FAILURE
 	if current_action._execute(delta):
+		current_action = null
 		return FAILURE
 
 	return RUNNING
