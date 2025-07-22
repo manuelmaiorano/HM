@@ -14,8 +14,9 @@ func on_action_changed(action: ScheduleAction):
 
 func _tick(delta: float) -> Status:
 	if not current_action:
-		return RUNNING
-	current_action._execute(delta)
+		return FAILURE
+	if current_action._execute(delta):
+		return FAILURE
 
 	return RUNNING
 

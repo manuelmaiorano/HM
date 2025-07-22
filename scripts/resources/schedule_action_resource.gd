@@ -7,8 +7,8 @@ class_name ScheduleAction
 func _enter(_agent: CharacterBody3D):
 	pass
 
-func _execute(_delta: float):
-	pass
+func _execute(_delta: float) -> bool:
+	return false
 
 func _exit():
 	pass

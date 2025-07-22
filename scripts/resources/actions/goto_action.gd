@@ -13,4 +13,5 @@ func _enter(agent: CharacterBody3D):
 
 
 func _execute(delta: float):
-	movement_comp.navigate(delta, movement_comp.walk_speed)
+	var navigation_finished = movement_comp.navigate(delta, movement_comp.walk_speed)
+	return navigation_finished
