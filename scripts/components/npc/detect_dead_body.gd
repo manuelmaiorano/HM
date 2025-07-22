@@ -19,7 +19,7 @@ signal dead_body_found(where: Vector3)
 
 var time_passed = 0.0
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	character.set_meta("DetectDeadBodyComponent", self)
 
 

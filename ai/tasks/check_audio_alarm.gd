@@ -11,6 +11,7 @@ func _setup() -> void:
 
 func on_sound_heard():
 	is_sound_heard = true
+	blackboard.set_var("investigate_position", hearing_component.last_sound_location)
 
 
 func _tick(_delta: float) -> Status:

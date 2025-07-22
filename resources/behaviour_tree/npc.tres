@@ -1,11 +1,28 @@
-[gd_resource type="BehaviorTree" load_steps=15 format=3 uid="uid://btwsgk4pfkbjj"]
+[gd_resource type="BehaviorTree" load_steps=27 format=3 uid="uid://btwsgk4pfkbjj"]
 
+[ext_resource type="Script" uid="uid://ufckanshevvq" path="res://ai/tasks/check_holding_weapon.gd" id="1_cwhup"]
 [ext_resource type="Script" uid="uid://dwbv0whk2lulp" path="res://ai/tasks/Patrol.gd" id="1_npdif"]
+[ext_resource type="Script" uid="uid://cebl6qx8uqri0" path="res://ai/tasks/check_dead_body_close_to_player.gd" id="2_sojdj"]
 [ext_resource type="Script" uid="uid://ddkmhso63nymt" path="res://ai/tasks/chase_player.gd" id="3_0pnie"]
+[ext_resource type="Script" uid="uid://du26ivon68blu" path="res://ai/tasks/check_restricted_area_suspicious_action.gd" id="3_ratg2"]
 [ext_resource type="Script" uid="uid://dbhqg7d6xtpux" path="res://ai/tasks/Follow_schedule.gd" id="3_yo0us"]
-[ext_resource type="Script" uid="uid://ck8kk23h4oecm" path="res://ai/tasks/investigate_audio.gd" id="4_kdpv0"]
+[ext_resource type="Script" uid="uid://c2m8yovqnewi0" path="res://ai/tasks/check_alarmed_npc.gd" id="5_sojdj"]
+[ext_resource type="Script" uid="uid://ci4xvxhwvh665" path="res://ai/tasks/check_audio_alarm.gd" id="6_ratg2"]
+[ext_resource type="Script" uid="uid://ck8kk23h4oecm" path="res://ai/tasks/investigate_position.gd" id="7_ratg2"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_gl1un"]
+
+[sub_resource type="BTCondition" id="BTCondition_qqk1o"]
+script = ExtResource("1_cwhup")
+
+[sub_resource type="BTCondition" id="BTCondition_0vvem"]
+script = ExtResource("2_sojdj")
+
+[sub_resource type="BTCondition" id="BTCondition_ga631"]
+script = ExtResource("3_ratg2")
+
+[sub_resource type="BTSelector" id="BTSelector_4q83n"]
+children = [SubResource("BTCondition_qqk1o"), SubResource("BTCondition_0vvem"), SubResource("BTCondition_ga631")]
 
 [sub_resource type="BTAction" id="BTAction_yo0us"]
 script = ExtResource("3_0pnie")
@@ -17,15 +34,24 @@ time_to_stop_chasing_after_spotted = 10.0
 
 [sub_resource type="BTSequence" id="BTSequence_npdif"]
 custom_name = "ChaseAndShoot"
-children = [SubResource("BTAction_yo0us")]
+children = [SubResource("BTSelector_4q83n"), SubResource("BTAction_yo0us")]
 
-[sub_resource type="BTAction" id="BTAction_mut8x"]
-script = ExtResource("4_kdpv0")
-time_to_stop_investigating_after_heard_sound = 10.0
+[sub_resource type="BTCondition" id="BTCondition_4q83n"]
+script = ExtResource("5_sojdj")
+
+[sub_resource type="BTCondition" id="BTCondition_cs05x"]
+script = ExtResource("6_ratg2")
+
+[sub_resource type="BTSelector" id="BTSelector_l3unm"]
+children = [SubResource("BTCondition_4q83n"), SubResource("BTCondition_cs05x")]
+
+[sub_resource type="BTAction" id="BTAction_qqk1o"]
+script = ExtResource("7_ratg2")
+time_to_stop_investigating = 100.0
 
 [sub_resource type="BTSequence" id="BTSequence_0pnie"]
-custom_name = "InvestigateAudio"
-children = [SubResource("BTAction_mut8x")]
+custom_name = "Investigate"
+children = [SubResource("BTSelector_l3unm"), SubResource("BTAction_qqk1o")]
 
 [sub_resource type="BTAction" id="BTAction_kdpv0"]
 script = ExtResource("3_yo0us")

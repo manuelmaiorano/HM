@@ -2,10 +2,8 @@ extends BTAction
 
 var character_movement: CharacterMovementComponent
 var detect_player_component: DetectPlayerComponent
-var detect_dead_body_component: DetectDeadBodyComponent
 var wieldable_component: WieldableComponent
-var restricted_areas_component: RestrictedAreaRegistrationComponent
-var player_inventory: InventoryComponent
+
 
 @export var shoot_cooldown_time: float = 2.0
 @export var reset_navigation_target_cooldown_time: float = 2.0
@@ -15,69 +13,21 @@ var player_inventory: InventoryComponent
 
 var time_passed = 0.0
 
-var is_chasing_player: bool = false
-var is_player_caught: bool = false
-var is_close_to_player: bool = false
-var is_dead_body_found: bool = false
+var is_close_to_player = false
 
 func _setup() -> void:
 	character_movement = agent.get_meta("CharacterMovementComponent")
 	detect_player_component = agent.get_meta("DetectPlayerComponent")
-	detect_dead_body_component = agent.get_meta("DetectDeadBodyComponent")
 	wieldable_component = agent.get_meta("WieldableComponent")
-	restricted_areas_component = agent.get_meta("RestrictedAreaRegistrationComponent")
-	player_inventory = agent.get_tree().get_first_node_in_group("player").get_meta("InventoryComponent") as InventoryComponent
 
-	detect_player_component.player_visibility_changed.connect(on_visibility_changed)
-	detect_dead_body_component.dead_body_found.connect(on_dead_body_found)
-	restricted_areas_component.player_caught.connect(on_suspicious_action)
-
-func on_dead_body_found(where):
-	is_dead_body_found = true
-	if detect_player_component.is_player_visible:
-		is_chasing_player = true
-		is_player_caught = true
-
-func on_suspicious_action():
-	is_player_caught = true
-	is_chasing_player = true
-
-func on_visibility_changed(is_visible: bool):
-	if is_visible:
-		if not player_inventory.item_in_use:
-			return
-		if player_inventory.item_in_use.is_weapon:
-			is_chasing_player = true
-			is_player_caught = true
 
 func _enter() -> void:
 	pass
 
 func _exit() -> void:
 	return
-	is_chasing_player = false
-	is_close_to_player = false
 
 func _tick(delta: float) -> Status:
-	if Globals.debug_ai:
-		DebugDraw2D.set_text("is_chasing_player", is_chasing_player)
-		DebugDraw2D.set_text("is_player_caught", is_player_caught)
-		DebugDraw2D.set_text("is_close_to_player", is_close_to_player)
-		DebugDraw2D.set_text("is_player_visible", detect_player_component.is_player_visible)
-		DebugDraw2D.set_text("is_dead_body_found", is_dead_body_found)
-		if detect_player_component.player:
-			DebugDraw2D.set_text("distance", agent.global_position.distance_to(detect_player_component.player.global_position))
-
-	if not is_player_caught:
-		return FAILURE
-
-	if not is_chasing_player:
-		return FAILURE
-
-	if not detect_player_component.is_player_visible and Globals.get_elapsed_seconds(detect_player_component.last_seen_time) > time_to_stop_chasing_after_spotted:
-		is_chasing_player = false
-		return FAILURE
-
 	if not detect_player_component.is_player_visible:
 		character_movement.set_navigation_target(detect_player_component.last_seen_position)
 		var navigation_finished = character_movement.navigate(delta, character_movement.run_speed)
