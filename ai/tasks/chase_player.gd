@@ -3,7 +3,7 @@ extends BTAction
 var character_movement: CharacterMovementComponent
 var detect_player_component: DetectPlayerComponent
 var wieldable_component: WieldableComponent
-
+var communicate_alarm_component: CommunicateAlarmComponent
 
 @export var shoot_cooldown_time: float = 2.0
 @export var reset_navigation_target_cooldown_time: float = 2.0
@@ -18,11 +18,13 @@ var is_close_to_player = false
 func _setup() -> void:
 	character_movement = agent.get_meta("CharacterMovementComponent")
 	detect_player_component = agent.get_meta("DetectPlayerComponent")
+	communicate_alarm_component = agent.get_meta("CommunicateAlarmComponent")
 	wieldable_component = agent.get_meta("WieldableComponent")
 
 
 func _enter() -> void:
-	pass
+	communicate_alarm_component.set_alarmed(agent.global_position)
+
 
 func _exit() -> void:
 	return
