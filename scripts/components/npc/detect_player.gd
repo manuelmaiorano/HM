@@ -26,8 +26,10 @@ var vis_check_component: VisibilityCheckTargetComponent = null
 
 var initialized_player_variables = false
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	character.set_meta("DetectPlayerComponent", self)
+
+func _ready() -> void:
 	detect_area.body_entered.connect(on_body_entered)
 	detect_area.body_exited.connect(on_body_exited)
 

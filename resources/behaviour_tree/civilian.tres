@@ -1,12 +1,21 @@
-[gd_resource type="BehaviorTree" load_steps=10 format=3 uid="uid://b0iesgp3y8xs3"]
+[gd_resource type="BehaviorTree" load_steps=14 format=3 uid="uid://b0iesgp3y8xs3"]
 
+[ext_resource type="Script" uid="uid://ufckanshevvq" path="res://ai/tasks/check_holding_weapon.gd" id="1_4siwh"]
 [ext_resource type="Script" uid="uid://dbhqg7d6xtpux" path="res://ai/tasks/Follow_schedule.gd" id="1_fj5rg"]
+[ext_resource type="Script" uid="uid://cqov11kl8cdbd" path="res://ai/tasks/run_away.gd" id="2_2im0v"]
 [ext_resource type="Script" uid="uid://dwbv0whk2lulp" path="res://ai/tasks/Patrol.gd" id="2_74cia"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_juyrq"]
 
+[sub_resource type="BTCondition" id="BTCondition_3rhtf"]
+script = ExtResource("1_4siwh")
+
+[sub_resource type="BTAction" id="BTAction_onbsm"]
+script = ExtResource("2_2im0v")
+
 [sub_resource type="BTSequence" id="BTSequence_fj5rg"]
 custom_name = "RunAway"
+children = [SubResource("BTCondition_3rhtf"), SubResource("BTAction_onbsm")]
 
 [sub_resource type="BTAction" id="BTAction_4siwh"]
 script = ExtResource("1_fj5rg")
@@ -24,9 +33,9 @@ waiting_on_start = false
 custom_name = "Patrol"
 children = [SubResource("BTAction_2im0v")]
 
-[sub_resource type="BTSelector" id="BTSelector_d732r"]
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_4siwh"]
 children = [SubResource("BTSequence_fj5rg"), SubResource("BTSequence_juyrq"), SubResource("BTSequence_d732r")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_juyrq")
-root_task = SubResource("BTSelector_d732r")
+root_task = SubResource("BTDynamicSelector_4siwh")

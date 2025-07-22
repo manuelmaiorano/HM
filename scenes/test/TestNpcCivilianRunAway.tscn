@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cwcvehowvpg6h"]
+[gd_scene load_steps=22 format=3 uid="uid://cwcvehowvpg6h"]
 
 [ext_resource type="Script" uid="uid://gpthe6bttgxp" path="res://scenes/register_schedule.gd" id="1_skytw"]
 [ext_resource type="Script" uid="uid://bhvrlytnxuq85" path="res://scripts/resources/schedule_action_resource.gd" id="2_sry7c"]
@@ -12,7 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui/ui.tscn" id="7_7v0iq"]
 [ext_resource type="NavigationMesh" uid="uid://difkv33qsjxpw" path="res://resources/navigation_meshes/test_follow_schedule.tres" id="8_8v7at"]
 [ext_resource type="Resource" uid="uid://cr016lejn45dv" path="res://resources/inventory/Amulet.tres" id="8_ogmjx"]
+[ext_resource type="Script" uid="uid://os6dsqegrf26" path="res://scenes/register_places.gd" id="9_7v0iq"]
 [ext_resource type="PackedScene" uid="uid://3u6bql5cwtjf" path="res://scenes/props/door.tscn" id="9_cbk0w"]
+[ext_resource type="Script" uid="uid://dbus1jwxr8cwg" path="res://scripts/resources/place_resource.gd" id="10_8v7at"]
 
 [sub_resource type="Resource" id="Resource_mudbd"]
 script = ExtResource("3_xcv0y")
@@ -26,6 +28,13 @@ metadata/_custom_type_script = "uid://csgdd4lo2587f"
 script = ExtResource("4_loyv8")
 actions = Array[ExtResource("2_sry7c")]([SubResource("Resource_mudbd")])
 metadata/_custom_type_script = "uid://b18cjiwbx5wuj"
+
+[sub_resource type="Resource" id="Resource_cbk0w"]
+script = ExtResource("10_8v7at")
+place_name = &"MainExit"
+navigation_position = Vector3(-15.7905, 0, -14.2065)
+is_exit = true
+metadata/_custom_type_script = "uid://dbus1jwxr8cwg"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_charm"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -63,6 +72,12 @@ npcs_initial_item_in_use = {
 NodePath("../Npc3"): ExtResource("8_ogmjx")
 }
 
+[node name="RegisterPlaces" type="Node" parent="."]
+script = ExtResource("9_7v0iq")
+places = Dictionary[StringName, ExtResource("10_8v7at")]({
+&"exit_1": SubResource("Resource_cbk0w")
+})
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_de4ha")
 
@@ -74,7 +89,7 @@ shadow_enabled = true
 transform = Transform3D(-0.0367832, 0, 0.999323, 0, 1, 0, -0.999323, 0, -0.0367832, -14.5446, 0, 19.1633)
 
 [node name="Npc3" parent="." instance=ExtResource("5_ogmjx")]
-transform = Transform3D(0.888897, 0, 0.458106, 0, 1, 0, -0.458106, 0, 0.888897, 11.2109, 0, -8.14492)
+transform = Transform3D(-0.500604, 0, 0.865676, 0, 1, 0, -0.865676, 0, -0.500604, 11.2109, 0, -8.14492)
 
 [node name="Player" parent="." instance=ExtResource("6_254sm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7236, -0.0753975, 7.34656)

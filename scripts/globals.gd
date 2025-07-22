@@ -23,6 +23,14 @@ enum UiElementActive {None, InteractionsMenu, InventoryMenu, Sniper}
 
 @export_category("Debug")
 @export var debug_ai: bool = true
+@export var places: Dictionary[StringName, PlaceInfo]:
+	set(value):
+		places = value
+		for place in places.keys():
+			if places[place].is_exit:
+				exits.append(places[place])
+
+@export var exits: Array[PlaceInfo] = []
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -66,3 +74,19 @@ func call_with_cooldown(delta: float, cool_down: float, callable: Callable, time
 		time_passed = 0.0
 
 	return time_passed
+
+
+func get_visible_areas(detect_area: Area3D, filter: Callable, ignore_raycast: bool, raycast: RayCast3D) -> Array[Area3D]:
+	var visibles = [] as Array[Area3D]
+	for area in detect_area.get_overlapping_areas():
+		if filter.call(area):
+			if ignore_raycast:
+				visibles.append(area)
+			else:
+				raycast.target_position = raycast.to_local(area.global_position)
+				raycast.force_raycast_update()
+				if raycast.is_colliding():
+					if raycast.get_collider() == area:
+						visibles.append(area)
+
+	return visibles

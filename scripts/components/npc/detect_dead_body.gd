@@ -28,19 +28,28 @@ func _physics_process(delta: float) -> void:
 
 
 func check_dead_bodies():
-	for area in detect_area.get_overlapping_areas():
-		if area.has_meta("LootInteractableComponent"):
-			var loot_component = area.get_meta("LootInteractableComponent") as LootInteractableComponent
-			if ignore_raycast:
-				dead_body_found.emit(area.global_position)
-				last_dead_body_position = area.global_position
-				last_body = loot_component.character
-			else:
-				raycast.target_position = raycast.to_local(area.global_position)
-				raycast.force_raycast_update()
-				if raycast.is_colliding():
-					if raycast.get_collider() == area:
-						dead_body_found.emit(area.global_position)
-						last_dead_body_position = area.global_position
-						last_body = loot_component.character
-						return
+	var visible_areas = Globals.get_visible_areas(detect_area, func(x): return x.has_meta("LootInteractableComponent"), ignore_raycast, raycast)
+	for area in visible_areas:
+		var loot_component = area.get_meta("LootInteractableComponent") as LootInteractableComponent
+		dead_body_found.emit(area.global_position)
+		last_dead_body_position = area.global_position
+		last_body = loot_component.character
+		return
+
+
+	# for area in detect_area.get_overlapping_areas():
+	# 	if area.has_meta("LootInteractableComponent"):
+	# 		var loot_component = area.get_meta("LootInteractableComponent") as LootInteractableComponent
+	# 		if ignore_raycast:
+	# 			dead_body_found.emit(area.global_position)
+	# 			last_dead_body_position = area.global_position
+	# 			last_body = loot_component.character
+	# 		else:
+	# 			raycast.target_position = raycast.to_local(area.global_position)
+	# 			raycast.force_raycast_update()
+	# 			if raycast.is_colliding():
+	# 				if raycast.get_collider() == area:
+	# 					dead_body_found.emit(area.global_position)
+	# 					last_dead_body_position = area.global_position
+	# 					last_body = loot_component.character
+	# 					return
