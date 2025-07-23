@@ -12,6 +12,7 @@ class_name InventoryUiComponent
 var no_item_button = null
 
 func _enter_tree() -> void:
+	get_parent().set_meta("InventoryManager", self)
 	no_item_button = on_item_pickup(null)
 	all_items.hide()
 	Globals.PickedItem.connect(on_item_pickup)
@@ -26,9 +27,6 @@ func on_inventory_changed(items: Array[InventoryItem]):
 		child.queue_free()
 	for item in items:
 		on_item_pickup(item)
-
-func update_scroll_active():
-	scroll_component.active = Globals.current_ui_element_active == Globals.UiElementActive.InventoryMenu
 
 func on_item_pickup(item: InventoryItem):
 	var item_button = item_scene.instantiate()
@@ -46,29 +44,18 @@ func on_item_drop(item: InventoryItem):
 			current_item_label.text = current_item.item_name
 			return
 
+func scroll(event):
+	scroll_component.scroll(event)
 
-func _input(event):
-	if Globals.current_ui_element_active == Globals.UiElementActive.None:
-		if event is InputEventMouseButton:
-			if event.button_index == MOUSE_BUTTON_WHEEL_UP or event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-					Globals.current_ui_element_active = Globals.UiElementActive.InventoryMenu
-					update_scroll_active()
-					all_items.show()
-	
-	if Globals.current_ui_element_active == Globals.UiElementActive.InventoryMenu:
-		if Input.is_action_just_pressed("interact"):
-			Globals.current_ui_element_active = Globals.UiElementActive.None
-			update_scroll_active()
-			all_items.hide()
+func select_invetory_item():
+	var items = all_items.get_children()
+	if not items.is_empty():
+		var current_item = all_items.get_child(scroll_component.current_index)
+		Globals.SelectedItemToUse.emit(current_item.inventory_item)
+		current_item_label.text = current_item.item_name
 
-	if Input.is_action_just_pressed("execute_action") and Globals.current_ui_element_active == Globals.UiElementActive.InventoryMenu:
-		var items = all_items.get_children()
-		if not items.is_empty():
-			var current_item = all_items.get_child(scroll_component.current_index)
-			Globals.SelectedItemToUse.emit(current_item.inventory_item)
-			current_item_label.text = current_item.item_name
-			Globals.current_ui_element_active = Globals.UiElementActive.None
-			Globals.UiElementActiveChanged.emit()
-			get_viewport().set_input_as_handled()
-			update_scroll_active()
-			all_items.hide()
+func change_visibility(visibile):
+	if visibile:
+		all_items.show()
+	else:
+		all_items.hide()

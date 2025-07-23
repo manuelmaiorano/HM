@@ -1,0 +1,100 @@
+[gd_scene load_steps=17 format=3 uid="uid://cawyshbigivur"]
+
+[ext_resource type="Script" uid="uid://gpthe6bttgxp" path="res://scenes/register_schedule.gd" id="1_wce1k"]
+[ext_resource type="Script" uid="uid://os6dsqegrf26" path="res://scenes/register_places.gd" id="5_gf1bl"]
+[ext_resource type="Script" uid="uid://bxfscqgts65oo" path="res://scenes/register_dialogue.gd" id="6_50voj"]
+[ext_resource type="Script" uid="uid://dbus1jwxr8cwg" path="res://scripts/resources/place_resource.gd" id="6_f4u6m"]
+[ext_resource type="Script" uid="uid://bq5ctdow4y7ti" path="res://scenes/register_roles.gd" id="7_7ow7p"]
+[ext_resource type="Resource" uid="uid://2yj7inag1l1f" path="res://resources/dialogic_timelines/test_timeline.dtl" id="7_iyg0t"]
+[ext_resource type="Resource" uid="uid://imclwo0owc31" path="res://resources/roles/civilian.tres" id="8_g51vx"]
+[ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="9_0cc6x"]
+[ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="10_2h7mh"]
+[ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui/ui.tscn" id="11_uxsgc"]
+[ext_resource type="NavigationMesh" uid="uid://difkv33qsjxpw" path="res://resources/navigation_meshes/test_follow_schedule.tres" id="12_6mwxf"]
+[ext_resource type="PackedScene" uid="uid://3u6bql5cwtjf" path="res://scenes/props/door.tscn" id="13_wsdfd"]
+
+[sub_resource type="Resource" id="Resource_cbk0w"]
+script = ExtResource("6_f4u6m")
+place_name = &"MainExit"
+navigation_position = Vector3(-15.7905, 0, -14.2065)
+is_exit = true
+metadata/_custom_type_script = "uid://dbus1jwxr8cwg"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_charm"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_6g2hc"]
+sky_material = SubResource("ProceduralSkyMaterial_charm")
+
+[sub_resource type="Environment" id="Environment_de4ha"]
+background_mode = 2
+sky = SubResource("Sky_6g2hc")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestNpcPatrolling" type="Node3D"]
+
+[node name="ScheduleConfiguration" type="Node" parent="."]
+script = ExtResource("1_wce1k")
+
+[node name="RegisterPlaces" type="Node" parent="."]
+script = ExtResource("5_gf1bl")
+places = Dictionary[StringName, ExtResource("6_f4u6m")]({
+&"exit_1": SubResource("Resource_cbk0w")
+})
+
+[node name="RoleRegistration" type="Node" parent="." node_paths=PackedStringArray("npc_roles")]
+script = ExtResource("7_7ow7p")
+npc_roles = {
+NodePath("../Npc3"): ExtResource("8_g51vx")
+}
+
+[node name="DialogueRegistration" type="Node" parent="." node_paths=PackedStringArray("npc_dialogue")]
+script = ExtResource("6_50voj")
+npc_dialogue = {
+NodePath("../Npc3"): ExtResource("7_iyg0t")
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_de4ha")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Npc3" parent="." instance=ExtResource("9_0cc6x")]
+transform = Transform3D(-0.500604, 0, 0.865676, 0, 1, 0, -0.865676, 0, -0.500604, 11.2109, 0, -8.14492)
+
+[node name="Player" parent="." instance=ExtResource("10_2h7mh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7236, -0.0753975, 7.34656)
+
+[node name="UI" parent="." instance=ExtResource("11_uxsgc")]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = ExtResource("12_6mwxf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000160217, -0.391869, 0.028717)
+use_collision = true
+size = Vector3(60.4503, 0.624512, 60.7372)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.104373, 2.76713, 0.028717)
+use_collision = true
+size = Vector3(1.18666, 6.9425, 60.7372)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.14467, 0.360205)
+operation = 2
+use_collision = true
+size = Vector3(1.18666, 2.65317, 1.03129)
+
+[node name="Door" parent="." instance=ExtResource("13_wsdfd")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.14317, -0.0796127, -0.12288)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1197, 0, -14.2065)
+
+[node name="Marker3D2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7905, 0, -14.2065)

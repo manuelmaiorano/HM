@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="NpcRole" load_steps=6 format=3 uid="uid://imclwo0owc31"]
+[gd_resource type="Resource" script_class="NpcRole" load_steps=7 format=3 uid="uid://imclwo0owc31"]
 
 [ext_resource type="BehaviorTree" uid="uid://b0iesgp3y8xs3" path="res://resources/behaviour_tree/civilian.tres" id="1_fe4gw"]
+[ext_resource type="Resource" uid="uid://et58twiwkwpb" path="res://resources/clothes/npc.tres" id="2_dxe8c"]
 [ext_resource type="Script" uid="uid://b1p3bunddmtvj" path="res://scripts/resources/inventory_resource.gd" id="2_vo6wr"]
 [ext_resource type="Resource" uid="uid://cr016lejn45dv" path="res://resources/inventory/Amulet.tres" id="3_dxe8c"]
 [ext_resource type="Script" uid="uid://dfm2w7hknry45" path="res://scripts/resources/role_resource.gd" id="4_c8a6v"]
@@ -13,4 +14,5 @@ behaviour_tree = ExtResource("1_fe4gw")
 shouts = ExtResource("5_ahy0l")
 initial_inventory = Array[ExtResource("2_vo6wr")]([ExtResource("3_dxe8c")])
 item_in_use = ExtResource("3_dxe8c")
+initial_clothes = ExtResource("2_dxe8c")
 metadata/_custom_type_script = "uid://dfm2w7hknry45"

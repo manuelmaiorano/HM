@@ -1,6 +1,7 @@
 extends Node
 signal PlayerHealthChanged(value)
 
+#from player interactions
 signal CanInteract(is_interactable_colliding: bool)
 signal Interactions(actions: Array[InteractionAction])
 signal ExecuteAction(action: InteractionAction)
@@ -13,13 +14,14 @@ signal InventoryChanged(itmes: Array[InventoryItem])
 
 signal ExecutedAction(action: InteractionAction)
 
-signal UiElementActiveChanged()
-enum UiElementActive {None, InteractionsMenu, InventoryMenu, Sniper}
-@export var current_ui_element_active: UiElementActive = UiElementActive.None:
-	set(x):
-		current_ui_element_active = x
-		UiElementActiveChanged.emit()
 
+signal PlayerShootingAction()
+signal SniperActivated()
+
+
+signal DialogueStarted
+signal DialogueEnded
+signal DialogueEndedByUi
 
 @export_category("Debug")
 @export var debug_ai: bool = true

@@ -16,22 +16,16 @@ class_name PlayerShootingComponent
 signal is_sniper_enabled
 
 func _ready() -> void:
-	return
+	Globals.PlayerShootingAction.connect(on_shooting)
 
 
-func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("execute_action") and \
-		Globals.current_ui_element_active == Globals.UiElementActive.None:
-		# var target
-		# if raycast.is_colliding():
-		# 	target = raycast.get_collision_point()
-		# else:
-		# 	target = raycast.to_global(raycast.target_position)
-		if wieldable.current_item == null:
-			return
-		if wieldable.current_item.has_meta("SniperComponent"):
-			is_sniper_enabled.emit()
-			Globals.current_ui_element_active = Globals.UiElementActive.Sniper
-		else:
-			wieldable.try_shoot_raycast(raycast)
-		wieldable.try_silent_kill(raycast)
+func on_shooting() -> void:
+
+	if wieldable.current_item == null:
+		return
+	if wieldable.current_item.has_meta("SniperComponent"):
+		is_sniper_enabled.emit()
+		Globals.SniperActivated.emit()
+		return
+	wieldable.try_shoot_raycast(raycast)
+	wieldable.try_silent_kill(raycast)

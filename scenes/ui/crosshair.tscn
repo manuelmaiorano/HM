@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs7lftby4mspk"]
+
+[ext_resource type="Texture2D" uid="uid://chbgdqr52flly" path="res://assets/icons/ch_no_interaction.png" id="1_n1pc2"]
+[ext_resource type="Script" uid="uid://b3ot22k3ruvi4" path="res://scenes/ui/crosshair_manager.gd" id="1_sdor8"]
+[ext_resource type="Texture2D" uid="uid://deqfn06tul8rg" path="res://assets/icons/ch_interaction.png" id="2_sdor8"]
+
+[node name="CenterContainer" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CrosshairManager" type="Node" parent="." node_paths=PackedStringArray("no_interact_tex", "can_interact_tex")]
+script = ExtResource("1_sdor8")
+no_interact_tex = NodePath("../no_interaction")
+can_interact_tex = NodePath("../can_interact")
+
+[node name="no_interaction" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_n1pc2")
+
+[node name="can_interact" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_sdor8")

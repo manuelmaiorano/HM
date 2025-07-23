@@ -1,5 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnljcgov67ptp"]
+[gd_scene load_steps=7 format=3 uid="uid://bnljcgov67ptp"]
 
+[ext_resource type="Script" uid="uid://dcqa5jq6tehlr" path="res://scenes/ui/ui_state_handling.gd" id="1_pfayw"]
+[ext_resource type="PackedScene" uid="uid://cs7lftby4mspk" path="res://scenes/ui/crosshair.tscn" id="3_0dwhk"]
 [ext_resource type="Script" uid="uid://cswybg6g7uyln" path="res://scenes/ui/playerhealth_ui.gd" id="3_aac20"]
 [ext_resource type="PackedScene" uid="uid://bexi6a1kt2h8m" path="res://scenes/ui/interactions_ui.tscn" id="3_yev5y"]
 [ext_resource type="Script" uid="uid://bc0byi2cu3l3q" path="res://scenes/ui/SecondsPassed.gd" id="4_g5kmx"]
@@ -14,6 +16,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
+[node name="UiStateManager" type="Node" parent="." node_paths=PackedStringArray("crosshair_menu", "interactions_menu", "inventory_menu")]
+script = ExtResource("1_pfayw")
+crosshair_menu = NodePath("../CrosshairMenu")
+interactions_menu = NodePath("../InteractionsUi")
+inventory_menu = NodePath("../InventoryUi")
+
 [node name="InteractionsUi" parent="." instance=ExtResource("3_yev5y")]
 layout_mode = 1
 
@@ -21,6 +29,9 @@ layout_mode = 1
 layout_mode = 1
 offset_left = -99.0
 offset_bottom = 43.0
+
+[node name="CrosshairMenu" parent="." instance=ExtResource("3_0dwhk")]
+layout_mode = 1
 
 [node name="PlayerhealthUi" type="ProgressBar" parent="."]
 layout_mode = 0

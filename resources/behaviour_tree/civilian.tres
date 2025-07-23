@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=19 format=3 uid="uid://b0iesgp3y8xs3"]
+[gd_resource type="BehaviorTree" load_steps=21 format=3 uid="uid://b0iesgp3y8xs3"]
 
 [ext_resource type="Script" uid="uid://ufckanshevvq" path="res://ai/tasks/check_holding_weapon.gd" id="1_4siwh"]
 [ext_resource type="Script" uid="uid://dbhqg7d6xtpux" path="res://ai/tasks/Follow_schedule.gd" id="1_fj5rg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://1i0hbjuicov2" path="res://ai/tasks/check_dead_body.gd" id="2_3rhtf"]
 [ext_resource type="Script" uid="uid://dwbv0whk2lulp" path="res://ai/tasks/Patrol.gd" id="2_74cia"]
 [ext_resource type="Script" uid="uid://ci4xvxhwvh665" path="res://ai/tasks/check_audio_alarm.gd" id="3_3rhtf"]
+[ext_resource type="Script" uid="uid://c7qyp61xkk16m" path="res://ai/tasks/check_gettting_hurt_player_not_visible.gd" id="4_onbsm"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_juyrq"]
 
@@ -18,8 +19,11 @@ script = ExtResource("2_3rhtf")
 [sub_resource type="BTCondition" id="BTCondition_r43p8"]
 script = ExtResource("3_3rhtf")
 
+[sub_resource type="BTCondition" id="BTCondition_aa4re"]
+script = ExtResource("4_onbsm")
+
 [sub_resource type="BTSelector" id="BTSelector_2im0v"]
-children = [SubResource("BTCondition_3rhtf"), SubResource("BTCondition_onbsm"), SubResource("BTCondition_r43p8")]
+children = [SubResource("BTCondition_3rhtf"), SubResource("BTCondition_onbsm"), SubResource("BTCondition_r43p8"), SubResource("BTCondition_aa4re")]
 
 [sub_resource type="BTAction" id="BTAction_onbsm"]
 script = ExtResource("2_2im0v")

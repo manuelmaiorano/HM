@@ -17,6 +17,7 @@ class_name SniperZoomControl
 		enabled = value
 		if value:
 			set_process_unhandled_input(true)
+			camera.fov = max_fov
 		else:
 			set_process_unhandled_input(false)
 

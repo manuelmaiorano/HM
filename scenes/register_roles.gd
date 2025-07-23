@@ -18,4 +18,7 @@ func _ready() -> void:
 		var shouts_component = npc.get_meta("NpcShoutsComponent") as NpcShoutsComponent
 		shouts_component.shouts = role.shouts
 
+		var clothes_component = npc.get_meta("ClothesComponent") as ClothesComponent
+		clothes_component.initial_clothes = role.initial_clothes
+
 	

@@ -7,7 +7,7 @@ class_name SniperShootingComponent
 @export var character: CharacterBody3D
 
 @export_category("Debug")
-@export var enabled: bool = true:
+@export var enabled: bool = false:
 	set(value):
 		enabled = value
 		if value:
@@ -23,11 +23,11 @@ signal is_sniper_disabled
 
 func _ready() -> void:
 	overlay.hide()
+	enabled = enabled
 
 
 func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("execute_action") and \
-		Globals.current_ui_element_active == Globals.UiElementActive.Sniper:
+	if Input.is_action_just_pressed("execute_action"):
 		# var target
 		# if raycast.is_colliding():
 		# 	target = raycast.get_collision_point()
@@ -39,4 +39,3 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 	if Input.is_action_just_pressed("interact"):
 		is_sniper_disabled.emit()
-		Globals.current_ui_element_active = Globals.UiElementActive.None
