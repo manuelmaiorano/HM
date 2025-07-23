@@ -26,14 +26,16 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [dialogic]
 
-directories/dch_directory={}
+directories/dch_directory={
+"civilian": "res://resources/dialogic_characters/civilian.dch"
+}
 directories/dtl_directory={
 "test_timeline": "res://resources/dialogic_timelines/test_timeline.dtl"
 }
 layout/style_list=["res://resources/dialogic_styles/dialogue_style.tres"]
 layout/default_style="res://resources/dialogic_styles/dialogue_style.tres"
 variables={
-"player_clothes": ""
+"playerClothes": ""
 }
 extensions_folder="res://addons/dialogic_additions"
 text/letter_speed=0.01

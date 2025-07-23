@@ -4,6 +4,7 @@ class_name LookAtPlayerComponent
 @export_category("Nodes")
 @export var detect_player_component: DetectPlayerComponent
 @export var look_at_modifier: LookAtModifier3D
+@export var target_component: TargetLookAtComponent
 
 @export_category("Debug")
 @export var enabled = true:
@@ -20,6 +21,7 @@ func on_player_close(is_close: bool):
 		return
 	if is_close:
 		look_at_modifier.active = true
-		look_at_modifier.target_node = detect_player_component.player.get_path()
+		target_component = detect_player_component.player.get_meta("TargetLookAtComponent")
+		look_at_modifier.target_node = target_component.target.get_path()
 	else:
 		look_at_modifier.active = false

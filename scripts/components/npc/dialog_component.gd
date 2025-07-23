@@ -18,11 +18,11 @@ func _enter_tree() -> void:
 	Globals.DialogueEndedByUi.connect(func(): stop())
 
 func _ready() -> void:
-	Dialogic.VAR.set('player_clothes', "")
+	Dialogic.VAR.set('playerClothes', "")
 
 func play(agent: Node3D):
 	player = agent
-	Dialogic.VAR.set('player_clothes', player.get_meta("ClothesComponent").current_clothes.name)
+	Dialogic.VAR.set('playerClothes', player.get_meta("ClothesComponent").current_clothes.name)
 	Dialogic.start(timeline)
 	Globals.DialogueStarted.emit()
 

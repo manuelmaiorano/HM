@@ -1,6 +1,4 @@
-if {player_clothes} = "npc":
-	Come right ahead Mr. Blaine
+if {playerClothes} = "npc":
+	civilian: Come right ahead Mr. Blaine
 else:
-	get The hell out of here bozo
-	
-
+	civilian: get The hell out of here bozo

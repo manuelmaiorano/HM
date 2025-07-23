@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ckldaterjjk1p"]
+[gd_scene load_steps=36 format=3 uid="uid://ckldaterjjk1p"]
 
 [ext_resource type="Script" uid="uid://cdedmtcvw313h" path="res://scripts/components/player/player_state.gd" id="1_4r5pv"]
 [ext_resource type="Script" uid="uid://dxfxej3khngxq" path="res://scripts/components/player/camera_control.gd" id="1_fulsm"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://c1m0kj0fise8s" path="res://scripts/components/player/player_disguise.gd" id="17_i4ail"]
 [ext_resource type="Script" uid="uid://p71q6aatforl" path="res://scripts/components/clothes_component.gd" id="18_a38lo"]
 [ext_resource type="Resource" uid="uid://c83k81fbm1wp2" path="res://resources/clothes/player.tres" id="19_4ni07"]
+[ext_resource type="Script" uid="uid://7v8j6sv8iyei" path="res://scripts/components/player/target_when_look_at.gd" id="19_wnwbv"]
 [ext_resource type="Script" uid="uid://btb5gfumwjp48" path="res://scripts/components/player/sniper_zoom.gd" id="22_31cv2"]
 [ext_resource type="Script" uid="uid://b5wdcevseqkkh" path="res://scripts/components/player/sniper_shooting.gd" id="23_pf23h"]
 [ext_resource type="PackedScene" uid="uid://bhry6ebir7a5l" path="res://assets/models/sniper_rifle.glb" id="25_ujl30"]
@@ -151,6 +152,11 @@ script = ExtResource("11_oprun")
 character = NodePath("..")
 target_node = NodePath("../AnimationLibrary_Godot_Standard/VisibilityCheckTarget")
 
+[node name="TargetWhenLookAt" type="Node" parent="." node_paths=PackedStringArray("agent", "target")]
+script = ExtResource("19_wnwbv")
+agent = NodePath("..")
+target = NodePath("../AnimationLibrary_Godot_Standard/Rig/Skeleton3D/HeadAttachment/TargetLookAt")
+
 [node name="PlayerHealthUi" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("16_60mlk")
 health = NodePath("../Health")
@@ -235,15 +241,15 @@ shape = SubResource("SphereShape3D_fjrip")
 [node name="AnimationLibrary_Godot_Standard" parent="." instance=ExtResource("7_smehm")]
 
 [node name="Skeleton3D" parent="AnimationLibrary_Godot_Standard/Rig" index="0"]
-bones/1/position = Vector3(-0.00228468, 0.0865738, 0.876562)
-bones/1/rotation = Quaternion(0.755969, -0.0882996, -0.0752498, 0.644245)
-bones/3/rotation = Quaternion(-0.031698, 0.000114043, 0.000125471, 0.999498)
-bones/4/rotation = Quaternion(0.13624, 0.000311066, 0.000400708, 0.990676)
-bones/5/rotation = Quaternion(0.0199245, -0.00023609, -0.000242963, 0.999801)
-bones/6/rotation = Quaternion(0.000396922, 0.0960171, -0.00257753, 0.995376)
-bones/7/rotation = Quaternion(-0.599828, -0.373242, -0.394411, 0.587654)
-bones/8/rotation = Quaternion(-0.286174, 0.673486, -0.496083, 0.467356)
-bones/9/rotation = Quaternion(0.280326, 0.0428792, -0.00489013, 0.958934)
+bones/1/position = Vector3(-0.00219651, 0.0863755, 0.876016)
+bones/1/rotation = Quaternion(0.755005, -0.0881869, -0.0753818, 0.645375)
+bones/3/rotation = Quaternion(-0.0336607, 0.00011298, 0.000126314, 0.999433)
+bones/4/rotation = Quaternion(0.13042, 0.000307837, 0.000402997, 0.991459)
+bones/5/rotation = Quaternion(0.0238385, -0.000234065, -0.000244681, 0.999716)
+bones/6/rotation = Quaternion(-0.0034124, 0.0960414, -0.00145917, 0.995371)
+bones/7/rotation = Quaternion(-0.600443, -0.372829, -0.394801, 0.587026)
+bones/8/rotation = Quaternion(-0.283965, 0.67322, -0.497854, 0.467204)
+bones/9/rotation = Quaternion(0.273043, 0.0400607, -0.00375379, 0.96116)
 bones/10/rotation = Quaternion(0.106009, 0.00637576, -0.0256743, 0.994013)
 bones/11/rotation = Quaternion(0.44519, 0.549369, -0.445194, 0.549365)
 bones/12/rotation = Quaternion(0.623342, 6.13486e-08, 2.15438e-07, 0.781949)
@@ -260,9 +266,9 @@ bones/22/rotation = Quaternion(0.623341, -0.000665145, -0.0008345, 0.781949)
 bones/23/rotation = Quaternion(0.290838, 0.949649, 0.114583, 0.021217)
 bones/24/rotation = Quaternion(0.21939, 0.0238026, -0.00530472, 0.975332)
 bones/25/rotation = Quaternion(0.687388, -0.000309068, -0.000444658, 0.72629)
-bones/26/rotation = Quaternion(-0.635944, 0.310316, 0.329755, 0.624932)
-bones/27/rotation = Quaternion(-0.294864, -0.681041, 0.467691, 0.480109)
-bones/28/rotation = Quaternion(0.367177, -0.154945, 0.0621743, 0.915045)
+bones/26/rotation = Quaternion(-0.636568, 0.309987, 0.330065, 0.624296)
+bones/27/rotation = Quaternion(-0.295779, -0.681586, 0.465371, 0.481025)
+bones/28/rotation = Quaternion(0.367131, -0.155627, 0.0624479, 0.914929)
 bones/29/rotation = Quaternion(0.116709, 0.00291669, 0.0447786, 0.992152)
 bones/30/rotation = Quaternion(0.445191, -0.549369, 0.445194, 0.549365)
 bones/31/rotation = Quaternion(0.623341, 2.17518e-07, 6.33371e-08, 0.78195)
@@ -279,17 +285,17 @@ bones/41/rotation = Quaternion(0.623342, 0.000664924, 0.000834326, 0.781949)
 bones/42/rotation = Quaternion(-0.290838, 0.949649, 0.114584, -0.021217)
 bones/43/rotation = Quaternion(0.21939, -0.0238026, 0.00530485, 0.975332)
 bones/44/rotation = Quaternion(0.687388, 0.000309234, 0.000444539, 0.72629)
-bones/45/rotation = Quaternion(0.96465, 0.114016, -0.0140578, 0.237178)
-bones/46/rotation = Quaternion(0.178086, -0.11201, 0.0203988, 0.977406)
-bones/47/rotation = Quaternion(-0.492271, 0.0201643, 0.0967094, 0.864818)
+bones/45/rotation = Quaternion(0.964609, 0.114339, -0.0140977, 0.237186)
+bones/46/rotation = Quaternion(0.180608, -0.111812, 0.0206605, 0.976961)
+bones/47/rotation = Quaternion(-0.493605, 0.02046, 0.0967078, 0.864051)
 bones/48/rotation = Quaternion(-0.000137176, 0.964307, -0.264787, -0.000499421)
-bones/49/rotation = Quaternion(0.993538, -0.111951, 0.0138033, 0.0126261)
-bones/50/rotation = Quaternion(0.120103, 0.357931, -0.0464935, 0.924824)
-bones/51/rotation = Quaternion(-0.583671, -0.0514405, -0.161103, 0.794183)
+bones/49/rotation = Quaternion(0.993388, -0.113291, 0.0139684, 0.0122401)
+bones/50/rotation = Quaternion(0.123274, 0.357426, -0.0476677, 0.924542)
+bones/51/rotation = Quaternion(-0.584492, -0.0516425, -0.161229, 0.793541)
 bones/52/rotation = Quaternion(-0.000137047, 0.964307, -0.264787, -0.000499421)
 
 [node name="WeaponAttachment" type="BoneAttachment3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D" index="1"]
-transform = Transform3D(-0.984815, -0.154743, 0.0786996, 0.173435, -0.856854, 0.485511, -0.00769556, 0.491789, 0.870681, -0.297274, 0.921552, -0.201128)
+transform = Transform3D(-0.984059, -0.159553, 0.0785581, 0.177376, -0.848463, 0.498647, -0.0129071, 0.504632, 0.863238, -0.298068, 0.919572, -0.19783)
 bone_name = "DEF-hand.R"
 bone_idx = 29
 
@@ -317,7 +323,7 @@ rotation_edit_mode = 1
 visible = false
 
 [node name="DragBodyAttachment" type="BoneAttachment3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D" index="2"]
-transform = Transform3D(-0.984815, -0.154743, 0.0786996, 0.173435, -0.856854, 0.485511, -0.00769556, 0.491789, 0.870681, -0.297274, 0.921552, -0.201128)
+transform = Transform3D(-0.984059, -0.159553, 0.0785581, 0.177376, -0.848463, 0.498647, -0.0129071, 0.504632, 0.863238, -0.298068, 0.919572, -0.19783)
 bone_name = "DEF-hand.R"
 bone_idx = 29
 
@@ -330,6 +336,13 @@ freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D/DragBodyAttachment/RigidBody3D"]
 shape = SubResource("SphereShape3D_wqfne")
+
+[node name="HeadAttachment" type="BoneAttachment3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D" index="3"]
+transform = Transform3D(0.997819, -0.057799, -0.0318836, 0.0478322, 0.965971, -0.254187, 0.0454904, 0.252108, 0.966629, -0.020604, 1.52596, -0.00963696)
+bone_name = "DEF-head"
+bone_idx = 6
+
+[node name="TargetLookAt" type="Node3D" parent="AnimationLibrary_Godot_Standard/Rig/Skeleton3D/HeadAttachment"]
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationLibrary_Godot_Standard"]
 tree_root = ExtResource("13_jej6c")
