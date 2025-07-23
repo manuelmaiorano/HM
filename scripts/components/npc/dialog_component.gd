@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func play(agent: Node3D):
 	player = agent
-	Dialogic.VAR.set('playerClothes', player.get_meta("ClothesComponent").current_clothes.name)
+	Dialogic.VAR.set('playerClothes', String(player.get_meta("ClothesComponent").current_clothes.name))
 	Dialogic.start(timeline)
 	Globals.DialogueStarted.emit()
 

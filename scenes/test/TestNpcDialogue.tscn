@@ -66,6 +66,9 @@ shadow_enabled = true
 [node name="Npc3" parent="." instance=ExtResource("9_0cc6x")]
 transform = Transform3D(-0.500604, 0, 0.865676, 0, 1, 0, -0.865676, 0, -0.500604, 11.2109, 0, -8.14492)
 
+[node name="Npc4" parent="." instance=ExtResource("9_0cc6x")]
+transform = Transform3D(0.179094, 0, -0.983832, 0, 1, 0, 0.983832, 0, 0.179094, 11.2109, 0, 9.26189)
+
 [node name="Player" parent="." instance=ExtResource("10_2h7mh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7236, -0.0753975, 7.34656)
 

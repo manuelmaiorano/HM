@@ -1,4 +1,6 @@
-if {playerClothes} = "npc":
+i need to go to the bathroom
+if {playerClothes} == "npc":
 	civilian: Come right ahead Mr. Blaine
 else:
 	civilian: get The hell out of here bozo
+	fuck you
