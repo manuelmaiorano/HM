@@ -25,7 +25,7 @@ func on_interactions_update(actions: Array[InteractionAction]):
 	var first = true
 	for action in actions:
 		var button = Button.new()
-		button.mouse_filter = Control.MOUSE_FILTER_PASS
+		button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.text = action.desc
 		interactions.add_child(button)
 		if first:
