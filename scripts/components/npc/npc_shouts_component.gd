@@ -9,6 +9,9 @@ class_name NpcShoutsComponent
 @export_category("Parameters")
 @export var shouts: NpcShouts
 
+@export_category("Debug")
+@export var enabled: bool = true
+
 func _enter_tree() -> void:
 	character.set_meta("NpcShoutsComponent", self)
 
@@ -19,6 +22,8 @@ func _ready() -> void:
 
 
 func play_random_stream(streams: Array[AudioStream]):
+	if not enabled:
+		return
 	audio_player.stream = streams.pick_random()
 	audio_player.play()
 

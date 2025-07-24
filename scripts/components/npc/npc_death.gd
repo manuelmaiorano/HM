@@ -8,6 +8,7 @@ extends Node
 @export var talk_interactions_collision_shape: CollisionShape3D
 @export var hurt_box_head_collision_shape: CollisionShape3D
 @export var hurt_box_body_collision_shape: CollisionShape3D
+@export var npc_shouts_component: NpcShoutsComponent
 
 func _ready() -> void:
 	health.dead.connect(on_dead)
@@ -19,3 +20,4 @@ func on_dead():
 	talk_interactions_collision_shape.disabled = true
 	hurt_box_body_collision_shape.disabled = true
 	hurt_box_head_collision_shape.disabled = true
+	npc_shouts_component.enabled = false
