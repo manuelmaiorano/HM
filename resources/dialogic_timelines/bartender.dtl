@@ -1,0 +1,4 @@
+if {itemDropped} == false:
+	i need to use the bathroom
+	sure here's your key
+	[signal arg_type="dict" arg="{"action":"drop","action_argument":"amulet"}"]

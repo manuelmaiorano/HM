@@ -27,6 +27,8 @@ func _ready() -> void:
 		item_in_use_changed.emit(item_in_use)
 
 func equip_item(item: InventoryItem):
+	if item_in_use == item:
+		return
 	item_in_use = item
 	item_in_use_changed.emit(item_in_use)
 
@@ -72,3 +74,10 @@ func assign_initial_items(items: Array):
 
 	for item in items:
 		initial_items.append(item as InventoryItem)
+
+
+func find_item_by_name(item_name: String):
+	for item in current_items:
+		if item.name == item_name:
+			return item
+	return null

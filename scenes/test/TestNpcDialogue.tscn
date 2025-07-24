@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bxfscqgts65oo" path="res://scenes/register_dialogue.gd" id="6_50voj"]
 [ext_resource type="Script" uid="uid://dbus1jwxr8cwg" path="res://scripts/resources/place_resource.gd" id="6_f4u6m"]
 [ext_resource type="Script" uid="uid://bq5ctdow4y7ti" path="res://scenes/register_roles.gd" id="7_7ow7p"]
-[ext_resource type="Resource" uid="uid://2yj7inag1l1f" path="res://resources/dialogic_timelines/test_timeline.dtl" id="7_iyg0t"]
+[ext_resource type="Resource" uid="uid://c8x8exqnw6q2i" path="res://resources/dialogic_timelines/bartender.dtl" id="7_iyg0t"]
 [ext_resource type="Resource" uid="uid://imclwo0owc31" path="res://resources/roles/civilian.tres" id="8_g51vx"]
 [ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="9_0cc6x"]
 [ext_resource type="PackedScene" uid="uid://ckldaterjjk1p" path="res://scenes/player.tscn" id="10_2h7mh"]

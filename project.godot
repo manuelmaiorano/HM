@@ -30,11 +30,13 @@ directories/dch_directory={
 "civilian": "res://resources/dialogic_characters/civilian.dch"
 }
 directories/dtl_directory={
+"bartender": "res://resources/dialogic_timelines/bartender.dtl",
 "test_timeline": "res://resources/dialogic_timelines/test_timeline.dtl"
 }
 layout/style_list=["res://resources/dialogic_styles/dialogue_style.tres"]
 layout/default_style="res://resources/dialogic_styles/dialogue_style.tres"
 variables={
+"itemDropped": false,
 "playerClothes": ""
 }
 extensions_folder="res://addons/dialogic_additions"
