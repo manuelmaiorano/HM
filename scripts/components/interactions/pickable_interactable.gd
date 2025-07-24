@@ -15,5 +15,6 @@ func get_actions() -> Array[InteractionAction]:
 	return [pickup_action]
 
 func execute_action(_action: InteractionAction, _agent: Node3D):
-	pickable_component.pick()
+	var inventory = _agent.get_meta("InventoryComponent") as InventoryComponent
+	inventory.add_item(pickable_component.pick())
 

@@ -6,5 +6,5 @@ class_name PickableComponent
 
 func pick() -> InventoryItem:
 	agent.queue_free()
-	Globals.PickedItem.emit(inventory_item)
+	#Globals.PickedItem.emit(inventory_item)
 	return inventory_item

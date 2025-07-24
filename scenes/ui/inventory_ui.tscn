@@ -14,7 +14,7 @@ grow_horizontal = 0
 
 [node name="Inventory" type="Node" parent="." node_paths=PackedStringArray("current_item_label", "all_items", "scroll_component")]
 script = ExtResource("1_tahbm")
-current_item_label = NodePath("../CurrentItem")
+current_item_label = NodePath("../HBoxContainer/CurrentItem")
 all_items = NodePath("../AllItems")
 scroll_component = NodePath("../ScrollComponent")
 item_scene = ExtResource("2_mdwe3")
@@ -23,11 +23,18 @@ item_scene = ExtResource("2_mdwe3")
 script = ExtResource("2_ylkvr")
 container_node = NodePath("../AllItems")
 
-[node name="CurrentItem" type="Label" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CurrentItem" type="Label" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Holster"
+
+[node name="CurrentAmmo" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "0/0"
 
 [node name="AllItems" type="VBoxContainer" parent="."]
 unique_name_in_owner = true

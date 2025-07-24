@@ -3,6 +3,7 @@ class_name InventoryUiComponent
 
 @export_category("Nodes")
 @export var current_item_label: Label
+@export var current_ammo_label: Label
 @export var all_items: VBoxContainer
 @export var scroll_component: ScrollItemsComponent
 
@@ -18,7 +19,14 @@ func _enter_tree() -> void:
 	Globals.PickedItem.connect(on_item_pickup)
 	Globals.DroppedItem.connect(on_item_drop)
 	Globals.InventoryChanged.connect(on_inventory_changed)
+	Globals.AmmoChanged.connect(on_ammo_changed)
 	scroll_component.current_index_changed.connect(func(idx): all_items.get_child(idx).grab_focus())
+
+func on_ammo_changed(item: InventoryItem, current_ammo: int, total_ammo: int):
+	if item == null:
+		current_ammo_label.text = ""
+		return
+	current_ammo_label.text = "%s/%s" % [current_ammo, total_ammo]
 
 func on_inventory_changed(items: Array[InventoryItem]):
 	for child in all_items.get_children():

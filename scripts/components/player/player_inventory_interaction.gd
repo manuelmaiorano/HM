@@ -16,7 +16,7 @@ class_name PlayerInventoryInteractionComponent
 
 func _enter_tree() -> void:
 	Globals.SelectedItemToUse.connect(func (x): inventory.equip_item(x))
-	Globals.PickedItem.connect(func (x): inventory.add_item(x))
+	inventory.item_added.connect(func (x): Globals.PickedItem.emit(x))
 	inventory.inventory_changed.connect(func(x): Globals.InventoryChanged.emit(x))
 
 

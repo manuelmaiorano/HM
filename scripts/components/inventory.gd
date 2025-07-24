@@ -13,6 +13,7 @@ class_name  InventoryComponent
 
 signal inventory_changed(items: Array[InventoryItem])
 signal item_in_use_changed(item: InventoryItem)
+signal item_added(item: InventoryItem)
 
 var current_items: Array[InventoryItem] = []
 
@@ -46,6 +47,7 @@ func drop_item():
 
 func add_item(item: InventoryItem):
 	current_items.append(item)
+	item_added.emit(item)
 
 func transfer_all_inventory(other_inventory: InventoryComponent):
 	other_inventory.current_items = current_items
