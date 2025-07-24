@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://un31nw2ob2tm"]
+
+[ext_resource type="Script" uid="uid://c3wcle1p5bqyk" path="res://scripts/components/interactions/sittable_interactable.gd" id="1_e0mcn"]
+[ext_resource type="PackedScene" uid="uid://bfyus78hpo2qc" path="res://assets/models/chair.glb" id="1_w5usl"]
+[ext_resource type="Resource" uid="uid://bby5iufcv4nma" path="res://resources/interactions/sit.tres" id="2_22kxo"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_22kxo"]
+points = PackedVector3Array(0.255651, 0.469748, 0.00875932, 0.255651, 0.469748, -0.559085, 0.233179, 1.18904, -0.426672, -0.255651, 0.469748, 0.00875932, 0.255651, 0, 0.00875932, -0.255651, 0.469748, -0.559085, 0.233179, 1.18904, -0.527622, 0.255651, 0, -0.559085, -0.233229, 1.18904, -0.426672, -0.255651, 0, 0.00875932, -0.233229, 1.18904, -0.527622, -0.255651, 0, -0.559085)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e0mcn"]
+size = Vector3(0.518555, 0.5, 0.576416)
+
+[node name="Chair" type="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_22kxo")
+
+[node name="SittableInteractable" type="Node" parent="." node_paths=PackedStringArray("detect_area", "target_sit_node")]
+script = ExtResource("1_e0mcn")
+detect_area = NodePath("../Area3D")
+target_sit_node = NodePath("../SitTransformMarker")
+sit_action = ExtResource("2_22kxo")
+
+[node name="chair" parent="." instance=ExtResource("1_w5usl")]
+
+[node name="SitTransformMarker" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00244141, 0.25, -0.278687)
+shape = SubResource("BoxShape3D_e0mcn")

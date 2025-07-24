@@ -1,12 +1,17 @@
-[gd_resource type="BehaviorTree" load_steps=21 format=3 uid="uid://b0iesgp3y8xs3"]
+[gd_resource type="BehaviorTree" load_steps=34 format=3 uid="uid://b0iesgp3y8xs3"]
 
 [ext_resource type="Script" uid="uid://ufckanshevvq" path="res://ai/tasks/check_holding_weapon.gd" id="1_4siwh"]
-[ext_resource type="Script" uid="uid://dbhqg7d6xtpux" path="res://ai/tasks/Follow_schedule.gd" id="1_fj5rg"]
 [ext_resource type="Script" uid="uid://cqov11kl8cdbd" path="res://ai/tasks/run_away.gd" id="2_2im0v"]
 [ext_resource type="Script" uid="uid://1i0hbjuicov2" path="res://ai/tasks/check_dead_body.gd" id="2_3rhtf"]
 [ext_resource type="Script" uid="uid://dwbv0whk2lulp" path="res://ai/tasks/Patrol.gd" id="2_74cia"]
 [ext_resource type="Script" uid="uid://ci4xvxhwvh665" path="res://ai/tasks/check_audio_alarm.gd" id="3_3rhtf"]
 [ext_resource type="Script" uid="uid://c7qyp61xkk16m" path="res://ai/tasks/check_gettting_hurt_player_not_visible.gd" id="4_onbsm"]
+[ext_resource type="Script" uid="uid://h4fd12wuupnc" path="res://ai/tasks/execute_object_interaction.gd" id="6_onbsm"]
+[ext_resource type="Script" uid="uid://bb65t8ugbxsep" path="res://ai/tasks/go_to_schedule_location.gd" id="6_sn6bh"]
+[ext_resource type="Script" uid="uid://di3nui8dlddni" path="res://ai/tasks/check_current_schedule_action.gd" id="6_xeefa"]
+[ext_resource type="Script" uid="uid://cdjdv271hybxm" path="res://ai/tasks/pick_interaction.gd" id="7_jlnai"]
+[ext_resource type="Script" uid="uid://mvlobpqolh8w" path="res://ai/tasks/check_schedule_change.gd" id="7_wagd0"]
+[ext_resource type="Script" uid="uid://cdbsige01haa1" path="res://ai/tasks/go_to_interaction_location.gd" id="8_xeefa"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_juyrq"]
 
@@ -32,12 +37,38 @@ script = ExtResource("2_2im0v")
 custom_name = "RunAway"
 children = [SubResource("BTSelector_2im0v"), SubResource("BTAction_onbsm")]
 
-[sub_resource type="BTAction" id="BTAction_4siwh"]
-script = ExtResource("1_fj5rg")
+[sub_resource type="BTCondition" id="BTCondition_v6r0c"]
+script = ExtResource("6_xeefa")
+
+[sub_resource type="BTCondition" id="BTCondition_asyxl"]
+script = ExtResource("7_wagd0")
+
+[sub_resource type="BTAction" id="BTAction_wagd0"]
+script = ExtResource("6_sn6bh")
+
+[sub_resource type="BTSequence" id="BTSequence_onbsm"]
+custom_name = "ScheduleChange"
+children = [SubResource("BTCondition_asyxl"), SubResource("BTAction_wagd0")]
+
+[sub_resource type="BTAction" id="BTAction_v6r0c"]
+script = ExtResource("7_jlnai")
+
+[sub_resource type="BTAction" id="BTAction_asyxl"]
+script = ExtResource("8_xeefa")
+
+[sub_resource type="BTAction" id="BTAction_xeefa"]
+script = ExtResource("6_onbsm")
+
+[sub_resource type="BTSequence" id="BTSequence_r43p8"]
+custom_name = "CurrentSchedule"
+children = [SubResource("BTAction_v6r0c"), SubResource("BTAction_asyxl"), SubResource("BTAction_xeefa")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_vqvi8"]
+children = [SubResource("BTSequence_onbsm"), SubResource("BTSequence_r43p8")]
 
 [sub_resource type="BTSequence" id="BTSequence_juyrq"]
 custom_name = "FollowSchedule"
-children = [SubResource("BTAction_4siwh")]
+children = [SubResource("BTCondition_v6r0c"), SubResource("BTDynamicSelector_vqvi8")]
 
 [sub_resource type="BTAction" id="BTAction_2im0v"]
 script = ExtResource("2_74cia")

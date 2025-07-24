@@ -20,7 +20,8 @@ func _ready() -> void:
 
 
 func on_shooting() -> void:
-
+	if not enabled:
+		return
 	if wieldable.current_item == null:
 		return
 	if wieldable.current_item.has_meta("SniperComponent"):

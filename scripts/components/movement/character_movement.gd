@@ -91,3 +91,12 @@ func rotateModelTowards(delta: float, direction: Vector3):
 	var q_to = Transform3D().looking_at(-direction, Vector3.UP).basis.get_rotation_quaternion()
 	# Interpolate current rotation with desired one.
 	character_model.global_basis = Basis(q_from.slerp(q_to, delta * rotation_speed))
+
+
+func rotateModelTowardsTweened(direction: Vector3, duration: float):
+	if direction.is_zero_approx():
+		return
+	var tween = get_tree().create_tween()
+	var q_from = character_model.global_basis.get_rotation_quaternion()
+	var q_to = Transform3D().looking_at(-direction, Vector3.UP).basis.get_rotation_quaternion()
+	tween.tween_method(func(weight): character_model.global_basis = Basis(q_from.slerp(q_to, weight)), 0.0, 1.0, duration)

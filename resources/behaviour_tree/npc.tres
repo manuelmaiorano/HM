@@ -1,11 +1,10 @@
-[gd_resource type="BehaviorTree" load_steps=36 format=3 uid="uid://btwsgk4pfkbjj"]
+[gd_resource type="BehaviorTree" load_steps=49 format=3 uid="uid://btwsgk4pfkbjj"]
 
 [ext_resource type="Script" uid="uid://ufckanshevvq" path="res://ai/tasks/check_holding_weapon.gd" id="1_cwhup"]
 [ext_resource type="Script" uid="uid://dwbv0whk2lulp" path="res://ai/tasks/Patrol.gd" id="1_npdif"]
 [ext_resource type="Script" uid="uid://cebl6qx8uqri0" path="res://ai/tasks/check_dead_body_close_to_player.gd" id="2_sojdj"]
 [ext_resource type="Script" uid="uid://ddkmhso63nymt" path="res://ai/tasks/chase_player.gd" id="3_0pnie"]
 [ext_resource type="Script" uid="uid://du26ivon68blu" path="res://ai/tasks/check_restricted_area_suspicious_action.gd" id="3_ratg2"]
-[ext_resource type="Script" uid="uid://dbhqg7d6xtpux" path="res://ai/tasks/Follow_schedule.gd" id="3_yo0us"]
 [ext_resource type="Script" uid="uid://dq0la56nm2kl5" path="res://ai/tasks/check_alarmed_npc_near_player.gd" id="4_0vvem"]
 [ext_resource type="Script" uid="uid://c2m8yovqnewi0" path="res://ai/tasks/check_alarmed_npc.gd" id="5_sojdj"]
 [ext_resource type="Script" uid="uid://c7qyp61xkk16m" path="res://ai/tasks/check_gettting_hurt_player_not_visible.gd" id="6_ga631"]
@@ -13,6 +12,12 @@
 [ext_resource type="Script" uid="uid://drrbyi0iy45c1" path="res://ai/tasks/rotate_to_player.gd" id="7_4q83n"]
 [ext_resource type="Script" uid="uid://1i0hbjuicov2" path="res://ai/tasks/check_dead_body.gd" id="7_qqk1o"]
 [ext_resource type="Script" uid="uid://ck8kk23h4oecm" path="res://ai/tasks/investigate_position.gd" id="7_ratg2"]
+[ext_resource type="Script" uid="uid://di3nui8dlddni" path="res://ai/tasks/check_current_schedule_action.gd" id="12_7x3oi"]
+[ext_resource type="Script" uid="uid://mvlobpqolh8w" path="res://ai/tasks/check_schedule_change.gd" id="13_lv15d"]
+[ext_resource type="Script" uid="uid://bb65t8ugbxsep" path="res://ai/tasks/go_to_schedule_location.gd" id="14_2lg0p"]
+[ext_resource type="Script" uid="uid://cdjdv271hybxm" path="res://ai/tasks/pick_interaction.gd" id="15_t0mhd"]
+[ext_resource type="Script" uid="uid://cdbsige01haa1" path="res://ai/tasks/go_to_interaction_location.gd" id="16_ergo3"]
+[ext_resource type="Script" uid="uid://h4fd12wuupnc" path="res://ai/tasks/execute_object_interaction.gd" id="17_hrtdm"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_gl1un"]
 
@@ -73,12 +78,38 @@ time_to_stop_investigating = 100.0
 custom_name = "Investigate"
 children = [SubResource("BTSelector_l3unm"), SubResource("BTAction_qqk1o")]
 
-[sub_resource type="BTAction" id="BTAction_kdpv0"]
-script = ExtResource("3_yo0us")
+[sub_resource type="BTCondition" id="BTCondition_im127"]
+script = ExtResource("12_7x3oi")
 
-[sub_resource type="BTSequence" id="BTSequence_yo0us"]
+[sub_resource type="BTCondition" id="BTCondition_60wvv"]
+script = ExtResource("13_lv15d")
+
+[sub_resource type="BTAction" id="BTAction_l2i3c"]
+script = ExtResource("14_2lg0p")
+
+[sub_resource type="BTSequence" id="BTSequence_7d3yt"]
+custom_name = "ScheduleChange"
+children = [SubResource("BTCondition_60wvv"), SubResource("BTAction_l2i3c")]
+
+[sub_resource type="BTAction" id="BTAction_p7m7h"]
+script = ExtResource("15_t0mhd")
+
+[sub_resource type="BTAction" id="BTAction_fd03d"]
+script = ExtResource("16_ergo3")
+
+[sub_resource type="BTAction" id="BTAction_ewvsl"]
+script = ExtResource("17_hrtdm")
+
+[sub_resource type="BTSequence" id="BTSequence_rp2gg"]
+custom_name = "CurrentSchedule"
+children = [SubResource("BTAction_p7m7h"), SubResource("BTAction_fd03d"), SubResource("BTAction_ewvsl")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_dpuf7"]
+children = [SubResource("BTSequence_7d3yt"), SubResource("BTSequence_rp2gg")]
+
+[sub_resource type="BTSequence" id="BTSequence_uoykd"]
 custom_name = "FollowSchedule"
-children = [SubResource("BTAction_kdpv0")]
+children = [SubResource("BTCondition_im127"), SubResource("BTDynamicSelector_dpuf7")]
 
 [sub_resource type="BTAction" id="BTAction_b5boe"]
 script = ExtResource("1_npdif")
@@ -90,7 +121,7 @@ custom_name = "Patrolling"
 children = [SubResource("BTAction_b5boe")]
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_b5boe"]
-children = [SubResource("BTSequence_npdif"), SubResource("BTSequence_0vvem"), SubResource("BTSequence_0pnie"), SubResource("BTSequence_yo0us"), SubResource("BTSequence_sxcp6")]
+children = [SubResource("BTSequence_npdif"), SubResource("BTSequence_0vvem"), SubResource("BTSequence_0pnie"), SubResource("BTSequence_uoykd"), SubResource("BTSequence_sxcp6")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_gl1un")

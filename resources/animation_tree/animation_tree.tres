@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=16 format=3 uid="uid://cr5i6g2a5t0xg"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=17 format=3 uid="uid://cr5i6g2a5t0xg"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jej6c"]
 animation = &"Pistol_Shoot"
@@ -8,6 +8,9 @@ animation = &"Death01"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yycqb"]
 animation = &"Sword_Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pu2xo"]
+animation = &"Sitting_Idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3v2ag"]
 animation = &"Idle"
@@ -25,6 +28,10 @@ input_2/name = "drag"
 input_2/auto_advance = false
 input_2/break_loop_at_end = false
 input_2/reset = true
+input_3/name = "sit"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j4bqp"]
 animation = &"Crouch_Idle"
@@ -67,7 +74,7 @@ min_space = 0.0
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_j4bqp"]
 
 [resource]
-graph_offset = Vector2(-173.453, 173.663)
+graph_offset = Vector2(101.501, 188.385)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_3v2ag")
 nodes/Animation/position = Vector2(300, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_jej6c")
@@ -76,6 +83,8 @@ nodes/Animation/position = Vector2(300, 140)
 "nodes/Animation 3/position" = Vector2(720, 580)
 "nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_yycqb")
 "nodes/Animation 4/position" = Vector2(700, 420)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_pu2xo")
+"nodes/Animation 5/position" = Vector2(1020, 640)
 nodes/Transition/node = SubResource("AnimationNodeTransition_yycqb")
 nodes/Transition/position = Vector2(1220, 220)
 nodes/crouch_blend/node = SubResource("AnimationNodeBlendSpace1D_pu2xo")
@@ -87,4 +96,4 @@ nodes/shoot/node = SubResource("AnimationNodeOneShot_f1ej7")
 nodes/shoot/position = Vector2(780, 100)
 nodes/stab_kill/node = SubResource("AnimationNodeOneShot_j4bqp")
 nodes/stab_kill/position = Vector2(980, 140)
-node_connections = [&"Transition", 0, &"stab_kill", &"Transition", 1, &"Animation 3", &"Transition", 2, &"crouch_blend", &"output", 0, &"Transition", &"shoot", 0, &"movement_blend", &"shoot", 1, &"Animation 2", &"stab_kill", 0, &"shoot", &"stab_kill", 1, &"Animation 4"]
+node_connections = [&"Transition", 0, &"stab_kill", &"Transition", 1, &"Animation 3", &"Transition", 2, &"crouch_blend", &"Transition", 3, &"Animation 5", &"output", 0, &"Transition", &"shoot", 0, &"movement_blend", &"shoot", 1, &"Animation 2", &"stab_kill", 0, &"shoot", &"stab_kill", 1, &"Animation 4"]

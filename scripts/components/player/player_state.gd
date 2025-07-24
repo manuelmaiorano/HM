@@ -11,13 +11,14 @@ extends Node
 @export var camera_zoom_sniper: SniperZoomControl
 @export var sniper_shooting: SniperShootingComponent
 @export var player_dragging: PlayerDraggingComponent
+@export var player_sitting: CharacterSittingComponent
 
 @export var camera_normal: Camera3D
 @export var camera_sniper: Camera3D
 
 @export var state: State
 
-enum State {Dead, Alive, Sniper, Drag}
+enum State {Dead, Alive, Sniper, Drag, Sitting}
 
 func  _ready() -> void:
 	on_alive()
@@ -25,7 +26,13 @@ func  _ready() -> void:
 	player_shooting.is_sniper_enabled.connect(on_sniper)
 	sniper_shooting.is_sniper_disabled.connect(on_alive)
 	player_dragging.drag_requested.connect(on_drag)
+	player_sitting.is_sitting_state_changed.connect(on_sitting_state_changed)
 
+func on_sitting_state_changed(is_sitting: bool):
+	if is_sitting:
+		on_sitting()
+	else:
+		on_alive()
 
 func on_alive():
 	state = State.Alive
@@ -59,6 +66,14 @@ func on_drag():
 	camera_normal.current = true
 	player_dragging.enabled = true
 
+func on_sitting():
+	state = State.Sitting
+	disable_all()
+	camera_control_normal.enabled = true
+	camera_normal.current = true
+	player_inventory.enabled = true
+	player_interactions.enabled = true
+
 
 func disable_all():
 	player_input.enabled = false
@@ -72,6 +87,11 @@ func disable_all():
 	player_dragging.enabled = false
 
 func _unhandled_input(event: InputEvent) -> void:
+	if state == State.Sitting:
+		var movement_direction = Input.get_vector("forward", "back", "right", "left")
+		if not movement_direction.is_zero_approx():
+			state = State.Alive
+			player_sitting.stand()
 	if state == State.Drag:
 		if Input.is_action_just_pressed("interact"):
 			on_alive()
