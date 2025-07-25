@@ -8,7 +8,7 @@ signal ExecuteAction(action: InteractionAction)
 
 signal PickedItem(item: InventoryItem)
 signal DroppedItem(item: InventoryItem)
-signal SelectedItemToUse(item: InventoryItem)
+signal SelectedItemToUse(idx: int)
 signal AmmoChanged(item: InventoryItem, current_ammo: int, total_ammo: int)
 
 signal InventoryChanged(itmes: Array[InventoryItem])

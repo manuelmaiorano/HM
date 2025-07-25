@@ -1,11 +1,22 @@
-[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://bnd6kr53derqv"]
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=5 format=3 uid="uid://bnd6kr53derqv"]
 
 [ext_resource type="Script" uid="uid://b1p3bunddmtvj" path="res://scripts/resources/inventory_resource.gd" id="1_qdnpy"]
+[ext_resource type="Resource" uid="uid://b47jd0gr1rdx" path="res://resources/bullet_info/gun.tres" id="2_to4u3"]
+[ext_resource type="Script" uid="uid://bjxn5roqx2cvo" path="res://scripts/resources/weapon_resource.gd" id="3_fpane"]
+
+[sub_resource type="Resource" id="Resource_7pqtf"]
+script = ExtResource("3_fpane")
+weapon_name = &"handgun"
+magazine_size = 11
+bullet_info = ExtResource("2_to4u3")
+metadata/_custom_type_script = "uid://bjxn5roqx2cvo"
 
 [resource]
 script = ExtResource("1_qdnpy")
 name = &"gun"
 scene_path = &"res://scenes/weapons/gun.tscn"
+is_weapon = true
 wield_transform_position = Vector3(-0.0383664, 0.169683, 0.0323393)
 wield_transform_rotation = Quaternion(-0.0890254, 0.689425, 0.718344, 0.0273778)
+weapon_info = SubResource("Resource_7pqtf")
 metadata/_custom_type_script = "uid://b1p3bunddmtvj"

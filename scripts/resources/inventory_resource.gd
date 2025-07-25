@@ -6,3 +6,4 @@ class_name InventoryItem
 @export var is_weapon: bool = true
 @export var wield_transform_position: Vector3
 @export var wield_transform_rotation: Quaternion
+@export var weapon_info: WeaponInfo

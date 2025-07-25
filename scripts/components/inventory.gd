@@ -10,6 +10,7 @@ class_name  InventoryComponent
 
 @export_category("Debug")
 @export var item_in_use: InventoryItem = null
+@export var current_idx: int = -1
 
 signal inventory_changed(items: Array[InventoryItem])
 signal item_in_use_changed(item: InventoryItem)
@@ -26,11 +27,20 @@ func _ready() -> void:
 		inventory_changed.emit(current_items)
 	if item_in_use:
 		item_in_use_changed.emit(item_in_use)
+		current_idx = current_items.find(item_in_use)
 
-func equip_item(item: InventoryItem):
-	if item_in_use == item:
+func equip_item(idx: int):
+	if idx == -1:
+		item_in_use = null
+		current_idx = -1
+		item_in_use_changed.emit(item_in_use)
 		return
-	item_in_use = item
+
+	if current_idx == idx:
+		return
+
+	item_in_use = current_items[idx]
+	current_idx = idx
 	item_in_use_changed.emit(item_in_use)
 
 func drop_item():
@@ -42,6 +52,7 @@ func drop_item():
 	character.get_parent().add_child(instance)
 	instance.global_position = drop_node.global_position
 	item_in_use = null
+	current_idx = -1
 	item_in_use_changed.emit(item_in_use)
 	return item_dropped
 
@@ -53,6 +64,7 @@ func transfer_all_inventory(other_inventory: InventoryComponent):
 	other_inventory.current_items = current_items
 	current_items = []
 	item_in_use = null
+	current_idx = -1
 	inventory_changed.emit(current_items)
 	item_in_use_changed.emit(item_in_use)
 	other_inventory.inventory_changed.emit(other_inventory.current_items)
@@ -64,6 +76,7 @@ func transfer_item(item: InventoryItem, other_inventory: InventoryComponent):
 	current_items.erase(item)
 	if item_in_use == item:
 		item_in_use = null
+		current_idx = -1
 		item_in_use_changed.emit(item_in_use)
 
 	inventory_changed.emit(current_items)
@@ -73,13 +86,15 @@ func transfer_item(item: InventoryItem, other_inventory: InventoryComponent):
 func assign_initial_items(items: Array):
 	initial_items = []
 	item_in_use = null
+	current_idx = -1
 
 	for item in items:
 		initial_items.append(item as InventoryItem)
 
 
 func find_item_by_name(item_name: String):
-	for item in current_items:
+	for idx in current_items.size():
+		var item = current_items[idx]
 		if item.name == item_name:
-			return item
-	return null
+			return idx
+	return -1

@@ -48,7 +48,7 @@ func on_item_drop(item: InventoryItem):
 			child.queue_free()
 			scroll_component.current_index = 0
 			var current_item = all_items.get_child(scroll_component.current_index)
-			Globals.SelectedItemToUse.emit(current_item.inventory_item)
+			Globals.SelectedItemToUse.emit(-1)
 			current_item_label.text = current_item.item_name
 			return
 
@@ -59,7 +59,7 @@ func select_invetory_item():
 	var items = all_items.get_children()
 	if not items.is_empty():
 		var current_item = all_items.get_child(scroll_component.current_index)
-		Globals.SelectedItemToUse.emit(current_item.inventory_item)
+		Globals.SelectedItemToUse.emit(scroll_component.current_index-1)
 		current_item_label.text = current_item.item_name
 
 func change_visibility(visibile):

@@ -11,7 +11,13 @@ func _setup() -> void:
 	detect_player_component = agent.get_meta("DetectPlayerComponent")
 	player_inventory = agent.get_tree().get_first_node_in_group("player").get_meta("InventoryComponent") as InventoryComponent
 	detect_player_component.player_visibility_changed.connect(on_visibility_changed)
+	player_inventory.item_in_use_changed.connect(on_item_in_use_changed)
 
+func on_item_in_use_changed(item: InventoryItem):
+	if detect_player_component.is_player_visible:
+		if item.is_weapon:
+			is_player_holding_weapon = true
+			npc_events.player_is_holding_weapon.emit()
 
 func on_visibility_changed(is_visible: bool):
 	if is_visible:
