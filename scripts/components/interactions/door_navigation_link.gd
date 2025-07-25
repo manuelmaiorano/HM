@@ -34,3 +34,7 @@ func move_through_link(delta: float, movement_comp: CharacterMovementComponent, 
 		if movement_comp.character.global_position.distance_to(ending_position) < 0.5:
 			return true
 	return false
+
+func on_link_abort(_character: Node3D):
+	interactable.open(_character)
+	pass

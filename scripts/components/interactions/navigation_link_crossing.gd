@@ -19,3 +19,6 @@ func move_through_link(_delta: float, movement_comp: CharacterMovementComponent,
 func on_link_exit(agent: Node3D):
 	pass
 
+
+func on_link_abort(agent: Node3D):
+	pass

@@ -38,6 +38,9 @@ func set_navigation_target(movement_target: Vector3):
 		if current_navigation_target.distance_squared_to(movement_target) > tolerance:
 			navigation_agent.set_target_position(movement_target)
 			current_navigation_target = movement_target
+	if moving_through_link:
+		moving_through_link = false
+		current_link_component.on_link_abort(character)
 
 func _on_velocity_computed(safe_velocity: Vector3):
 	character.velocity = safe_velocity
