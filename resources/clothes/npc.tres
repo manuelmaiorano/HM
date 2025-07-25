@@ -1,10 +1,14 @@
-[gd_resource type="Resource" script_class="ClothesInfo" load_steps=3 format=3 uid="uid://et58twiwkwpb"]
+[gd_resource type="Resource" script_class="ClothesInfo" load_steps=5 format=3 uid="uid://et58twiwkwpb"]
 
+[ext_resource type="Material" uid="uid://iuyyj2y6j56m" path="res://assets/materials/clothes_material_green.tres" id="1_c5t7o"]
 [ext_resource type="PackedScene" uid="uid://d0uauty2ym85p" path="res://scenes/test/clothes/TestClothes1.tscn" id="1_tcysj"]
 [ext_resource type="Script" uid="uid://coicgtnqg1jt5" path="res://scripts/resources/clothes_resource.gd" id="2_h2llj"]
+[ext_resource type="ArrayMesh" uid="uid://btc1k3qhgo1k4" path="res://assets/models/characters/clothes_Cube_006.res" id="2_hp70r"]
 
 [resource]
 script = ExtResource("2_h2llj")
 name = &"npc"
 scene = ExtResource("1_tcysj")
+clothes_mesh = ExtResource("2_hp70r")
+clothes_material = ExtResource("1_c5t7o")
 metadata/_custom_type_script = "uid://coicgtnqg1jt5"
