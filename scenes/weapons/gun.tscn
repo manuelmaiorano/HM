@@ -51,6 +51,7 @@ script = ExtResource("6_e4hp8")
 agent = NodePath("..")
 shoot_from = NodePath("../ShootFrom")
 bullet_info = ExtResource("7_5h4ka")
+raycast_collision_mask = 9
 
 [node name="ShootingAudio" type="Node" parent="." node_paths=PackedStringArray("shootable_component", "audio_player", "audio_area")]
 script = ExtResource("8_7dh3r")

@@ -54,4 +54,4 @@ func _tick(delta: float) -> Status:
 	return RUNNING
 
 func shoot_player():
-	wieldable_component.try_shoot(detect_player_component.player.get_meta("VisibilityCheckTargetComponent").target_node.global_position)
+	wieldable_component.try_shoot(detect_player_component.player.get_meta("VisibilityCheckTargetComponent").target_node.global_position, detect_player_component.player.velocity)

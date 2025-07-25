@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("2_spkv5")
+name = &"5 mm"
 damage = 20.0
 scene = ExtResource("1_fkkv3")
 metadata/_custom_type_script = "uid://cawt6j7ql6n8c"

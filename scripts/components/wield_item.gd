@@ -44,19 +44,19 @@ func add_wieldable_exceptions(instance):
 		var hb = instance.get_meta("HurtBoxComponent") as HurtBoxComponent
 		hb.exceptions = hit_box_exceptions_when_wielding_hurtbox
 
-func try_shoot(target: Vector3) -> bool:
+func try_shoot(target: Vector3, velocity: Vector3) -> bool:
 	if current_item == null:
 		return false
 	if current_item.has_meta("Shootable"):
 		if ignore_ammo_check:
 			var shootable_component = current_item.get_meta("Shootable") as Shootable
-			shootable_component.shoot(target, shoot_from)
+			shootable_component.shoot(target, velocity, shoot_from)
 			is_shooting.emit()
 			return true
 		
 		if inventory.check_equipped_weapon_ammo():
 			var shootable_component = current_item.get_meta("Shootable") as Shootable
-			shootable_component.shoot(target, shoot_from)
+			shootable_component.shoot(target, velocity, shoot_from)
 			is_shooting.emit()
 			inventory.reduce_ammo_equipped()
 			return true
