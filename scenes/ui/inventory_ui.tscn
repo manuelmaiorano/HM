@@ -12,9 +12,10 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="Inventory" type="Node" parent="." node_paths=PackedStringArray("current_item_label", "all_items", "scroll_component")]
+[node name="Inventory" type="Node" parent="." node_paths=PackedStringArray("current_item_label", "current_ammo_label", "all_items", "scroll_component")]
 script = ExtResource("1_tahbm")
 current_item_label = NodePath("../HBoxContainer/CurrentItem")
+current_ammo_label = NodePath("../HBoxContainer/CurrentAmmo")
 all_items = NodePath("../AllItems")
 scroll_component = NodePath("../ScrollComponent")
 item_scene = ExtResource("2_mdwe3")

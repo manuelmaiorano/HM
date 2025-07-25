@@ -9,9 +9,9 @@ signal ExecuteAction(action: InteractionAction)
 signal PickedItem(item: InventoryItem)
 signal DroppedItem(item: InventoryItem)
 signal SelectedItemToUse(idx: int)
-signal AmmoChanged(item: InventoryItem, current_ammo: int, total_ammo: int)
+signal AmmoChanged(in_magazine: int, remaining: int)
 
-signal InventoryChanged(itmes: Array[InventoryItem])
+signal InventoryChanged(itmes: Array[InventoryItem], idx_selected: int)
 
 signal ExecutedAction(action: InteractionAction)
 

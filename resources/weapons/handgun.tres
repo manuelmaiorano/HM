@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponInfo" load_steps=3 format=3 uid="uid://d332b1pypwun"]
+
+[ext_resource type="Resource" uid="uid://b47jd0gr1rdx" path="res://resources/bullet_info/gun.tres" id="1_tpy8x"]
+[ext_resource type="Script" uid="uid://bjxn5roqx2cvo" path="res://scripts/resources/weapon_resource.gd" id="2_sj0vd"]
+
+[resource]
+script = ExtResource("2_sj0vd")
+weapon_name = &"handgun"
+magazine_size = 15
+bullet_info = ExtResource("1_tpy8x")
+metadata/_custom_type_script = "uid://bjxn5roqx2cvo"

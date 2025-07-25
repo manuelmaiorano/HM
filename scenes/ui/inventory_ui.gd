@@ -22,19 +22,23 @@ func _enter_tree() -> void:
 	Globals.AmmoChanged.connect(on_ammo_changed)
 	scroll_component.current_index_changed.connect(func(idx): all_items.get_child(idx).grab_focus())
 
-func on_ammo_changed(item: InventoryItem, current_ammo: int, total_ammo: int):
-	if item == null:
+func on_ammo_changed(in_magazine: int, remaining: int):
+	if in_magazine == -1:
 		current_ammo_label.text = ""
 		return
-	current_ammo_label.text = "%s/%s" % [current_ammo, total_ammo]
+	current_ammo_label.text = "%s/%s" % [in_magazine, remaining]
 
-func on_inventory_changed(items: Array[InventoryItem]):
+func on_inventory_changed(items: Array[InventoryItem], idx_selected: int):
+
 	for child in all_items.get_children():
 		if child == no_item_button:
 			continue
 		child.queue_free()
 	for item in items:
 		on_item_pickup(item)
+
+	scroll_component.current_index = idx_selected + 1
+	select_invetory_item()
 
 func on_item_pickup(item: InventoryItem):
 	var item_button = item_scene.instantiate()

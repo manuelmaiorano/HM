@@ -26,7 +26,7 @@ func get_actions() -> Array[InteractionAction]:
 		actions.append(action)
 
 	for idx in inventory.current_items.size():
-		var inventory_item = inventory.current_items[idx]
+		var inventory_item = inventory.current_items[idx].item_type
 		var action = InteractionAction.new()
 		if clothes_component:
 			action.id = idx + 2

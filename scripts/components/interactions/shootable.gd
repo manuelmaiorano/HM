@@ -8,9 +8,6 @@ class_name Shootable
 @export_category("Parameters")
 @export var bullet_info: BulletInfo
 
-@export_category("Debug")
-@export var magazine_amount: int
-
 signal is_shooting
 
 func _ready() -> void:
@@ -41,6 +38,3 @@ func raycast_shoot(raycast: RayCast3D):
 			hitbox.take_damage(damage)
 
 	is_shooting.emit()
-
-func load_magazine(amount: int):
-	magazine_amount += amount

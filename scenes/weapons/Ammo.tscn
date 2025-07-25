@@ -1,18 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://baqlcvq4r0pyo"]
+[gd_scene load_steps=5 format=3 uid="uid://baqlcvq4r0pyo"]
 
 [ext_resource type="PackedScene" uid="uid://coj4dck2jf62c" path="res://assets/models/ammo.glb" id="1_iwcaw"]
-[ext_resource type="Script" uid="uid://dtlpbo88xhkur" path="res://scripts/components/interactions/pickable.gd" id="1_kdyln"]
-[ext_resource type="Script" uid="uid://bvtxk76q4i1xo" path="res://scripts/components/interactions/pickable_interactable.gd" id="1_nh4rc"]
-[ext_resource type="Script" uid="uid://b1p3bunddmtvj" path="res://scripts/resources/inventory_resource.gd" id="2_m12tn"]
-
-[sub_resource type="Resource" id="Resource_x4kog"]
-script = ExtResource("2_m12tn")
-name = &"ammo"
-scene_path = &""
-is_weapon = false
-wield_transform_position = Vector3(0, 0, 0)
-wield_transform_rotation = Quaternion(0, 0, 0, 1)
-metadata/_custom_type_script = "uid://b1p3bunddmtvj"
+[ext_resource type="Script" uid="uid://dpq8xa8s15o4f" path="res://scripts/components/interactions/ammo_interactable.gd" id="1_nh4rc"]
+[ext_resource type="Resource" uid="uid://b47jd0gr1rdx" path="res://resources/bullet_info/gun.tres" id="2_enm1l"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_iwcaw"]
 points = PackedVector3Array(-0.05, -0.000666514, -0.05, -0.05, 0.0488788, -0.05, 0.05, -0.000666514, -0.05, -0.05, -0.000666514, 0.05, -0.05, 0.0488788, 0.05, 0.05, 0.0488788, -0.05, 0.05, -0.000666514, 0.05, 0.05, 0.0488788, 0.05)
@@ -21,14 +11,11 @@ points = PackedVector3Array(-0.05, -0.000666514, -0.05, -0.05, 0.0488788, -0.05,
 collision_layer = 4
 collision_mask = 7
 
-[node name="Pickable" type="Node" parent="." node_paths=PackedStringArray("agent")]
-script = ExtResource("1_kdyln")
-agent = NodePath("..")
-inventory_item = SubResource("Resource_x4kog")
-
-[node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("pickable_component")]
+[node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("agent")]
 script = ExtResource("1_nh4rc")
-pickable_component = NodePath("../Pickable")
+agent = NodePath("..")
+bullet_info = ExtResource("2_enm1l")
+interpolation_string = &"Pick Up Ammo %s"
 
 [node name="ammo" parent="." instance=ExtResource("1_iwcaw")]
 

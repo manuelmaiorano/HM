@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bug78mgxdlo6o"]
+[gd_scene load_steps=15 format=3 uid="uid://bug78mgxdlo6o"]
 
 [ext_resource type="PackedScene" uid="uid://bhry6ebir7a5l" path="res://assets/models/sniper_rifle.glb" id="1_f7frn"]
+[ext_resource type="Script" uid="uid://6844vo3mbia4" path="res://scenes/weapons/magazine.gd" id="2_k3q0y"]
 [ext_resource type="Script" uid="uid://bvtxk76q4i1xo" path="res://scripts/components/interactions/pickable_interactable.gd" id="2_o4qhe"]
 [ext_resource type="Script" uid="uid://dtlpbo88xhkur" path="res://scripts/components/interactions/pickable.gd" id="3_k3q0y"]
 [ext_resource type="Resource" uid="uid://c4g777laes2j7" path="res://resources/inventory/sniper_rifle.tres" id="4_f7frn"]
@@ -31,6 +32,11 @@ continuous_cd = true
 shape = SubResource("ConvexPolygonShape3D_o4qhe")
 
 [node name="sniper_rifle" parent="." instance=ExtResource("1_f7frn")]
+
+[node name="Magazine" type="Node" parent="." node_paths=PackedStringArray("agent")]
+script = ExtResource("2_k3q0y")
+agent = NodePath("..")
+bullet_amount = 11
 
 [node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("pickable_component")]
 script = ExtResource("2_o4qhe")

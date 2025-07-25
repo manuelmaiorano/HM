@@ -8,6 +8,9 @@ class_name WieldableComponent
 @export var shoot_from: Node3D
 @export var hit_box_exceptions_when_wielding_hurtbox: Array[Area3D]
 
+@export_category("Parameters")
+@export var ignore_ammo_check: bool = false
+
 @export_category("Debug")
 @export var current_item: Node3D
 
@@ -45,21 +48,43 @@ func try_shoot(target: Vector3) -> bool:
 	if current_item == null:
 		return false
 	if current_item.has_meta("Shootable"):
-		var shootable_component = current_item.get_meta("Shootable") as Shootable
-		shootable_component.shoot(target, shoot_from)
-		is_shooting.emit()
-		return true
+		if ignore_ammo_check:
+			var shootable_component = current_item.get_meta("Shootable") as Shootable
+			shootable_component.shoot(target, shoot_from)
+			is_shooting.emit()
+			return true
+		
+		if inventory.check_equipped_weapon_ammo():
+			var shootable_component = current_item.get_meta("Shootable") as Shootable
+			shootable_component.shoot(target, shoot_from)
+			is_shooting.emit()
+			inventory.reduce_ammo_equipped()
+			return true
+		else:
+			inventory.reload_equipped()
+			return false
 	return false
 
 
 func try_shoot_raycast(raycast: RayCast3D) -> bool:
+
 	if current_item == null:
 		return false
 	if current_item.has_meta("Shootable"):
 		var shootable_component = current_item.get_meta("Shootable") as Shootable
-		shootable_component.raycast_shoot(raycast)
-		is_shooting.emit()
-		return true
+		if ignore_ammo_check:
+			shootable_component.raycast_shoot(raycast)
+			is_shooting.emit()
+			return true
+
+		if inventory.check_equipped_weapon_ammo():
+			shootable_component.raycast_shoot(raycast)
+			is_shooting.emit()
+			inventory.reduce_ammo_equipped()
+			return true
+		else:
+			inventory.reload_equipped()
+			return false
 	return false
 
 

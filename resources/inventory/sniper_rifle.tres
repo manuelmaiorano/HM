@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://c4g777laes2j7"]
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://c4g777laes2j7"]
 
 [ext_resource type="Script" uid="uid://b1p3bunddmtvj" path="res://scripts/resources/inventory_resource.gd" id="1_k0c8f"]
+[ext_resource type="Resource" uid="uid://beufhnrm0q5tm" path="res://resources/weapons/sniper.tres" id="2_is1sl"]
 
 [resource]
 script = ExtResource("1_k0c8f")
@@ -9,4 +10,5 @@ scene_path = &"res://scenes/weapons/sniper_rifle.tscn"
 is_weapon = true
 wield_transform_position = Vector3(-0.0521829, 0.129528, 0.104097)
 wield_transform_rotation = Quaternion(-0.070957, 0.468533, 0.839297, -0.266499)
+weapon_info = ExtResource("2_is1sl")
 metadata/_custom_type_script = "uid://b1p3bunddmtvj"

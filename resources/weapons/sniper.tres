@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponInfo" load_steps=3 format=3 uid="uid://beufhnrm0q5tm"]
+
+[ext_resource type="Resource" uid="uid://b47jd0gr1rdx" path="res://resources/bullet_info/gun.tres" id="1_hdm7c"]
+[ext_resource type="Script" uid="uid://bjxn5roqx2cvo" path="res://scripts/resources/weapon_resource.gd" id="2_b8euq"]
+
+[resource]
+script = ExtResource("2_b8euq")
+weapon_name = &"sniper"
+magazine_size = 5
+bullet_info = ExtResource("1_hdm7c")
+metadata/_custom_type_script = "uid://bjxn5roqx2cvo"
