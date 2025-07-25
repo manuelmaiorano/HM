@@ -15,6 +15,8 @@ func _setup() -> void:
 
 func on_item_in_use_changed(item: InventoryItem):
 	if detect_player_component.is_player_visible:
+		if item == null:
+			return
 		if item.is_weapon:
 			is_player_holding_weapon = true
 			npc_events.player_is_holding_weapon.emit()
