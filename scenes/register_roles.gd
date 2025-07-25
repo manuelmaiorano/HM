@@ -21,4 +21,7 @@ func _ready() -> void:
 		var clothes_component = npc.get_meta("ClothesComponent") as ClothesComponent
 		clothes_component.initial_clothes = role.initial_clothes
 
+		if role.initial_base_mesh != null:
+			clothes_component.set_base_mesh(role.initial_base_mesh)
+
 	

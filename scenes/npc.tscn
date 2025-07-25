@@ -347,11 +347,12 @@ clothes_component = NodePath("../Clothes")
 bone_to_drag = NodePath("../model/Rig/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone DEF-neck")
 loot_scene = ExtResource("17_ewlk4")
 
-[node name="Clothes" type="Node" parent="." node_paths=PackedStringArray("character", "skeleton", "clothes_mesh")]
+[node name="Clothes" type="Node" parent="." node_paths=PackedStringArray("character", "skeleton", "clothes_mesh", "base_mesh")]
 script = ExtResource("18_gc4mq")
 character = NodePath("..")
 skeleton = NodePath("../model/Rig/Skeleton3D")
 clothes_mesh = NodePath("../model/Rig/Skeleton3D/Clothes")
+base_mesh = NodePath("../model/Rig/Skeleton3D/BaseMesh")
 initial_clothes = ExtResource("19_2gr28")
 
 [node name="VisibilityCheckComponent" type="Node" parent="." node_paths=PackedStringArray("character", "target_node")]
@@ -1789,8 +1790,8 @@ shape = SubResource("CapsuleShape3D_redd5")
 transform = Transform3D(0.886094, 0.210515, 0.412941, 0.270838, -0.958151, -0.092707, 0.376143, 0.193987, -0.906027, -0.175567, 0.10973, -0.374514)
 collision_layer = 32
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000309851, 2.07577e-05, 0.212225)
-body_offset = Transform3D(0.999999, 0.000914507, 0.000963926, 0.00096488, -0.00107147, -0.999999, -0.000913486, 0.999999, -0.00107238, 0.000105262, 0.212226, 0.000206545)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000309857, 2.07577e-05, 0.212225)
+body_offset = Transform3D(0.999999, 0.000914522, 0.000963956, 0.00096491, -0.00107147, -0.999999, -0.000913508, 0.999999, -0.00107238, 0.000105262, 0.212226, 0.000206545)
 bone_name = "DEF-thigh.R"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0

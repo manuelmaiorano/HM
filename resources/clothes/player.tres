@@ -11,4 +11,5 @@ name = &"player"
 scene = ExtResource("1_r2edn")
 clothes_mesh = ExtResource("2_smfmo")
 clothes_material = ExtResource("1_whp6q")
+clothes_material_when_on_ground = ExtResource("1_whp6q")
 metadata/_custom_type_script = "uid://coicgtnqg1jt5"

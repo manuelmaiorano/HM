@@ -7,3 +7,4 @@ class_name NpcRole
 @export var initial_inventory: Array[InventoryItem]
 @export var item_in_use: InventoryItem
 @export var initial_clothes: ClothesInfo
+@export var initial_base_mesh: BaseMeshInfo

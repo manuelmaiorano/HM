@@ -11,4 +11,5 @@ name = &"npc"
 scene = ExtResource("1_tcysj")
 clothes_mesh = ExtResource("2_hp70r")
 clothes_material = ExtResource("1_c5t7o")
+clothes_material_when_on_ground = ExtResource("1_c5t7o")
 metadata/_custom_type_script = "uid://coicgtnqg1jt5"

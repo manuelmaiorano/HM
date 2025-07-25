@@ -5,6 +5,8 @@ class_name ClothesComponent
 @export var character: CharacterBody3D
 @export var skeleton: Skeleton3D
 @export var clothes_mesh: MeshInstance3D
+@export var base_mesh: MeshInstance3D
+
 
 @export_category("Parameters")
 @export var initial_clothes: ClothesInfo
@@ -37,4 +39,11 @@ func add_changed_clothes_scene(clothes_info):
 	character.get_parent().add_child(instance)
 	var clothes_interactable = instance.get_meta("ClothesInteractable") as ClothesInteractable
 	clothes_interactable.clothes_info = clothes_info
+	if clothes_info.clothes_material_when_on_ground != null:
+		instance.find_children("*", "MeshInstance3D", true)[0].material_override = clothes_info.clothes_material_when_on_ground
 	instance.global_position = character.global_position
+
+
+func set_base_mesh(mesh_info: BaseMeshInfo):
+	base_mesh.mesh = mesh_info.mesh
+	base_mesh.material_override = mesh_info.material
