@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bw36we0hryrus"]
+[gd_scene load_steps=18 format=4 uid="uid://bw36we0hryrus"]
 
 [ext_resource type="Script" uid="uid://dr87e1fwpugca" path="res://scripts/resources/floor_resource.gd" id="2_mstjn"]
 [ext_resource type="Script" uid="uid://40cs31m6jema" path="res://scripts/components/interactions/elevator_interactable.gd" id="2_yw5cb"]
@@ -122,6 +122,12 @@ floor_name = &"first"
 floor_number = 1
 metadata/_custom_type_script = "uid://dr87e1fwpugca"
 
+[sub_resource type="Resource" id="Resource_yw5cb"]
+script = ExtResource("2_mstjn")
+floor_name = &"third"
+floor_number = 2
+metadata/_custom_type_script = "uid://dr87e1fwpugca"
+
 [node name="Elevator" type="Node3D"]
 
 [node name="elevator2" type="Node3D" parent="."]
@@ -167,4 +173,4 @@ detection_area = NodePath("../elevator2/elevator_001/body/floorButton/Area3D")
 elevator_body = NodePath("../elevator2/elevator_001/body")
 elevator_door = NodePath("../elevator2/elevator_001/body/elevator/door")
 floor_offset = 4.168
-floor_info = Array[ExtResource("2_mstjn")]([SubResource("Resource_g6g7e"), SubResource("Resource_jbcn5")])
+floor_info = Array[ExtResource("2_mstjn")]([SubResource("Resource_g6g7e"), SubResource("Resource_jbcn5"), SubResource("Resource_yw5cb")])
