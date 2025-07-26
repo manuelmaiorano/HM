@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=4 uid="uid://c7fk5njqhkd7n"]
+[gd_scene load_steps=19 format=4 uid="uid://c7fk5njqhkd7n"]
 
 [ext_resource type="Script" uid="uid://xw44t361w7bo" path="res://scenes/props/broken_glass.gd" id="1_6k0kq"]
+[ext_resource type="Material" uid="uid://cjr66m1vly0mr" path="res://assets/materials/glass.tres" id="2_2imqe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rluf"]
 
@@ -148,6 +149,7 @@ script = ExtResource("1_6k0kq")
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 
 [node name="Cube_001" type="MeshInstance3D" parent="RigidBody3D"]
+material_override = ExtResource("2_2imqe")
 mesh = SubResource("ArrayMesh_q2ijc")
 skeleton = NodePath("")
 
@@ -157,6 +159,7 @@ shape = SubResource("ConvexPolygonShape3D_dou7h")
 [node name="RigidBody3D2" type="RigidBody3D" parent="."]
 
 [node name="Cube_002" type="MeshInstance3D" parent="RigidBody3D2"]
+material_override = ExtResource("2_2imqe")
 mesh = SubResource("ArrayMesh_73xqb")
 skeleton = NodePath("")
 
@@ -166,6 +169,7 @@ shape = SubResource("ConvexPolygonShape3D_6k0kq")
 [node name="RigidBody3D3" type="RigidBody3D" parent="."]
 
 [node name="Cube_003" type="MeshInstance3D" parent="RigidBody3D3"]
+material_override = ExtResource("2_2imqe")
 mesh = SubResource("ArrayMesh_ywcao")
 skeleton = NodePath("")
 
@@ -175,6 +179,7 @@ shape = SubResource("ConvexPolygonShape3D_kcowl")
 [node name="RigidBody3D4" type="RigidBody3D" parent="."]
 
 [node name="Cube_004" type="MeshInstance3D" parent="RigidBody3D4"]
+material_override = ExtResource("2_2imqe")
 mesh = SubResource("ArrayMesh_5bnx5")
 skeleton = NodePath("")
 

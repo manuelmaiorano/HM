@@ -22,5 +22,5 @@ func on_area_entered(area: Area3D):
 		return
 	if area.has_meta("HitBoxComponent"):
 		var hit_box = area.get_meta("HitBoxComponent") as HitBoxComponent
-		hit_box.take_damage(damage)
+		hit_box.take_damage(damage, agent)
 		has_hit.emit()

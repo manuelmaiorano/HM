@@ -40,7 +40,7 @@ func shoot(target: Vector3, velocity: Vector3, override_shoot_from: Node3D = nul
 		var collider = result["collider"]	
 		if collider.has_meta("HitBoxComponent"):
 			var hitbox = collider.get_meta("HitBoxComponent", null) as HitBoxComponent
-			hitbox.take_damage(bullet_info.damage)
+			hitbox.take_damage(bullet_info.damage, agent)
 		
 	is_shooting.emit()
 
@@ -52,6 +52,6 @@ func raycast_shoot(raycast: RayCast3D):
 		var collider = raycast.get_collider()
 		if collider.has_meta("HitBoxComponent"):
 			var hitbox = collider.get_meta("HitBoxComponent", null) as HitBoxComponent
-			hitbox.take_damage(damage)
+			hitbox.take_damage(damage, agent)
 
 	is_shooting.emit()

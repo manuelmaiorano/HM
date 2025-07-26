@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqg05qufup05h"]
+[gd_scene load_steps=9 format=3 uid="uid://cqg05qufup05h"]
 
 [ext_resource type="PackedScene" uid="uid://bhcsdpu70b312" path="res://assets/models/breackable/original.glb" id="1_e1s7p"]
+[ext_resource type="Material" uid="uid://cjr66m1vly0mr" path="res://assets/materials/glass.tres" id="2_0o6a1"]
 [ext_resource type="Script" uid="uid://b31t7lgyp32k3" path="res://scripts/components/interactions/breakable.gd" id="2_megkt"]
 [ext_resource type="PackedScene" uid="uid://c7fk5njqhkd7n" path="res://scenes/props/BrokenGlass.tscn" id="3_hoobn"]
 [ext_resource type="Script" uid="uid://spcieak5y62x" path="res://scripts/components/interactions/health.gd" id="3_mu441"]
@@ -10,7 +11,7 @@
 points = PackedVector3Array(0.0841013, 2.99142, 1, -0.0132418, 2.99142, 1, 0.0841013, 0, 1, 0.0841013, 2.99142, -1, -0.0132418, 2.99142, -1, -0.0132418, 0, 1, 0.0841013, 0, -1, -0.0132418, 0, -1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_megkt"]
-size = Vector3(0.187256, 2.96979, 2.00928)
+size = Vector3(0.180389, 2.96979, 2.00928)
 
 [node name="Glass" type="StaticBody3D"]
 
@@ -19,10 +20,14 @@ shape = SubResource("ConvexPolygonShape3D_megkt")
 
 [node name="original2" parent="." instance=ExtResource("1_e1s7p")]
 
-[node name="Breakable" type="Node" parent="." node_paths=PackedStringArray("agent", "health")]
+[node name="original" parent="original2" index="0"]
+material_override = ExtResource("2_0o6a1")
+
+[node name="Breakable" type="Node" parent="." node_paths=PackedStringArray("agent", "health", "hit_box")]
 script = ExtResource("2_megkt")
 agent = NodePath("..")
 health = NodePath("../Health")
+hit_box = NodePath("../HitBox")
 broken_scene = ExtResource("3_hoobn")
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("agent")]
@@ -41,5 +46,7 @@ collision_mask = 8
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0560303, 1.4664, 0.00610352)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0385285, 1.4664, 0.00610352)
 shape = SubResource("BoxShape3D_megkt")
+
+[editable path="original2"]
