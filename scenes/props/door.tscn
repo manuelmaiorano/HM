@@ -28,11 +28,11 @@ agent = NodePath("..")
 navigation_link = NodePath("../NavigationLink3D")
 
 [node name="NavigationLink3D" type="NavigationLink3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.369083, 0, 0)
 start_position = Vector3(0, 0, 2.085)
 end_position = Vector3(0, 0, -2.085)
 
 [node name="Door" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48713, 0, 0)
 collision_layer = 5
 collision_mask = 3
 
