@@ -17,7 +17,6 @@ class_name AnimationsManagerComponent
 var shooting_tween: Tween
 
 func _ready() -> void:
-	shooting_tween = create_tween()
 
 	wieldable_component.is_shooting.connect(on_shooting)
 	wieldable_component.is_silent_kill.connect(on_silent_kill)
@@ -45,7 +44,7 @@ func on_drag_state_changed(is_dragging: bool):
 		animation_tree["parameters/Transition/transition_request"] = "alive"
 
 func on_shooting():
-	if shooting_tween.is_running():
+	if shooting_tween and shooting_tween.is_running():
 		shooting_tween.kill()
 
 	shooting_tween = create_tween()
