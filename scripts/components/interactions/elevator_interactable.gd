@@ -1,4 +1,5 @@
 extends InteractableComponent
+class_name ElevatorInteractable
 
 @export_category("Nodes")
 @export var detection_area: Area3D
@@ -71,3 +72,11 @@ func open_door():
 	var tween := create_tween()
 	tween.tween_property(elevator_door, "position:x", door_open_offset, door_open_duration)
 	await tween.finished
+
+
+func get_floor_from_switch_position(position: Vector3):
+	for floor_idx in floor_info.size():
+		if position.y > floor_idx * floor_offset and position.y < (floor_idx + 1) * floor_offset:
+			return floor_idx
+
+	return -1

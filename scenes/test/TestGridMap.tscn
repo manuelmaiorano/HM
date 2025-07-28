@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bwwhya8e25nb6"]
+[gd_scene load_steps=15 format=3 uid="uid://bwwhya8e25nb6"]
 
 [ext_resource type="Script" uid="uid://doy4l5fg1sy52" path="res://scenes/register_patrol_points.gd" id="1_3dvpi"]
+[ext_resource type="Script" uid="uid://b03jfbgrhg4jh" path="res://scenes/register_switches.gd" id="2_i7lt6"]
 [ext_resource type="MeshLibrary" uid="uid://78fcvv61ywml" path="res://assets/models/modular_pieces/meshlibscene/meshlib.tres" id="2_k0jyh"]
 [ext_resource type="PackedScene" uid="uid://cqg05qufup05h" path="res://scenes/props/Glass.tscn" id="3_pbi00"]
 [ext_resource type="PackedScene" uid="uid://3u6bql5cwtjf" path="res://scenes/props/door.tscn" id="4_lv2ly"]
@@ -8,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bnljcgov67ptp" path="res://scenes/ui/ui.tscn" id="6_ml60k"]
 [ext_resource type="PackedScene" uid="uid://ddppbvxc1iutf" path="res://scenes/npc.tscn" id="7_ngf4m"]
 [ext_resource type="PackedScene" uid="uid://bw36we0hryrus" path="res://scenes/props/Elevator.tscn" id="8_ets7i"]
+[ext_resource type="PackedScene" uid="uid://ccibb0j6q64xa" path="res://scenes/props/elevator_door.tscn" id="9_tvnvq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pqnbl"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -23,8 +25,6 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_pdlvs"]
-vertices = PackedVector3Array(3.2509, 0.3774, -6.25, 5.5009, 0.3774, -6.5, 5.5009, 0.3774, -9.5, -1.4991, 0.3774, -9.5, -1.4991, 0.3774, 13, 3.5009, 0.3774, 12.75, 24.2509, 0.3774, -6.5, 24.2509, 0.3774, -9.5, 26.5009, 0.3774, -6.25, 29.5009, 0.3774, -9.5, 26.5009, 0.3774, 8.25, 29.5009, 0.3774, 8.25, 4.2509, 4.6274, 11.75, 15.5009, 4.6274, 11.75, 15.5009, 4.6274, 8, 17.2509, 4.6274, 7.75, 17.0009, 4.6274, -5.5, 4.2509, 4.6274, -5.5, 25.5009, 4.6274, -0.25, 27.5009, 4.6274, -0.5, 27.5009, 4.6274, -5.5, 25.5009, 4.6274, 7.75, 4.5009, 0.3774, 8.75, 4.7509, 0.3774, 11.25, 15.2509, 0.3774, 11.25, 15.5009, 0.3774, 3.25, 15.2509, 0.3774, -5.25, 4.7509, 0.3774, -5.25, 16.5009, 0.3774, -5.25, 16.2509, 0.3774, -3.25, 16.5009, 0.3774, -0.75, 25.2509, 0.3774, -0.75, 25.2509, 0.3774, -5.25, 16.5009, 0.3774, 7.25, 25.2509, 0.3774, 7.25, 25.5009, 0.3774, 5.25, 25.2509, 0.3774, 0.75, 16.5009, 0.3774, 0.75, 16.2509, 0.3774, 2.75, 26.2509, 0.3774, 8.75, 16.5009, 0.3774, 12.5, 14.7509, 0.3774, 12.75, 15.0009, 0.3774, 17.5, 29.5009, 0.3774, 17.5, 16.5009, 0.3774, 8.75, 4.7509, 0.3774, 17.5, 5.0009, 0.3774, 12.75, -1.4991, 0.3774, 17.5)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 0), PackedInt32Array(0, 4, 3), PackedInt32Array(2, 7, 1), PackedInt32Array(1, 7, 6), PackedInt32Array(6, 7, 8), PackedInt32Array(8, 7, 9), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 9), PackedInt32Array(14, 13, 12), PackedInt32Array(16, 15, 14), PackedInt32Array(16, 14, 17), PackedInt32Array(17, 14, 12), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 16), PackedInt32Array(21, 15, 18), PackedInt32Array(18, 15, 16), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 25), PackedInt32Array(25, 22, 26), PackedInt32Array(26, 22, 27), PackedInt32Array(29, 28, 30), PackedInt32Array(30, 28, 32), PackedInt32Array(30, 32, 31), PackedInt32Array(38, 37, 33), PackedInt32Array(33, 37, 36), PackedInt32Array(33, 36, 35), PackedInt32Array(33, 35, 34), PackedInt32Array(39, 10, 11), PackedInt32Array(42, 41, 40), PackedInt32Array(11, 43, 39), PackedInt32Array(39, 43, 40), PackedInt32Array(40, 43, 42), PackedInt32Array(40, 44, 39), PackedInt32Array(46, 45, 5), PackedInt32Array(5, 45, 4), PackedInt32Array(4, 45, 47), PackedInt32Array(46, 41, 45), PackedInt32Array(45, 41, 42)]
 geometry_parsed_geometry_type = 1
 agent_max_slope = 60.0
 
@@ -34,6 +34,13 @@ agent_max_slope = 60.0
 script = ExtResource("1_3dvpi")
 npc_to_patrol_points = {
 NodePath("../Npc"): [NodePath("../Marker3D"), NodePath("../Marker3D2")]
+}
+
+[node name="registerSwitches" type="Node" parent="." node_paths=PackedStringArray("switch_to_switchables")]
+script = ExtResource("2_i7lt6")
+switch_to_switchables = {
+NodePath("../ElevatorDoor"): [NodePath("../Elevator")],
+NodePath("../ElevatorDoor2"): [NodePath("../Elevator")]
 }
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -48,9 +55,12 @@ navigation_mesh = SubResource("NavigationMesh_pdlvs")
 
 [node name="walls" type="GridMap" parent="NavigationRegion3D"]
 mesh_library = ExtResource("2_k0jyh")
+cell_size = Vector3(1, 2, 1)
+cell_center_x = false
 cell_center_y = false
+cell_center_z = false
 data = {
-"cells": PackedInt32Array(2, 5, 1048577, 3, 5, 655367, 4, 5, 655367, 5, 5, 655367, 6, 5, 655367, 7, 5, 655361, 7, 4, 1441795, 7, 3, 1441795, 7, 2, 1441795, 7, 1, 1441794, 7, 0, 1441795, 7, 65535, 1441795, 7, 65534, 1441794, 7, 65533, 1441793, 2, 65533, 1, 3, 65533, 3, 4, 65533, 3, 5, 65533, 3, 6, 65533, 3, 8, 65533, 3, 9, 65533, 3, 10, 65533, 3, 11, 65533, 5, 12, 65533, 1441793, 8, 65535, 655363, 9, 65535, 655363, 10, 65535, 655363, 11, 65535, 655363, 12, 65535, 655361, 12, 0, 1441795, 12, 1, 1441795, 12, 2, 1441794, 12, 3, 655361, 11, 3, 655363, 10, 3, 655363, 9, 3, 655363, 8, 3, 655363, 2, 65534, 1048579, 2, 65535, 1048583, 2, 0, 1048583, 2, 1, 1048583, 2, 2, 1048583, 2, 3, 1048583, 2, 4, 1048578, 12, 65534, 1441795, 65535, 65531, 2)
+"cells": PackedInt32Array(5, 65532, 1, 7, 65532, 3, 9, 65532, 3, 11, 65532, 3, 13, 65532, 3, 15, 65532, 3, 25, 65532, 1441793, 25, 65534, 1441795, 25, 0, 655361, 15, 8, 1441795, 15, 6, 1441795, 17, 7, 655363, 19, 7, 655363, 21, 7, 655363, 23, 7, 655363, 25, 7, 655361, 25, 2, 1441795, 24, 5, 1441801, 23, 0, 655363, 21, 0, 655363, 19, 0, 655363, 5, 65535, 1048583, 5, 1, 1048583, 5, 3, 1048583, 5, 5, 1048583, 5, 7, 1048583, 7, 11, 655367, 9, 11, 655367, 11, 11, 655367, 13, 11, 655367, 5, 11, 1441802, 5, 9, 1048583, 15, 11, 655361, 23, 65532, 5, 21, 65532, 3, 19, 65532, 3, 15, 65533, 1441794, 17, 65532, 3, 15, 65535, 1441795, 17, 0, 655363, 17, 3, 1048578, 65535, 65527, 2, 65533, 65527, 3, 1, 65527, 3)
 }
 
 [node name="floor" type="GridMap" parent="NavigationRegion3D"]
@@ -113,14 +123,15 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16, 0,
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26, 0, 5)
 
 [node name="Door4" parent="." instance=ExtResource("4_lv2ly")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, 9)
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 5, 0, 11)
 
 [node name="Player" parent="." instance=ExtResource("5_8sf3l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -11.5)
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -0.5, 0, -4)
 
 [node name="UI" parent="." instance=ExtResource("6_ml60k")]
 
 [node name="Npc" parent="." instance=ExtResource("7_ngf4m")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 16.5)
 
 [node name="Marker3D" type="Marker3D" parent="."]
@@ -133,3 +144,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 15)
 
 [node name="Elevator" parent="." instance=ExtResource("8_ets7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -9)
+
+[node name="ElevatorDoor" parent="." instance=ExtResource("9_tvnvq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -9)
+
+[node name="ElevatorDoor2" parent="." instance=ExtResource("9_tvnvq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4, -9)

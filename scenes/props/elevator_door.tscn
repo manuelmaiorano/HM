@@ -1,0 +1,143 @@
+[gd_scene load_steps=14 format=4 uid="uid://ccibb0j6q64xa"]
+
+[ext_resource type="Material" uid="uid://cshk3fuco68yi" path="res://assets/materials/clothes_material_red.tres" id="1_vj8bo"]
+[ext_resource type="Script" uid="uid://c3akwidiw11md" path="res://scripts/components/interactions/call_elevator_interactable.gd" id="2_no342"]
+[ext_resource type="Script" uid="uid://c8jlenbmf1545" path="res://scripts/resources/action_resource.gd" id="3_vj8bo"]
+[ext_resource type="Script" uid="uid://dxyy41ir155pu" path="res://scripts/components/interactions/switch.gd" id="3_ygu4d"]
+[ext_resource type="Script" uid="uid://c0kvrwkmcyd1n" path="res://scenes/props/automatic_door.gd" id="5_22xpv"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_714bt"]
+_surfaces = [{
+"aabb": AABB(0.654431, 1.26592, -0.83049, 0.171832, 0.346619, 0.0429789),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_s7xr1"]
+resource_name = "elevatorDoor_Cube_014"
+_surfaces = [{
+"aabb": AABB(0.654431, 1.26592, -0.83049, 0.171832, 0.346619, 0.0429789),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": ExtResource("1_vj8bo"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_714bt")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_22xpv"]
+data = PackedVector3Array(-0.7893, 0, -0.9263, -0.7893, 2.6641, -1.0028, -0.7893, 2.6641, -0.9263, -0.7893, 0, -0.9263, -0.7893, 0, -1.0028, -0.7893, 2.6641, -1.0028, -0.7893, 0, -1.0028, 0.7893, 2.6641, -1.0028, -0.7893, 2.6641, -1.0028, -0.7893, 0, -1.0028, 0.7893, 0, -1.0028, 0.7893, 2.6641, -1.0028, 0.7893, 0, -1.0028, 0.7893, 2.6641, -0.9263, 0.7893, 2.6641, -1.0028, 0.7893, 0, -1.0028, 0.7893, 0, -0.9263, 0.7893, 2.6641, -0.9263, 0.7893, 0, -0.9263, -0.7893, 2.6641, -0.9263, 0.7893, 2.6641, -0.9263, 0.7893, 0, -0.9263, -0.7893, 0, -0.9263, -0.7893, 2.6641, -0.9263, -0.7893, 0, -1.0028, 0.7893, 0, -0.9263, 0.7893, 0, -1.0028, -0.7893, 0, -1.0028, -0.7893, 0, -0.9263, 0.7893, 0, -0.9263, 0.7893, 2.6641, -1.0028, -0.7893, 2.6641, -0.9263, -0.7893, 2.6641, -1.0028, 0.7893, 2.6641, -1.0028, 0.7893, 2.6641, -0.9263, -0.7893, 2.6641, -0.9263)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6dpbx"]
+_surfaces = [{
+"aabb": AABB(-0.789253, 0, -1.00279, 1.57851, 2.66411, 0.0765334),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lkgn5"]
+resource_name = "elevatorDoor_Cube_016"
+_surfaces = [{
+"aabb": AABB(-0.789253, 0, -1.00279, 1.57851, 2.66411, 0.0765334),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": ExtResource("1_vj8bo"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_6dpbx")
+
+[sub_resource type="Resource" id="Resource_22xpv"]
+script = ExtResource("3_vj8bo")
+id = 0
+desc = &"call elevator"
+is_suspicious_in_restricted_area = true
+metadata/_custom_type_script = "uid://c8jlenbmf1545"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ygu4d"]
+size = Vector3(0.30838, 0.387939, 0.18219)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_22xpv"]
+size = Vector3(1, 0.5, 1)
+
+[node name="ElevatorDoor" type="Node3D"]
+
+[node name="elevatorDoor" type="Node3D" parent="."]
+
+[node name="call_button" type="MeshInstance3D" parent="elevatorDoor"]
+mesh = SubResource("ArrayMesh_s7xr1")
+skeleton = NodePath("")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="elevatorDoor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="elevatorDoor/AnimatableBody3D"]
+shape = SubResource("ConcavePolygonShape3D_22xpv")
+
+[node name="door_002" type="MeshInstance3D" parent="elevatorDoor/AnimatableBody3D"]
+mesh = SubResource("ArrayMesh_lkgn5")
+skeleton = NodePath("")
+
+[node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("detect_area", "switch")]
+script = ExtResource("2_no342")
+detect_area = NodePath("../DetectInteractions")
+call_elevator_action = SubResource("Resource_22xpv")
+switch = NodePath("../Switch")
+
+[node name="Switch" type="Node" parent="." node_paths=PackedStringArray("agent", "switch_node_position_marker")]
+script = ExtResource("3_ygu4d")
+agent = NodePath("..")
+switch_node_position_marker = NodePath("../SwitchPositionMarker")
+
+[node name="AutomaticDoor" type="Node" parent="." node_paths=PackedStringArray("door", "detect_area")]
+script = ExtResource("5_22xpv")
+door = NodePath("../elevatorDoor/AnimatableBody3D")
+detect_area = NodePath("../DetectElevator")
+
+[node name="DetectInteractions" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.728959, 1.43455, -0.859798)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectInteractions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0533905, 0.00964355, 0.0539856)
+shape = SubResource("BoxShape3D_ygu4d")
+
+[node name="SwitchPositionMarker" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.747205, 1.41874, 0)
+
+[node name="DetectElevator" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.93653)
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectElevator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_22xpv")
