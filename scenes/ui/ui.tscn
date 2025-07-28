@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnljcgov67ptp"]
+[gd_scene load_steps=10 format=3 uid="uid://bnljcgov67ptp"]
 
 [ext_resource type="Script" uid="uid://dcqa5jq6tehlr" path="res://scenes/ui/ui_state_handling.gd" id="1_pfayw"]
 [ext_resource type="PackedScene" uid="uid://cs7lftby4mspk" path="res://scenes/ui/crosshair.tscn" id="3_0dwhk"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bexi6a1kt2h8m" path="res://scenes/ui/interactions_ui.tscn" id="3_yev5y"]
 [ext_resource type="Script" uid="uid://bc0byi2cu3l3q" path="res://scenes/ui/SecondsPassed.gd" id="4_g5kmx"]
 [ext_resource type="PackedScene" uid="uid://b5ifia8xxlhtt" path="res://scenes/ui/inventory_ui.tscn" id="4_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://cauvdcsg0ifdh" path="res://assets/icons/compass.png" id="7_7vp6q"]
+[ext_resource type="Script" uid="uid://cmhiw7756moms" path="res://scenes/ui/compass.gd" id="7_uegxj"]
+[ext_resource type="Texture2D" uid="uid://ekqkj68yoprf" path="res://assets/icons/indicator.png" id="9_y220t"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -48,3 +51,33 @@ offset_top = 42.0
 offset_right = 981.0
 offset_bottom = 65.0
 script = ExtResource("4_g5kmx")
+
+[node name="compass" type="Node" parent="." node_paths=PackedStringArray("compass_ui")]
+script = ExtResource("7_uegxj")
+compass_ui = NodePath("../Control/compass")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 18.0
+offset_top = 929.0
+offset_right = 146.0
+offset_bottom = 1057.0
+
+[node name="compass" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("7_7vp6q")
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_y220t")

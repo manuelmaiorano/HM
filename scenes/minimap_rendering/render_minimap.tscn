@@ -2,19 +2,27 @@
 
 [ext_resource type="Script" uid="uid://d4h2b1fokubtf" path="res://scenes/minimap_rendering/render_minimap.gd" id="1_fy20g"]
 [ext_resource type="PackedScene" uid="uid://bdulnlvnnvpse" path="res://scenes/minimap_rendering/depth_quad.tscn" id="1_km2c8"]
-[ext_resource type="PackedScene" uid="uid://cb8i73sknj50o" path="res://scenes/test/buildings/testbuilding.tscn" id="2_fy20g"]
+[ext_resource type="PackedScene" uid="uid://bssa1riwrlsp2" path="res://scenes/test/test_level/building_mudular_test.tscn" id="3_fy20g"]
 
 [node name="RenderMinimap" type="Node3D"]
 script = ExtResource("1_fy20g")
 
 [node name="DepthQuad" parent="." instance=ExtResource("1_km2c8")]
 
-[node name="testbuilding" parent="." instance=ExtResource("2_fy20g")]
-
-[node name="testbuilding2" parent="." instance=ExtResource("2_fy20g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 60.7595)
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 63.0347, -2.75533e-06)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 11.2442, 33.0449, -1.44443e-06)
 projection = 1
-size = 500.0
+size = 30.493
+
+[node name="building_mudular_test" parent="." instance=ExtResource("3_fy20g")]
+
+[node name="wallssecondfloor" parent="building_mudular_test" index="1"]
+visible = false
+
+[node name="floorfirstfloor" parent="building_mudular_test" index="2"]
+visible = false
+
+[node name="ceilingfirstfloor" parent="building_mudular_test" index="3"]
+visible = false
+
+[editable path="building_mudular_test"]
