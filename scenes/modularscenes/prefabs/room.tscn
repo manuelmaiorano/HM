@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj4kojvogrvqc"]
+
+[ext_resource type="PackedScene" uid="uid://chlreejuclsgb" path="res://scenes/modularscenes/flat1mt.tscn" id="1_vgqx1"]
+[ext_resource type="PackedScene" uid="uid://dc05e7sfa5c80" path="res://scenes/modularscenes/walldoor.tscn" id="2_y2k10"]
+[ext_resource type="PackedScene" uid="uid://dmhyj8dkxfhap" path="res://scenes/modularscenes/windowwall.tscn" id="3_wwm3o"]
+[ext_resource type="PackedScene" uid="uid://cfbar5yo47lay" path="res://scenes/modularscenes/corner1mt_inner.tscn" id="4_gpl7d"]
+[ext_resource type="PackedScene" uid="uid://brk240j7junhv" path="res://scenes/modularscenes/floorpiece2mt.tscn" id="5_y2k10"]
+
+[node name="Room" type="Node3D"]
+
+[node name="Flat1Mt" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+
+[node name="Flat1Mt2" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="Flat1Mt3" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
+
+[node name="Flat1Mt4" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+
+[node name="Flat1Mt7" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 2)
+
+[node name="Flat1Mt15" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 2)
+
+[node name="Flat1Mt16" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0, 2)
+
+[node name="Flat1Mt9" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 6, 0, -1)
+
+[node name="Flat1Mt10" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 6, 0, 0)
+
+[node name="Flat1Mt13" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -2, 0, 1)
+
+[node name="Flat1Mt14" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -2, 0, 0)
+
+[node name="Flat1Mt8" parent="." instance=ExtResource("1_vgqx1")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5, 0, 2)
+
+[node name="Walldoor" parent="." instance=ExtResource("2_y2k10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+
+[node name="Windowwall" parent="." instance=ExtResource("3_wwm3o")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4, 0, 2)
+
+[node name="Corner1MtInner" parent="." instance=ExtResource("4_gpl7d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="Corner1MtInner2" parent="." instance=ExtResource("4_gpl7d")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, -2)
+
+[node name="Corner1MtInner3" parent="." instance=ExtResource("4_gpl7d")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 6, 0, 2)
+
+[node name="Corner1MtInner4" parent="." instance=ExtResource("4_gpl7d")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -2, 0, 2)
+
+[node name="Floorpiece2Mt" parent="." instance=ExtResource("5_y2k10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="Floorpiece2Mt2" parent="." instance=ExtResource("5_y2k10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Floorpiece2Mt3" parent="." instance=ExtResource("5_y2k10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="Floorpiece2Mt4" parent="." instance=ExtResource("5_y2k10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+
+[node name="Floorpiece2Mt5" parent="." instance=ExtResource("5_y2k10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Floorpiece2Mt6" parent="." instance=ExtResource("5_y2k10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Floorpiece2Mt7" parent="." instance=ExtResource("5_y2k10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="Floorpiece2Mt8" parent="." instance=ExtResource("5_y2k10")]
