@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbof6vj3l0e1d"]
+
+[ext_resource type="PackedScene" uid="uid://c7yuldbk8illg" path="res://scenes/modularscenes/cornerdoorwall.tscn" id="1_gho23"]
+[ext_resource type="PackedScene" uid="uid://3u6bql5cwtjf" path="res://scenes/props/door.tscn" id="2_rxpvv"]
+
+[node name="Cornerwallrotatingdoor" type="Node3D"]
+
+[node name="Cornerdoorwall" parent="." instance=ExtResource("1_gho23")]
+
+[node name="Door" parent="." instance=ExtResource("2_rxpvv")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)

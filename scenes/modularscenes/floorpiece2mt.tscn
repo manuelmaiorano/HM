@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://brk240j7junhv"]
+
+[ext_resource type="PackedScene" uid="uid://dmw6suyev75ol" path="res://assets/models/modular_pieces/floor.glb" id="1_i22mx"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_i22mx"]
+data = PackedVector3Array(0, 0, 0, 2, 0, 1.9991, 0, 0, 1.9991, 0, 0, 0, 2, 0, 0, 2, 0, 1.9991, 0, -0.1226, 0, 2, -0.1226, 1.9991, 2, -0.1226, 0, 0, -0.1226, 0, 0, -0.1226, 1.9991, 2, -0.1226, 1.9991, 2, 0, 1.9991, 0, -0.1226, 1.9991, 0, 0, 1.9991, 2, 0, 1.9991, 2, -0.1226, 1.9991, 0, -0.1226, 1.9991, 2, 0, 0, 2, -0.1226, 1.9991, 2, 0, 1.9991, 2, 0, 0, 2, -0.1226, 0, 2, -0.1226, 1.9991, 0, 0, 1.9991, 0, -0.1226, 0, 0, 0, 0, 0, 0, 1.9991, 0, -0.1226, 1.9991, 0, -0.1226, 0, 0, 0, 0, 2, -0.1226, 0, 2, 0, 0, 0, 0, 0, 0, -0.1226, 0, 2, -0.1226, 0)
+
+[node name="Floorpiece2Mt" type="Node3D"]
+
+[node name="floor2" parent="." instance=ExtResource("1_i22mx")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_i22mx")

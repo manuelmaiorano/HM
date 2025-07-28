@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://0ylu6qejmti3"]
+
+[ext_resource type="PackedScene" uid="uid://dc05e7sfa5c80" path="res://scenes/modularscenes/walldoor.tscn" id="1_mvl4v"]
+[ext_resource type="PackedScene" uid="uid://3u6bql5cwtjf" path="res://scenes/props/door.tscn" id="2_1kxji"]
+
+[node name="WallwithrotatingDoor" type="Node3D"]
+
+[node name="Walldoor" parent="." instance=ExtResource("1_mvl4v")]
+
+[node name="Door" parent="." instance=ExtResource("2_1kxji")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0.0716512)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwl5x3wh0xn4u"]
+
+[ext_resource type="PackedScene" uid="uid://dtkm741gl2pab" path="res://assets/models/modular_pieces/flatwall.glb" id="1_pvih3"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pvih3"]
+data = PackedVector3Array(0, 0, 0.1892, 0, 3.9915, 0, 0, 3.9915, 0.1892, 0, 0, 0.1892, 0, 0, 0, 0, 3.9915, 0, 0, 0, 0, 2, 3.9915, 0, 0, 3.9915, 0, 0, 0, 0, 2, 0, 0, 2, 3.9915, 0, 0, 3.9915, 0.1892, 2, 0, 0.1892, 0, 0, 0.1892, 0, 3.9915, 0.1892, 2, 3.9915, 0.1892, 2, 0, 0.1892, 2, 3.9915, 0, 0, 3.9915, 0.1892, 0, 3.9915, 0, 2, 3.9915, 0, 2, 3.9915, 0.1892, 0, 3.9915, 0.1892, 0, 0, 0, 2, 0, 0.1892, 2, 0, 0, 0, 0, 0, 0, 0, 0.1892, 2, 0, 0.1892, 2, 0, 0, 2, 3.9915, 0.1892, 2, 3.9915, 0, 2, 0, 0, 2, 0, 0.1892, 2, 3.9915, 0.1892)
+
+[node name="Flat2Mt" type="Node3D"]
+
+[node name="flatwall" parent="." instance=ExtResource("1_pvih3")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_pvih3")
