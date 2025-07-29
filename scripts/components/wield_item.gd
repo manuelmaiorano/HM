@@ -37,6 +37,7 @@ func on_item_changed(item: InventoryItem):
 	bone_attachment_offset_node.add_child(instance)
 	add_wieldable_exceptions(instance)
 	instance.freeze = true
+	#instance.find_child("CollisionShape3D").disabled = true
 	current_item = instance
 
 func add_wieldable_exceptions(instance):

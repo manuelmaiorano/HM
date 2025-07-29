@@ -44,6 +44,11 @@ func _unhandled_input(_event: InputEvent) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if Input.is_action_just_pressed("slow_down"):
+		if Engine.time_scale == 0.1:
+			Engine.time_scale = 1.0
+		else:
+			Engine.time_scale = 0.1
 
 func get_timestamp_seconds():
 	return float(Time.get_ticks_msec())/1000

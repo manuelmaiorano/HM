@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://ddppbvxc1iutf"]
+[gd_scene load_steps=118 format=3 uid="uid://ddppbvxc1iutf"]
 
 [ext_resource type="Script" uid="uid://c6rnwllugvfri" path="res://scripts/components/movement/character_movement.gd" id="1_wuru7"]
 [ext_resource type="Script" uid="uid://b1p3bunddmtvj" path="res://scripts/resources/inventory_resource.gd" id="3_gl1un"]
@@ -42,6 +42,7 @@
 [ext_resource type="Script" uid="uid://2yf5iig3ym7j" path="res://scripts/sitting_component.gd" id="34_pea3f"]
 [ext_resource type="Script" uid="uid://ceryt1n5whrwu" path="res://scripts/components/npc/debug_ai_component.gd" id="36_horvw"]
 [ext_resource type="Material" uid="uid://4d3pewdaffpq" path="res://assets/materials/base_mesh/texture_painted.tres" id="36_t3sqa"]
+[ext_resource type="Script" uid="uid://bgh5we1g8wmom" path="res://scripts/components/npc/ai_black_board_component.gd" id="37_8jh2s"]
 [ext_resource type="ArrayMesh" uid="uid://y5iqcox17lsk" path="res://assets/models/characters/base_medh_uv_Cube_003.res" id="37_horvw"]
 [ext_resource type="Animation" uid="uid://de47mbtci8tnk" path="res://assets/animations/A_TPose.res" id="39_lax8w"]
 [ext_resource type="Animation" uid="uid://dffmncytmi4q3" path="res://assets/animations/Death01.res" id="40_we6qr"]
@@ -428,6 +429,9 @@ detect_player_component = NodePath("../DetectPlayer")
 detect_dead_body_component = NodePath("../DetectDeadBody")
 detect_alarm_component = NodePath("../DetectAlarmedCivilian")
 enabled = true
+
+[node name="AiBlackBoardComponent" type="Node" parent="."]
+script = ExtResource("37_8jh2s")
 
 [node name="TalkInteractionsArea" type="Area3D" parent="."]
 collision_layer = 4
@@ -2070,7 +2074,7 @@ shape = SubResource("BoxShape3D_gl1un")
 [node name="CheckPlayerRaycast" type="RayCast3D" parent="model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69319, 0.245241)
 target_position = Vector3(0, 0, 3.35)
-collision_mask = 7
+collision_mask = 3
 
 [node name="CheckDeadBodyRaycast" type="RayCast3D" parent="model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69319, 0.245241)

@@ -14,7 +14,7 @@ func _setup() -> void:
 	hearing_component.is_sound_heard.connect(on_sound_heard)
 
 func on_sound_heard():
-	if hearing_component.last_sound_location.distance_squared_to(agent.global_position) > min_distance_from_agent**2:
+	if hearing_component.last_sound_location.distance_squared_to(agent.global_position) < min_distance_from_agent**2:
 		return
 	is_sound_heard = true
 	npc_events.audio_heard.emit()
