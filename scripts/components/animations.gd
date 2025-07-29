@@ -20,6 +20,7 @@ func _ready() -> void:
 
 	wieldable_component.is_shooting.connect(on_shooting)
 	wieldable_component.is_silent_kill.connect(on_silent_kill)
+	wieldable_component.is_reloading.connect(on_reload)
 	health.dead.connect(on_dead)
 	sitting_component.is_sitting_state_changed.connect(on_sitting_state_changed)
 	if dragging_component:
@@ -30,6 +31,11 @@ func _ready() -> void:
 	animation_tree["parameters/movement_blend/blend_position"] = 0.0
 	animation_tree["parameters/blend_shoot/blend_amount"] = 0.0
 	animation_tree["parameters/stab_kill/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
+	animation_tree["parameters/reload/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
+
+func on_reload():
+	animation_tree["parameters/reload/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+	on_shooting()
 
 func on_sitting_state_changed(is_sitting):
 	if is_sitting:

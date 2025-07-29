@@ -10,11 +10,14 @@ class_name WieldableComponent
 
 @export_category("Parameters")
 @export var ignore_ammo_check: bool = false
+@export var reload_time: float = 1.6
 
 @export_category("Debug")
 @export var current_item: Node3D
+@export var reloading: bool = false
 
 signal is_shooting()
+signal is_reloading()
 signal is_silent_kill()
 
 func _enter_tree() -> void:
@@ -46,6 +49,8 @@ func add_wieldable_exceptions(instance):
 		hb.exceptions = hit_box_exceptions_when_wielding_hurtbox
 
 func try_shoot(target: Vector3, velocity: Vector3) -> bool:
+	if reloading:
+		return false
 	if current_item == null:
 		return false
 	if current_item.has_meta("Shootable"):
@@ -62,13 +67,14 @@ func try_shoot(target: Vector3, velocity: Vector3) -> bool:
 			inventory.reduce_ammo_equipped()
 			return true
 		else:
-			inventory.reload_equipped()
+			handle_reload()
 			return false
 	return false
 
 
 func try_shoot_raycast(raycast: RayCast3D) -> bool:
-
+	if reloading:
+		return false
 	if current_item == null:
 		return false
 	if current_item.has_meta("Shootable"):
@@ -84,7 +90,7 @@ func try_shoot_raycast(raycast: RayCast3D) -> bool:
 			inventory.reduce_ammo_equipped()
 			return true
 		else:
-			inventory.reload_equipped()
+			handle_reload()
 			return false
 	return false
 
@@ -99,3 +105,9 @@ func try_silent_kill(raycast: RayCast3D) -> bool:
 	return false
 
 	
+func handle_reload():
+	inventory.reload_equipped()
+	is_reloading.emit()
+	reloading = true
+	var tween = get_tree().create_tween()
+	tween.tween_callback(func(): reloading = false).set_delay(reload_time)
