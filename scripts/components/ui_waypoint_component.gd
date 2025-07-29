@@ -1,55 +1,23 @@
-extends Control
-class_name OverheadUi
+extends Node
 
-## Some margin to keep the marker away from the screen's corners.
+@export_category("Nodes")
+@export var control: Control
+
+@export_category("Parameters")
+@export var sticky: bool = false
+
+@export_category("Debug")
+@export var camera: Camera3D = null
+
 const MARGIN = 8
-
-## The waypoint's text.
-@export var text := "Waypoint":
-	set(value):
-		text = value
-		# The label's text can only be set once the node is ready.
-		if is_inside_tree():
-			label.text = value
-
-@export var value_perc: float:
-	set(value):
-		value_perc = value
-		progress_bar.value = value * 100
-		
-
-## If `true`, the waypoint sticks to the viewport's edges when moving off-screen.
-@export var sticky := true
-
-@onready var camera := get_viewport().get_camera_3d()
-@onready var parent := get_parent()
-@onready var label: Label = $Label
-@onready var marker: TextureRect = $Marker
-@onready var progress_bar: ProgressBar = $ProgressBar
-
-
-@export var is_health: bool = true:
-	set(value):
-		is_health = value
-		if is_health:
-			label.hide()
-			progress_bar.show()
-		else:
-			label.show()
-			progress_bar.hide()
-
-func _ready() -> void:
-	value_perc = 100
-	self.text = text
-	assert(parent is Node3D, "The waypoint's parent node must inherit from Node3D.")
 
 
 func _process(_delta: float) -> void:
-	if not camera.current:
+	if not camera or not camera.current:
 		# If the camera we have isn't the current one, get the current camera.
 		camera = get_viewport().get_camera_3d()
 
-	var parent_position: Vector3 = parent.global_transform.origin
+	var parent_position: Vector3 = control.get_parent().global_transform.origin
 	var camera_transform := camera.global_transform
 	var camera_position := camera_transform.origin
 
@@ -59,7 +27,7 @@ func _process(_delta: float) -> void:
 
 	# Fade the waypoint when the camera gets close.
 	var distance := camera_position.distance_to(parent_position)
-	modulate.a = clamp(remap(distance, 0, 2, 0, 1), 0, 1 )
+	control.modulate.a = clamp(remap(distance, 0, 2, 0, 1), 0, 1 )
 
 	var unprojected_position := camera.unproject_position(parent_position)
 	# `get_size_override()` will return a valid size only if the stretch mode is `2d`.
@@ -72,8 +40,8 @@ func _process(_delta: float) -> void:
 	if not sticky:
 		# For non-sticky waypoints, we don't need to clamp and calculate
 		# the position if the waypoint goes off screen.
-		position = unprojected_position
-		visible = not is_behind
+		control.position = unprojected_position
+		control.visible = not is_behind
 		return
 
 	# We need to handle the axes differently.
@@ -97,33 +65,29 @@ func _process(_delta: float) -> void:
 		var diff := angle_difference(look.basis.get_euler().x, camera_transform.basis.get_euler().x)
 		unprojected_position.y = viewport_base_size.y * (0.5 + (diff / deg_to_rad(camera.fov)))
 
-	position = Vector2(
+	control.position = Vector2(
 			clamp(unprojected_position.x, MARGIN, viewport_base_size.x - MARGIN),
 			clamp(unprojected_position.y, MARGIN, viewport_base_size.y - MARGIN)
 	)
 
 	#label.visible = true
-	rotation = 0
+	control.rotation = 0
 	# Used to display a diagonal arrow when the waypoint is displayed in
 	# one of the screen corners.
 	var overflow := 0
 
-	if position.x <= MARGIN:
+	if control.position.x <= MARGIN:
 		# Left overflow.
 		overflow = int(-TAU / 8.0)
-		label.visible = false
-		rotation = TAU / 4.0
-	elif position.x >= viewport_base_size.x - MARGIN:
+		control.rotation = TAU / 4.0
+	elif control.position.x >= viewport_base_size.x - MARGIN:
 		# Right overflow.
 		overflow = int(TAU / 8.0)
-		label.visible = false
-		rotation = TAU * 3.0 / 4.0
+		control.rotation = TAU * 3.0 / 4.0
 
-	if position.y <= MARGIN:
+	if control.position.y <= MARGIN:
 		# Top overflow.
-		label.visible = false
-		rotation = TAU / 2.0 + overflow
-	elif position.y >= viewport_base_size.y - MARGIN:
+		control.rotation = TAU / 2.0 + overflow
+	elif control.position.y >= viewport_base_size.y - MARGIN:
 		# Bottom overflow.
-		label.visible = false
-		rotation = -overflow
+		control.rotation = -overflow
