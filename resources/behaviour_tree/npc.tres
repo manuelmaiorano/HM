@@ -63,6 +63,7 @@ script = ExtResource("5_sojdj")
 
 [sub_resource type="BTCondition" id="BTCondition_cs05x"]
 script = ExtResource("6_ratg2")
+min_distance_from_agent = 2.0
 
 [sub_resource type="BTCondition" id="BTCondition_l3unm"]
 script = ExtResource("7_qqk1o")
@@ -72,7 +73,7 @@ children = [SubResource("BTCondition_4q83n"), SubResource("BTCondition_cs05x"), 
 
 [sub_resource type="BTAction" id="BTAction_qqk1o"]
 script = ExtResource("7_ratg2")
-time_to_stop_investigating = 100.0
+time_to_stop_investigating = 10.0
 
 [sub_resource type="BTSequence" id="BTSequence_0pnie"]
 custom_name = "Investigate"

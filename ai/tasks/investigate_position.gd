@@ -3,7 +3,7 @@ extends BTAction
 var character_movement: CharacterMovementComponent
 
 
-@export var time_to_stop_investigating: float = 100.0
+@export var time_to_stop_investigating: float = 10.0
 
 var time_entered = 0.0
 var position_to_investigate

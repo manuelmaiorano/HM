@@ -57,6 +57,10 @@ func move_to(delta: float, position: Vector3, speed: float):
 	position.y = character.global_position.y
 	var direction = character.global_position.direction_to(position)
 	DebugDraw3D.draw_line(character.global_position + Vector3.UP, character.global_position + Vector3.UP + direction) 
+	if character.velocity.is_zero_approx():
+		DebugDraw2D.set_text("is_stuck", true)
+	else:
+		DebugDraw2D.set_text("is_stuck", false)
 	move(delta, direction, speed)
 	rotateModelTowards(delta, direction)
 

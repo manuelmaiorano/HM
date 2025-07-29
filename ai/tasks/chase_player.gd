@@ -30,10 +30,15 @@ func _exit() -> void:
 	return
 
 func _tick(delta: float) -> Status:
+	if Globals.debug_ai:
+		DebugDraw2D.set_text("is_player_visible",  detect_player_component.is_player_visible)
+		DebugDraw2D.set_text("is_player_close",  is_close_to_player)
+
 	if not detect_player_component.is_player_visible:
 		character_movement.set_navigation_target(detect_player_component.last_seen_position)
 		var navigation_finished = character_movement.navigate(delta, character_movement.run_speed)
 		if navigation_finished:
+			blackboard.set_var("investigate_position", detect_player_component.last_seen_position)
 			return FAILURE
 		return RUNNING
 
